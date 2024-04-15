@@ -8,7 +8,7 @@ class Home extends Controller
 	
 	public function index($id = "")
 	{
-		echo $this->view('home');
+		$this->view('home');
 	}
 
 
