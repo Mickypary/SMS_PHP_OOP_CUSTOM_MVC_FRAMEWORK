@@ -11,8 +11,7 @@ class Controller
 	{
 		extract($data);
 		// code...
-		if (file_exists("../private/views/".$view.".view.php")) {
-			
+		if (file_exists("../private/views/".$view.".view.php")) {		
 			require "../private/views/".$view.".view.php";
 		}else {
 			require "../private/views/404.view.php";
