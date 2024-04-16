@@ -6,10 +6,8 @@
 				<img src="<?= ROOT ?>/assets/logo.png" class="border border-primary d-block mx-auto rounded-circle"  style="width: 100px;">
 				<h3>Login</h3>
 				<form>
-					<input type="email" name="email" class="form-control" placeholder="Email" autofocus>
-					<br>
-					<input type="password" name="password" class="form-control" placeholder="Password">
-					<br>
+					<input type="email" name="email" class="my-2 form-control" placeholder="Email" autofocus>
+					<input type="password" name="password" class="my-2 form-control" placeholder="Password">
 					<button type="submit" class="btn btn-primary" >Login</button>
 				</form>
 			</div>
