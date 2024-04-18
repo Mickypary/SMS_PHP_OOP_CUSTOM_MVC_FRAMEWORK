@@ -12,12 +12,12 @@ class App
 	public function __construct()
 	{
 		$URL = $this->getURL();
-		if (file_exists("../private/controllers/".$URL[0].".php")) {
+		if (file_exists("../app/Controllers/".$URL[0].".php")) {
 			$this->controller =  ucfirst($URL[0]);
 			unset($URL[0]);
 		}
 
-		require "../private/controllers/".$this->controller.".php";
+		require "../app/Controllers/".$this->controller.".php";
 		$this->controller = new $this->controller();
 		if (isset($URL[1])) {
 			if (method_exists($this->controller, $URL[1])) {

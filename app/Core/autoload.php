@@ -1,0 +1,14 @@
+<?php
+
+
+require 'config.php';
+require 'database.php';
+require 'controller.php';
+require 'app.php';
+require 'model.php';
+
+
+spl_autoload_register(function($classname) {
+	// echo $classname . " class was not found";
+	include '../app/Models/' . $classname . ".php";
+});
