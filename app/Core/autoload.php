@@ -10,5 +10,5 @@ require 'model.php';
 
 spl_autoload_register(function($classname) {
 	// echo $classname . " class was not found";
-	include '../app/Models/' . $classname . ".php";
+	require '../app/Models/' . ucfirst($classname) . ".php";
 });
