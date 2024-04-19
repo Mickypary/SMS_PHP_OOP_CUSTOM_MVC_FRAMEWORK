@@ -7,7 +7,9 @@
 class Model extends Database
 {
 
-	function __construct()
+	public $errors = array();
+
+	public function __construct()
 	{
 		// var_dump(property_exists($this, 'table'));
 		// echo Model::class;
