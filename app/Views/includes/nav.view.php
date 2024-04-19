@@ -1,4 +1,12 @@
 <style type="text/css">
+
+  nav ul li a {
+    width: 110px;
+    text-align: center;
+    border-left: solid thin #eee;
+    border-right: solid thin #fff;
+  }
+
   nav ul li a:hover {
     background-color: grey;
     color: white !important;
@@ -29,11 +37,13 @@
         <li class="nav-item">
           <a class="nav-link" href="<?=ROOT?>/tests">TESTS</a>
         </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             USER
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="<?=ROOT?>/profile">Profile</a></li>
             <li><a class="dropdown-item" href="<?=ROOT?>">Dashboard</a></li>
             <li><hr class="dropdown-divider"></li>

@@ -9,7 +9,10 @@ class Controller
 	
 	public function view($view, $data = array())
 	{
-		extract($data);
+		if (is_array($data)) {
+			extract($data);
+		}
+		
 		// code...
 		if (file_exists("../app/Views/".$view.".view.php")) {		
 			require "../app/Views/".$view.".view.php";
