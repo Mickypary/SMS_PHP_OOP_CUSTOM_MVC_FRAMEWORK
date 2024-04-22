@@ -9,7 +9,8 @@ class Home extends Controller
 	public function index()
 	{
 		// $user = $this->load_model("user"); 
-		$arr = ['gender' => 'male', 'firstname' => "Kareem", 'lastname' => "Jerrymiah", 'user_id' => "24fgddhcbdjd"];
+		// $arr = ['gender' => 'male', 'firstname' => "Kareem", 'lastname' => "Jerrymiah", 'user_id' => "24fgddhcbdjd"];
+		// $data = ['male', 'firstname', "Jerrymiah", "24fgddhcbdjd"];
 
 		$user = new User();
 

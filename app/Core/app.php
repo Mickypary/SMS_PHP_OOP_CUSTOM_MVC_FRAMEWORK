@@ -12,13 +12,16 @@ class App
 	public function __construct()
 	{
 		$URL = $this->getURL();
+
+		// for controller setting for route
 		if (file_exists("../app/Controllers/".$URL[0].".php")) {
 			$this->controller =  ucfirst($URL[0]);
 			unset($URL[0]);
 		}
-
 		require "../app/Controllers/".$this->controller.".php";
 		$this->controller = new $this->controller();
+
+		// for method setting
 		if (isset($URL[1])) {
 			if (method_exists($this->controller, $URL[1])) {
 				$this->method = ucfirst($URL[1]);
@@ -26,6 +29,7 @@ class App
 			}
 		}
 
+		// For parameters setting and reseting the array values using array_values function so that the array starts at index 0
 		$URL = array_values($URL);
 		$this->params = $URL;
 
