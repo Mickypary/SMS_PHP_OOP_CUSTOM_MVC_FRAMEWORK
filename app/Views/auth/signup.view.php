@@ -20,6 +20,7 @@
 			<!-- Alert End -->
 
 			<form method="POST" action="">
+				<input type="hidden" name="signup">
 				<input type="text" name="firstname" value="<?= input_val('firstname'); ?>" class="my-2 form-control" placeholder="First Name" autofocus>
 				<input type="text" name="lastname" value="<?= input_val('lastname'); ?>" class="my-2 form-control" placeholder="Last Name" autofocus>
 				<input type="email" name="email" value="<?= input_val('email'); ?>" class="my-2 form-control" placeholder="Email" autofocus>

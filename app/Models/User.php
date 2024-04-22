@@ -40,6 +40,8 @@ class User extends Model
 			$this->errors['email'] = "Email field is required";
 		}elseif (isset($DATA['email']) && !filter_var($DATA['email'], FILTER_VALIDATE_EMAIL)) {
 			$this->errors['email'] = "Email is not valid";
+		}elseif(isset($_POST['signup']) && $this->where('email',$_POST['email'])) {
+			$this->errors['email'] = "Email already taken";
 		}
 
 		// check for gender

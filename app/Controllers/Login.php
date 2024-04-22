@@ -16,15 +16,19 @@ class Login extends Controller
 			$user = new User();
 
 			if ($user->validate($_POST)) {
+				// check email address
 				if($row = $user->where('email',$_POST['email'])) {
-					Auth::authenticate($row);
-					$this->redirect('home');
-				}else {
-					$errors['email'] = "Wrong email or password!";
+					$row = $row[0];
+					//verify password
+					if(password_verify($_POST['password'], $row->password)) {
+						Auth::authenticate($row);
+						$this->redirect('home');
+					}
 				}
+
+				// add to errors array
+				$errors['email'] = "Wrong email or password!";	
 			}else {
-				print_r($errors);
-				echo 'errors';
 				// errors
 				$errors = $user->errors;	
 			}

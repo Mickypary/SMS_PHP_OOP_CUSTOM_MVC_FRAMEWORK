@@ -29,7 +29,13 @@
           <a class="nav-link active" aria-current="page" href="<?=ROOT?>">DASHBOARD</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=ROOT?>/users">USERS</a>
+          <a class="nav-link" href="<?=ROOT?>/school">SCHOOL</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=ROOT?>/staff">STAFF</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=ROOT?>/students">STUDENTS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?=ROOT?>/classes">CLASSES</a>
@@ -41,7 +47,7 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            USER
+            <?= Auth::getFirstname(); ?>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="<?=ROOT?>/profile">Profile</a></li>
