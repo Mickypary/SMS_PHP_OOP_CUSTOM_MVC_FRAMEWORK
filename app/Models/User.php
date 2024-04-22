@@ -21,58 +21,35 @@ class User extends Model
 		$this->errors = array();
 
 		// check for firstname
-		switch ($DATA) {
-			case empty($DATA['firstname']):
-				$this->errors['firstname'] = "Firstname field is required";
-				break;
-
-			case !preg_match("/^[a-zA-z]+$/", $DATA['firstname']):
-				$this->errors['firstname'] = "Only letters allowed in firstname";
-				break;
-			
-			default:
-				// code...
-				break;
+		if (isset($DATA['firstname']) && empty($DATA['firstname'])) {
+			$this->errors['firstname'] = "Firstname field is required";
+		}elseif (isset($DATA['firstname']) && !preg_match("/^[a-zA-z]+$/", $DATA['firstname'])) {
+			$this->errors['firstname'] = "Only letters allowed in firstname";
 		}
 
 		// check for lastname
-		switch ($DATA) {
-			case empty($DATA['lastname']):
-				$this->errors['lastname'] = "Lastname field is required";
-				break;
-
-			case !preg_match("/^[a-zA-z]+$/", $DATA['lastname']):
-				$this->errors['lastname'] = "Only letters allowed in lastname";
-				break;
-			
-			default:
-				// code...
-				break;
+		if (isset($DATA['lastname']) && empty($DATA['lastname'])) {
+			$this->errors['lastname'] = "Lastname field is required";
+		}elseif (isset($DATA['lastname']) && !preg_match("/^[a-zA-z]+$/", $DATA['lastname'])) {
+			$this->errors['lastname'] = "Only letters allowed in lastname";
 		}
 
-		// check for email
-		switch ($DATA) {
-			case empty($DATA['email']):
-				$this->errors['email'] = "Email field is required";
-				break;
 
-			case !filter_var($DATA['email'], FILTER_VALIDATE_EMAIL):
-				$this->errors['email'] = "Email is not valid";
-				break;
-			
-			default:
-				// code...
-				break;
+		// check for email
+		if (isset($DATA['email']) && empty($DATA['email'])) {
+			$this->errors['email'] = "Email field is required";
+		}elseif (isset($DATA['email']) && !filter_var($DATA['email'], FILTER_VALIDATE_EMAIL)) {
+			$this->errors['email'] = "Email is not valid";
 		}
 
 		// check for gender
 		$genders = ['male', 'female'];
 		switch ($DATA) {
-			case empty($DATA['gender']):
+			case isset($DATA['gender']) && empty($DATA['gender']):
 				$this->errors['gender'] = "Gender field is required";
 				break;
 
-			case !in_array($DATA['gender'], $genders):
+			case isset($DATA['gender']) && !in_array($DATA['gender'], $genders):
 				$this->errors['email'] = "Gender is not valid";
 				break;
 			
@@ -84,11 +61,11 @@ class User extends Model
 		// check for ranks
 		$ranks = ['student', 'reception', 'lecturer', 'admin', 'super_admin'];
 		switch ($DATA) {
-			case empty($DATA['rank']):
+			case isset($DATA['rank']) && empty($DATA['rank']):
 				$this->errors['rank'] = "Rank field is required";
 				break;
 
-			case !in_array($DATA['rank'], $ranks):
+			case isset($DATA['rank']) && !in_array($DATA['rank'], $ranks):
 				$this->errors['rank'] = "Rank is not valid";
 				break;
 			
@@ -97,17 +74,17 @@ class User extends Model
 				break;
 		}
 
-		// check for password
+		// // check for password
 		switch ($DATA) {
-			case empty($DATA['password']):
+			case isset($DATA['password']) && empty($DATA['password']):
 				$this->errors['password'] = "Password field is required";
 				break;
 
-			case strlen($DATA['password']) < 8:
+			case isset($DATA['password']) && strlen($DATA['password']) < 8:
 				$this->errors['password'] = "Password field cannot be less than 8 chars";
 				break;
 
-			case $DATA['password'] != $DATA['password2']:
+			case (isset($DATA['password']) && isset($DATA['password2'])) && ($DATA['password'] != $DATA['password2']):
 				$this->errors['password'] = "The passwords do not match";
 				break;
 			

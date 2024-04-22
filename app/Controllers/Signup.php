@@ -15,6 +15,7 @@ class Signup extends Controller
 
 		if (count($_POST) > 0) {
 			
+			// instantiate the User Class since the class file has been included globally in the autoload file using spl_autoload_register
 			$user = new User();
 
 			if ($user->validate($_POST)) {
@@ -23,8 +24,7 @@ class Signup extends Controller
 				$this->redirect('login');
 			}else {
 				// errors
-				$errors = $user->errors;
-				
+				$errors = $user->errors;	
 			}
 		}
 		// var_dump($errors);
