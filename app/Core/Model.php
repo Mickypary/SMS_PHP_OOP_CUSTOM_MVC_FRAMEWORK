@@ -16,6 +16,7 @@ class Model extends Database
 		if(!property_exists($this, 'table')) {
 			$this->table = strtolower($this::class) . "s";
 		}
+		// echo $this->beforeInsert[0];
 
 	}
 
@@ -36,8 +37,25 @@ class Model extends Database
 		return $this->query($query);
 	}
 
-	public function insert(array $data)
+	public function insert($data)
 	{
+		// remove unwanted columns
+		if(property_exists($this, 'allowedColumns')) {
+			foreach($data as $key => $value) {
+				if (!in_array($key, $this->allowedColumns)) {
+					unset($data[$key]);
+				}
+			}
+		}
+
+		// run functions before insert
+		if(property_exists($this, 'beforeInsert')) {
+			foreach($this->beforeInsert as $func) {
+				// note: the $func is just a variable holding the real value such as generate_user_id which makes it $this->generate_user_id() for instance as the $func gets replaced by the content value
+				$data = $this->$func($data);
+			}
+		}
+
 		// get the keys in the array
 		$keys = array_keys($data);
 
@@ -48,7 +66,7 @@ class Model extends Database
 		$values = implode(", :", $keys);
 
 		$query = "INSERT INTO " . $this->table . " (" . $columns . ") VALUES (:" . $values . ")";
-		print_r($query);
+		// print_r($query);
 
 		return $this->query($query,$data);
 	}

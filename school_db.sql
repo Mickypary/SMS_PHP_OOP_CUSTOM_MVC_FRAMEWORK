@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2024 at 10:16 AM
+-- Generation Time: Apr 22, 2024 at 03:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `date`, `user_id`, `gender`, `school_id`, `rank`, `password`) VALUES
-(1, 'Eathorne', 'Banda', 'eathorne@yahoo.com', '2024-04-22 10:07:45', '', 'male', '', 'super_admin', '$2y$10$PTGd4wSSMXnTVoNMtFEfvu8s.IW1ESWgEhZ4I3Mn4AMW4EZWqJ6i6');
+(1, 'Eathorne', 'Banda', 'eathorne@yahoo.com', '2024-04-22 14:11:01', 'iSpGJLrFmMISUmAsPyYnafcgPQr5a8BsvrAK9pQo81vGiYHLTETq9RpZI8zp', 'male', '', 'super_admin', '$2y$10$7KQuKt4BcjPyoPJcnLQ/x.CzXrA0gGi6qk92skFYa1UyVOJt3/UTG');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
