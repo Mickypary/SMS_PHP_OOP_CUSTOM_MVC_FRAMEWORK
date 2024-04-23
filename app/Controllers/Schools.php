@@ -34,6 +34,8 @@ class Schools extends Controller
 
 		$data = $school->findAll();
 
+		
+
 		$this->view('schools.add',[
 			'rows' => $data,
 		]);

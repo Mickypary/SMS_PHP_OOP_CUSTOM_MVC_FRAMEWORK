@@ -27,7 +27,7 @@ class Login extends Controller
 				}
 
 				// add to errors array
-				$errors['email'] = "Wrong email or password!";	
+				$errors['email'] = "Invalid email or password!";	
 			}else {
 				// errors
 				$errors = $user->errors;	

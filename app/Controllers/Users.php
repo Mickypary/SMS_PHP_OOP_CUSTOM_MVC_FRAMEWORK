@@ -17,9 +17,9 @@ class Users extends Controller
 
 		$data = $user->findAll();
 
-		$this->view('users',[
-			'rows' => $data,
-		]);
+		$data['rows'] = $data;
+
+		$this->view('users',$data);
 	}
 
 

@@ -7,6 +7,7 @@
 
 		<div class="card-group justify-content-center">
 			<form method="POST" action="">
+				<h3>Add New School</h3>
 				<input class="form-control" value="<?= input_val('school') ?>" type="text" name="school" placeholder="School Name"><br>
 				<input class="btn btn-primary" type="submit" value="Add">
 			</form>

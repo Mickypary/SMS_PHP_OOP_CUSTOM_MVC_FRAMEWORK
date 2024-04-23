@@ -129,7 +129,4 @@ class User extends Model
 
 
 
-
-
-
 } // End Class
