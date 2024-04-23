@@ -15,6 +15,8 @@ class Users extends Controller
 		
 		$user = new User();
 
+		$data = $user->findAll();
+
 		$this->view('users',[
 			'rows' => $data,
 		]);
