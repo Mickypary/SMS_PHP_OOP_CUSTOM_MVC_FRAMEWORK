@@ -6,6 +6,7 @@
 		<?php $this->view('includes/crumbs'); ?>
 
 		<div class="card-group justify-content-center">
+			<?php if($rows): ?>
 			<?php foreach ($rows as $key => $value): ?>
 				<div class="card m-2 shadow" style="min-width: 14rem; max-width: 14rem;">
 				  <img src="<?=ASSETS?>/user_female.jpg" class="card-img-top" alt="Card image cap">
@@ -16,6 +17,7 @@
 				  </div>
 				</div>
 			<?php endforeach ?>
+			<?php endif ?>
 			
 
 		</div>

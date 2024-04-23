@@ -29,10 +29,10 @@
           <a class="nav-link active" aria-current="page" href="<?=ROOT?>">DASHBOARD</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=ROOT?>/school">SCHOOL</a>
+          <a class="nav-link" href="<?=ROOT?>/schools">SCHOOL</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=ROOT?>/staff">STAFF</a>
+          <a class="nav-link" href="<?=ROOT?>/users">STAFF</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?=ROOT?>/students">STUDENTS</a>
