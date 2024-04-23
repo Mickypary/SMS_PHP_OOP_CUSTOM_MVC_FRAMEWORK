@@ -6,8 +6,8 @@
 		<?php $this->view('includes/crumbs'); ?>
 
 		<div class="card-group justify-content-center">
-			<form>
-				<input class="form-control" type="text" name="school"><br>
+			<form method="POST" action="">
+				<input class="form-control" value="<?= input_val('school') ?>" type="text" name="school" placeholder="School Name"><br>
 				<input class="btn btn-primary" type="submit" value="Add">
 			</form>
 		</div>
