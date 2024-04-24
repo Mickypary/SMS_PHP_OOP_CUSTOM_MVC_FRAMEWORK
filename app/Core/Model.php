@@ -115,7 +115,7 @@ class Model extends Database
 	public function delete($id)
 	{
 		$query = "DELETE FROM " . $this->table . " WHERE id =:id";
-		echo $query;
+		// echo $query;
 		return $this->query($query,[
 			'id' => $id,
 		]);

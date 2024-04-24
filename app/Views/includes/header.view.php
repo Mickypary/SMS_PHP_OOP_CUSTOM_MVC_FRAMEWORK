@@ -9,6 +9,14 @@
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="<?=ASSETS?>/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?=ASSETS?>/fontawesome/all.min.css">
+	<!-- Sweet Alert 2 -->
+  	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  	<!-- Jquery Ajax -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- // toastr -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> -->
 </head>
 <body>
 	<style type="text/css">

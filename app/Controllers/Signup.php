@@ -26,7 +26,7 @@ class Signup extends Controller
 		}
 		// var_dump($errors);
 
-		$this->view('auth/signup', [
+		$this->load_view('auth/signup', [
 			'errors' => $errors,
 		]);
 	}

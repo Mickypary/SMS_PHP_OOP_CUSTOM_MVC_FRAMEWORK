@@ -29,8 +29,8 @@ class School extends Model
 			$this->errors['school'] = "School Name field is required";
 		}elseif (isset($DATA['school']) && !preg_match("/^[a-zA-Z ]+$/", $DATA['school'])) {
 			$this->errors['school'] = "Only letters allowed in School Name";
-		}elseif($this->where('school',$_POST['school'])) {
-			$this->errors['email'] = "School already exist";
+		}elseif($this->where('school',$DATA['school'])) {
+			$this->errors['school'] = "School already exist";
 		}
 
 		

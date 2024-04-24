@@ -27,8 +27,9 @@
 							<a href="<?= ROOT ?>/schools/edit/<?= $row->id ?>">
 								<button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 							</a>
-							<a href="">
-								<button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
+							<a href="<?= ROOT ?>/schools/delete/<?= $row->id ?>" id="delete" class="btn btn-sm btn-danger">
+								<i class="fa fa-trash-alt"></i>
+								<!-- <button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button> -->
 							</a>				
 						</td>
 					</tr>

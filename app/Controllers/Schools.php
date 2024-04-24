@@ -64,7 +64,7 @@ class Schools extends Controller
 		$this->load_view('schools.edit',$data);
 	}
 
-	// add new school
+	// update school
 	public function update($id)
 	{
 		$errors = array();
@@ -76,7 +76,7 @@ class Schools extends Controller
 		if (count($_POST) > 0) {
 			$school = new School();
 			if ($school->validate($_POST)) {
-				$result = $school->update($id,$_POST);
+				$school->update($id,$_POST);
 				$this->redirect('schools');
 			}else {
 				$errors = $school->errors;
@@ -85,6 +85,31 @@ class Schools extends Controller
 			
 		$data['errors'] = $errors;
 		$this->load_view('schools.add',$data);
+	}
+
+	// delete new school
+	public function delete($id)
+	{
+		$errors = array();
+
+		if($check = !Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		$school = new School();
+			$school->delete($id);
+			$this->redirect('schools');
+			die();
+				// $_SESSION['message'] = "Successful";
+        		// $_SESSION['alert-type'] = "success";
+        		// echo 'here';
+        		// print_r($_SESSION['message']);
+        		// die();
+
+		// $row = $school->where('id',$id);	
+            
+		// $data['row'] = $row;
+		// $this->load_view('schools.delete',$data);
 	}
 
 
