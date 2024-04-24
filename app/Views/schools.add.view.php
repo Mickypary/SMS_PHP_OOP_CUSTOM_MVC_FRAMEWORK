@@ -9,11 +9,12 @@
 			<form method="POST" action="">
 				<h3>Add New School</h3>
 				<!-- Alert Start -->
-				<?php if(isset($errors) && count($errors) > 0): ?>
+				<?php if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0): ?>
 					<div class="alert alert-warning alert-dismissible fade show" role="alert">
 						<strong>Errors!:</strong> <br>
-						<?php foreach ($errors as $key => $error): ?>
+						<?php foreach ($_SESSION['errors'] as $key => $error): ?>
 							<?= $error ."<br>" ?>
+							<?php unset($_SESSION['errors']) ?>
 						<?php endforeach ?>
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>

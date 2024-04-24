@@ -40,11 +40,9 @@ class Schools extends Controller
 				$errors = $school->errors;
 			}
 		}
-		
-		
-		
-		$data['errors'] = $errors;
-		$this->load_view('schools.add',$data);
+
+		$_SESSION['errors'] = $errors;
+		$this->load_view('schools.add');
 	}
 
 	// add new school
@@ -60,7 +58,6 @@ class Schools extends Controller
 		$row = $school->where('id',$id);
 
 		$data['rows'] = $row;
-		$data['errors'] = $errors;
 		$this->load_view('schools.edit',$data);
 	}
 
@@ -80,11 +77,10 @@ class Schools extends Controller
 				$this->redirect('schools');
 			}else {
 				$errors = $school->errors;
+				$_SESSION['errors'] = $errors;
+				$this->redirect('schools/edit/'.$id);
 			}
 		}
-			
-		$data['errors'] = $errors;
-		$this->load_view('schools.add',$data);
 	}
 
 	// delete new school
@@ -98,13 +94,9 @@ class Schools extends Controller
 
 		$school = new School();
 			$school->delete($id);
+			sleep(1);
 			$this->redirect('schools');
 			die();
-				// $_SESSION['message'] = "Successful";
-        		// $_SESSION['alert-type'] = "success";
-        		// echo 'here';
-        		// print_r($_SESSION['message']);
-        		// die();
 
 		// $row = $school->where('id',$id);	
             

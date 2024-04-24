@@ -36,7 +36,7 @@ class Controller
 	public function redirect($link)
 	{
 		header("Location: ".ROOT."/".trim($link,"/"));
-		// header( "refresh:5;url=https://www.google.com" );
+		// header( "refresh:1;url=".ROOT."/".trim($link,"/"));
 		die();
 	}
 
