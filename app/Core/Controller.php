@@ -7,7 +7,7 @@
 class Controller
 {
 	
-	public function view($view, $data = array())
+	public function load_view($view, $data = array())
 	{
 		if (is_array($data)) {
 			extract($data);

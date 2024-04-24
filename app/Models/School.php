@@ -15,6 +15,10 @@ class School extends Model
 		'generate_school_id', 'generate_user_id'
 	];
 
+	protected $afterSelect = [
+		'get_user'
+	];
+
 	public function validate($DATA)
 	{
 		// to be sure the errors property in Model class is refreshed with empty value
@@ -22,9 +26,11 @@ class School extends Model
 
 		// check for school name
 		if (isset($DATA['school']) && empty($DATA['school'])) {
-			$this->errors['school'] = "School field is required";
-		}elseif (isset($DATA['school']) && !preg_match("/^[a-zA-z]+$/", $DATA['school'])) {
+			$this->errors['school'] = "School Name field is required";
+		}elseif (isset($DATA['school']) && !preg_match("/^[a-zA-Z ]+$/", $DATA['school'])) {
 			$this->errors['school'] = "Only letters allowed in School Name";
+		}elseif($this->where('school',$_POST['school'])) {
+			$this->errors['email'] = "School already exist";
 		}
 
 		
@@ -40,13 +46,28 @@ class School extends Model
 
 	public function generate_user_id($data)
 	{
-		$data['user_id'] = random_string(60);
+		if (isset($_SESSION['USER']->user_id)) {
+			$data['user_id'] = $_SESSION['USER']->user_id;
+		}
+		
 		return $data;
 	}
 
 	public function generate_school_id($data)
 	{
 		$data['school_id'] = random_string(60);
+		return $data;
+	}
+
+	public function get_user($data)
+	{
+		$user = new User();
+		foreach ($data as $key => $row) {
+			$result = $user->where('user_id',$row->user_id);
+			//  just like array push. its adding to the array $data
+			$data[$key]->user = $result[0];
+		}
+
 		return $data;
 	}
 

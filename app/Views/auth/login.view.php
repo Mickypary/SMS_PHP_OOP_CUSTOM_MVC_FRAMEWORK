@@ -1,4 +1,4 @@
-<?php $this->view('includes/header'); ?>
+<?php $this->load_view('includes/header'); ?>
 
 		<div class="container-fluid">
 			<div class="p-4 mx-auto shadow rounded" style="margin-top: 50px; width: 100%; max-width: 340px;">
@@ -26,5 +26,5 @@
 			</div>
 		</div>
 
-<?php $this->view('includes/footer'); ?>
+<?php $this->load_view('includes/footer'); ?>
 	

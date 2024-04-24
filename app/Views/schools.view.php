@@ -1,9 +1,9 @@
-<?php $this->view('includes/header'); ?>
-<?php $this->view('includes/nav'); ?>
+<?php $this->load_view('includes/header'); ?>
+<?php $this->load_view('includes/nav'); ?>
 
 	<div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px">
 		<!-- Breadcrumbs -->
-		<?php $this->view('includes/crumbs'); ?>
+		<?php $this->load_view('includes/crumbs'); ?>
 
 		<div class="card-group justify-content-center">
 			<table class="table table-striped table-hover">
@@ -17,18 +17,27 @@
 						</a>
 					</th>
 				</tr>
-			</table>
 			<?php if($rows): ?>
-				<?php foreach ($rows as $key => $value): ?>
-					
+				<?php echo "<pre>"; print_r($rows); ?>
+				<?php foreach ($rows as $key => $row): ?>
+					<tr>
+						<td><?= $row->school ?></td>
+						<td><?= $row->user->firstname ?></td>
+						<td><?= format_date($row->date) ?></td>
+						<td>
+							<button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+							<button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
+						</td>
+					</tr>
 				<?php endforeach ?>
 			<?php else: ?>
 				<h4><?= 'No record found'; ?></h4>
 			<?php endif ?>
+			</table>
 		</div>
 		
 
 	</div>
 
-<?php $this->view('includes/footer'); ?>
+<?php $this->load_view('includes/footer'); ?>
 	

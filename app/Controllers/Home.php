@@ -23,7 +23,7 @@ class Home extends Controller
 		// $data = $user->delete(4);
 		$data = $user->findAll();
 
-		$this->view('home',[
+		$this->load_view('home',[
 			'rows' => $data,
 		]);
 	}

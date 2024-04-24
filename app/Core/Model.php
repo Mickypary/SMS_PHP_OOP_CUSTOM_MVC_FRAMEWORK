@@ -25,20 +25,45 @@ class Model extends Database
 		$column = addslashes($column);
 		$query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :".$column;
 		// echo $query;
-		return $this->query($query,[
+		$data =  $this->query($query,[
 			$column => $value,
 		]);
+
+		// run functions after select
+		if (is_array($data)) {
+			if(property_exists($this, 'afterSelect')) {
+				foreach($this->afterSelect as $func) {
+					// note: the $func is just a variable holding the real value such as generate_user_id which makes it $this->generate_user_id() for instance as the $func gets replaced by the content value
+					$data = $this->$func($data);
+				}
+			}	
+		}
+
+		return $data;
 	}
 
 	public function findAll()
 	{
 		$query = "SELECT * FROM " . $this->table;
 		// echo $query;
-		return $this->query($query);
+		$data =  $this->query($query);
+
+		// run functions after select
+		if (is_array($data)) {
+			if(property_exists($this, 'afterSelect')) {
+				foreach($this->afterSelect as $func) {
+					// note: the $func is just a variable holding the real value such as generate_user_id which makes it $this->generate_user_id() for instance as the $func gets replaced by the content value
+					$data = $this->$func($data);
+				}
+			}
+		}
+
+		return $data;
 	}
 
 	public function insert($data)
 	{
+
 		// remove unwanted columns
 		if(property_exists($this, 'allowedColumns')) {
 			foreach($data as $key => $value) {
@@ -48,6 +73,7 @@ class Model extends Database
 			}
 		}
 
+
 		// run functions before insert
 		if(property_exists($this, 'beforeInsert')) {
 			foreach($this->beforeInsert as $func) {
@@ -55,6 +81,7 @@ class Model extends Database
 				$data = $this->$func($data);
 			}
 		}
+
 
 		// get the keys in the array
 		$keys = array_keys($data);

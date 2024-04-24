@@ -1,9 +1,9 @@
-<?php $this->view('includes/header'); ?>
-<?php $this->view('includes/nav'); ?>
+<?php $this->load_view('includes/header'); ?>
+<?php $this->load_view('includes/nav'); ?>
 
 	<div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px">
 		<!-- Breadcrumbs -->
-		<?php $this->view('includes/crumbs'); ?>
+		<?php $this->load_view('includes/crumbs'); ?>
 
 		<div class="card-group justify-content-center">
 			<?php if($rows): ?>
@@ -25,5 +25,5 @@
 
 	</div>
 
-<?php $this->view('includes/footer'); ?>
+<?php $this->load_view('includes/footer'); ?>
 	

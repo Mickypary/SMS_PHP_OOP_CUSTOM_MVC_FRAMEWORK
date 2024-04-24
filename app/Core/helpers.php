@@ -32,3 +32,8 @@ function random_string($length)
 	}
 	return $text;
 }
+
+function format_date($date)
+{
+	return date('l jS M, Y', strtotime($date));
+}
