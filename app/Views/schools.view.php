@@ -18,15 +18,18 @@
 					</th>
 				</tr>
 			<?php if($rows): ?>
-				<?php echo "<pre>"; print_r($rows); ?>
 				<?php foreach ($rows as $key => $row): ?>
 					<tr>
 						<td><?= $row->school ?></td>
-						<td><?= $row->user->firstname ?></td>
+						<td><?= $row->user->firstname ?> <?= $row->user->lastname ?></td>
 						<td><?= format_date($row->date) ?></td>
 						<td>
-							<button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-							<button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
+							<a href="<?= ROOT ?>/schools/edit/<?= $row->id ?>">
+								<button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+							</a>
+							<a href="">
+								<button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
+							</a>				
 						</td>
 					</tr>
 				<?php endforeach ?>

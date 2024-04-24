@@ -65,7 +65,7 @@ class School extends Model
 		foreach ($data as $key => $row) {
 			$result = $user->where('user_id',$row->user_id);
 			//  just like array push. its adding to the array $data
-			$data[$key]->user = $result[0];
+			$data[$key]->user = is_array($result) ? $result[0] : false;
 		}
 
 		return $data;

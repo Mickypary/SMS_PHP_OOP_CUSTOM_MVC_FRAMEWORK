@@ -1,9 +1,12 @@
 <?php
 
-function input_val($key)
+function input_val($key, $default = "")
 {
-	return isset($_POST[$key]) ? $_POST[$key] : "";
+	if (isset($_POST[$key])) {
+		return $_POST[$key];
+	}
 
+	return $default;
 }
 
 function select_val($key, $value='')
