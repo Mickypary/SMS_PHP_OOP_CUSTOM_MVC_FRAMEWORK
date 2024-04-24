@@ -34,8 +34,8 @@ class Login extends Controller
 			}
 		}
 
-		$data['errors'] = $errors;
-		$this->load_view('auth/login',$data);
+		$_SESSION['errors'] = $errors;
+		$this->load_view('auth/login');
 	}
 
 

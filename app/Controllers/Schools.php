@@ -17,8 +17,13 @@ class Schools extends Controller
 
 		$data = $school->findAll();
 
-		$data['rows'] = $data;
-		$this->load_view('schools',$data);
+		// $data['rows'] = $data;
+		$crumbs[] = ['Dashboard',''];
+		$crumbs[] = ['Schools','schools'];
+		$this->load_view('schools',[
+			'rows' => $data,
+			'crumbs' => $crumbs,
+		]);
 	}
 
 	// add new school
@@ -42,7 +47,12 @@ class Schools extends Controller
 		}
 
 		$_SESSION['errors'] = $errors;
-		$this->load_view('schools.add');
+		$crumbs[] = ['Dashboard',''];
+		$crumbs[] = ['Schools','schools'];
+		$crumbs[] = ['Add','schools/add'];
+		$this->load_view('schools.add',[
+			'crumbs' => $crumbs,
+		]);
 	}
 
 	// add new school
@@ -57,8 +67,14 @@ class Schools extends Controller
 		$school = new School();
 		$row = $school->where('id',$id);
 
-		$data['rows'] = $row;
-		$this->load_view('schools.edit',$data);
+		// $data['rows'] = $row;
+		$crumbs[] = ['Dashboard',''];
+		$crumbs[] = ['Schools','schools'];
+		$crumbs[] = ['Edit','schools/edit'];
+		$this->load_view('schools.edit',[
+			'rows' => $row,
+			'crumbs' => $crumbs,
+		]);
 	}
 
 	// update school

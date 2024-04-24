@@ -3,7 +3,7 @@
 
 	<div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px">
 		<!-- Breadcrumbs -->
-		<?php $this->load_view('includes/crumbs'); ?>
+		<?php $this->load_view('includes/crumbs',['crumbs' => $crumbs]); ?>
 
 		<div class="card-group justify-content-center">
 			<table class="table table-striped table-hover">
@@ -27,9 +27,9 @@
 							<a href="<?= ROOT ?>/schools/edit/<?= $row->id ?>">
 								<button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 							</a>
-							<a href="<?= ROOT ?>/schools/delete/<?= $row->id ?>" id="delete" class="btn btn-sm btn-danger">
-								<i class="fa fa-trash-alt"></i>
-								<!-- <button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button> -->
+							<a href="<?= ROOT ?>/schools/delete/<?= $row->id ?>" id="delete">
+								<!-- <i class="fa fa-trash-alt"></i> -->
+								<button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
 							</a>				
 						</td>
 					</tr>
