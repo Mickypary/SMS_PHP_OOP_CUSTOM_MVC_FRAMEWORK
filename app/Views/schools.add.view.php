@@ -3,7 +3,7 @@
 
 	<div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px">
 		<!-- Breadcrumbs -->
-		<?php $this->load_view('includes/crumbs'); ?>
+		<?php $this->load_view('includes/crumbs',['crumbs' => $crumbs]); ?>
 
 		<div class="card-group justify-content-center">
 			<form method="POST" action="">

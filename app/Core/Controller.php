@@ -12,7 +12,7 @@ class Controller
 		if (is_array($data)) {
 			extract($data);
 		}
-		
+
 		// code...
 		if (file_exists("../app/Views/".$view.".view.php")) {		
 			require "../app/Views/".$view.".view.php";

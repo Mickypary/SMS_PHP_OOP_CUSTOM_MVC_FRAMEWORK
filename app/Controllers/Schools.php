@@ -15,13 +15,13 @@ class Schools extends Controller
 		
 		$school = new School();
 
-		$data = $school->findAll();
+		$rows = $school->findAll();
 
 		// $data['rows'] = $data;
 		$crumbs[] = ['Dashboard',''];
 		$crumbs[] = ['Schools','schools'];
 		$this->load_view('schools',[
-			'rows' => $data,
+			'rows' => $rows,
 			'crumbs' => $crumbs,
 		]);
 	}
