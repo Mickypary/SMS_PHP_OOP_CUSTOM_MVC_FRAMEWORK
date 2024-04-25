@@ -22,10 +22,12 @@ class Model extends Database
 
 	public function where($column, $value)
 	{
+		$this->query_type = "select";
+
 		$column = addslashes($column);
-		$query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :".$column;
+		$this->query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :".$column;
 		// echo $query;
-		$data =  $this->query($query,[
+		$data =  $this->query($this->query,[
 			$column => $value,
 		]);
 
@@ -44,9 +46,11 @@ class Model extends Database
 
 	public function findAll()
 	{
-		$query = "SELECT * FROM " . $this->table;
+		$this->query_type = "select";
+
+		$this->query = "SELECT * FROM " . $this->table;
 		// echo $query;
-		$data =  $this->query($query);
+		$data =  $this->query($this->query);
 
 		// run functions after select
 		if (is_array($data)) {
@@ -63,6 +67,7 @@ class Model extends Database
 
 	public function insert($data)
 	{
+		$this->query_type = "insert";
 
 		// remove unwanted columns
 		if(property_exists($this, 'allowedColumns')) {
@@ -92,31 +97,32 @@ class Model extends Database
 		// break the array to string with comma
 		$values = implode(", :", $keys);
 
-		$query = "INSERT INTO " . $this->table . " (" . $columns . ") VALUES (:" . $values . ")";
+		$this->query = "INSERT INTO " . $this->table . " (" . $columns . ") VALUES (:" . $values . ")";
 		// print_r($query);
 
-		return $this->query($query,$data);
+		return $this->query($this->query,$data);
 	}
 
 	public function update($id, $data)
-	{		
-		$query = "UPDATE " . $this->table . " SET ";
+	{	
+		$this->query_type = "update";	
+		$this->query = "UPDATE " . $this->table . " SET ";
 		foreach ($data as $key => $value) {		
-			$query .= $key . " = :" . $key . ", ";
+			$this->query .= $key . " = :" . $key . ", ";
 		}
-		$query = trim($query, ", ");
-		$query .= " WHERE id = :id";
+		$this->query = trim($this->query, ", ");
+		$this->query .= " WHERE id = :id";
 		$data['id'] = $id;
 		// echo $query;
 
-		return $this->query($query,$data);
+		return $this->query($this->query,$data);
 	}
 
 	public function delete($id)
 	{
-		$query = "DELETE FROM " . $this->table . " WHERE id =:id";
+		$this->query = "DELETE FROM " . $this->table . " WHERE id =:id";
 		// echo $query;
-		return $this->query($query,[
+		return $this->query($this->query,[
 			'id' => $id,
 		]);
 	}

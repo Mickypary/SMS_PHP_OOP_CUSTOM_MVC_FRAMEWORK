@@ -31,7 +31,7 @@
 								<!-- <i class="fa fa-trash-alt"></i> -->
 								<button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
 							</a>
-							<a href="<?= ROOT ?>/switch_switch/<?= $row->id ?>" id="">
+							<a href="<?= ROOT ?>/switch_school/<?= $row->id ?>" id="">
 								<!-- <i class="fa fa-trash-alt"></i> -->
 								<button class="btn btn-sm btn-success"><i class="fa fa-chevron-right"></i>Switch To</button>
 							</a>				
@@ -39,7 +39,10 @@
 					</tr>
 				<?php endforeach ?>
 			<?php else: ?>
-				<h4><?= 'No record found'; ?></h4>
+				<tr style="text-align: center;" >
+					<td colspan="4"><h4><?= 'No record found'; ?></h4></td>
+				</tr>
+				
 			<?php endif ?>
 			</table>
 		</div>
