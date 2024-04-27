@@ -14,7 +14,7 @@ class Students extends Controller
 		
 		$user = new User();
 		$school_id = Auth::getSchool_id();
-		$data = $user->query("select * from users where school_id = :school_id && rank in ('students')" ,['school_id' => $school_id]);
+		$data = $user->query("select * from users where school_id = :school_id && rank in ('student') order by id desc" ,['school_id' => $school_id]);
 
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Students','students'];
