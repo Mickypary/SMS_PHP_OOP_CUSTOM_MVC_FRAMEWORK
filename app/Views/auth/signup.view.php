@@ -29,23 +29,33 @@
 					<option value="male" <?= select_val('gender','male') ?>>Male</option>
 					<option value="female" <?= select_val('gender','female') ?>>Female</option>					
 				</select>
+				<?php if (($mode == 'students')): ?>
+					<input type="hidden" name="rank" value="student">
+				<?php else: ?>
 				<select name="rank" class="my-2 form-control">
 					<option value="" <?= select_val('rank','') ?>>--Select Rank--</option>
-					<option value="student" <?= select_val('rank','student') ?>>Student</option>
+					<option value="student" <?= select_val('rank','student') ?> >Student</option>
 					<option value="reception" <?= select_val('rank','reception') ?>>Reception</option>
 					<option value="lecturer" <?= select_val('rank','lecturer') ?>>Lecturer</option>
 					<option value="admin" <?= select_val('rank','admin') ?>>Admin</option>
 					<?php if (Auth::getRank() == "super_admin"): ?>
 						<option value="super_admin" <?= select_val('rank','super_admin') ?>>Super Admin</option>	
-					<?php endif; ?>
-									
+					<?php endif; ?>					
 				</select>
+				<?php endif ?>
 				<input type="text" name="password" value="<?= input_val('password'); ?>" class="my-2 form-control" placeholder="Password">
 				<input type="text" name="password2" value="<?= input_val('password2'); ?>" class="my-2 form-control" placeholder="Retype Password">
 				<button type="submit" class="btn btn-primary float-end" >Add User</button>
-				<a href="<?= ROOT ?>/users">
-					<button type="button" class="btn btn-danger" >Cancel</button>
-				</a>
+				<?php if ($mode == 'users'): ?>
+					<a href="<?= ROOT ?>/users">
+						<button type="button" class="btn btn-danger" >Cancel</button>
+					</a>
+				<?php else: ?>
+					<a href="<?= ROOT ?>/students">
+						<button type="button" class="btn btn-danger" >Cancel</button>
+					</a>
+				<?php endif ?>
+				
 			</form>
 		</div>
 	</div>

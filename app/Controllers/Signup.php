@@ -26,8 +26,10 @@ class Signup extends Controller
 		}
 		// var_dump($errors);
 
+		$mode = isset($_GET['mode']) ? $_GET['mode'] : '';
 		$this->load_view('auth/signup', [
 			'errors' => $errors,
+			'mode' => $mode,
 		]);
 	}
 

@@ -15,7 +15,7 @@
 			  </form>
 
 			  <!-- add new user -->
-				<a href="<?= ROOT ?>/signup?mode=users">
+				<a href="<?= ROOT ?>/signup?mode=students">
 					<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
 				</a>
 			</nav>
