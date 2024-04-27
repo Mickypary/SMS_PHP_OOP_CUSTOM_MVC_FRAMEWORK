@@ -6,9 +6,24 @@
 class Profile extends Controller
 {
 	
-	public function index()
+	public function index($id = '')
 	{
-		$this->view('profile');
+		if($check = !Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		$user = new User();
+		$row = $user->whereRow('user_id',$id);
+
+		$crumbs[] = ['Dashboard','/school/public'];
+		$crumbs[] = ['Profile','profile'];
+		if ($row) {
+			$crumbs[] = [$row->firstname,'profile'];
+		}
+		$this->load_view('profile',[
+			'row' => $row,
+			'crumbs' => $crumbs,
+		]);
 	}
 
 

@@ -35,12 +35,17 @@
 					<option value="reception" <?= select_val('rank','reception') ?>>Reception</option>
 					<option value="lecturer" <?= select_val('rank','lecturer') ?>>Lecturer</option>
 					<option value="admin" <?= select_val('rank','admin') ?>>Admin</option>
-					<option value="super_admin" <?= select_val('rank','super_admin') ?>>Super Admin</option>					
+					<?php if (Auth::getRank() == "super_admin"): ?>
+						<option value="super_admin" <?= select_val('rank','super_admin') ?>>Super Admin</option>	
+					<?php endif; ?>
+									
 				</select>
 				<input type="text" name="password" value="<?= input_val('password'); ?>" class="my-2 form-control" placeholder="Password">
 				<input type="text" name="password2" value="<?= input_val('password2'); ?>" class="my-2 form-control" placeholder="Retype Password">
 				<button type="submit" class="btn btn-primary float-end" >Add User</button>
-				<button type="button" class="btn btn-danger" >Cancel</button>
+				<a href="<?= ROOT ?>/users">
+					<button type="button" class="btn btn-danger" >Cancel</button>
+				</a>
 			</form>
 		</div>
 	</div>

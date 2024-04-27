@@ -18,7 +18,7 @@ class Schools extends Controller
 		$rows = $school->findAll();
 
 		// $data['rows'] = $data;
-		$crumbs[] = ['Dashboard',''];
+		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Schools','schools'];
 		$this->load_view('schools',[
 			'rows' => $rows,

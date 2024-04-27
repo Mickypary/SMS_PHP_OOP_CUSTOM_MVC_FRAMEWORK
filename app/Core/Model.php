@@ -44,6 +44,34 @@ class Model extends Database
 		return $data;
 	}
 
+	public function whereRow($column, $value)
+	{
+		$this->query_type = "select";
+
+		$column = addslashes($column);
+		$this->query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :".$column;
+		// echo $query;
+		$data =  $this->query($this->query,[
+			$column => $value,
+		]);
+
+		// run functions after select
+		if (is_array($data)) {
+			if(property_exists($this, 'afterSelect')) {
+				foreach($this->afterSelect as $func) {
+					// note: the $func is just a variable holding the real value such as generate_user_id which makes it $this->generate_user_id() for instance as the $func gets replaced by the content value
+					$data = $this->$func($data);
+				}
+			}	
+		}
+
+		if (is_array($data)) {
+			$data = $data[0];
+		}
+		
+		return $data;
+	}
+
 	public function findAll()
 	{
 		$this->query_type = "select";

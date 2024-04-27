@@ -22,6 +22,7 @@ class Database
 
 	public function query($query, $data = array(), $data_type = "object")
 	{
+
 		// $conn = $this->connect();
 		// $stm = $conn->prepare($query);
 
@@ -44,8 +45,9 @@ class Database
 
 		// return false;
 
+		$this->query = $query;
 		$conn = $this->connect();
-		$stm = $conn->prepare($query);
+		$stm = $conn->prepare($this->query);
 		$check = $stm->execute($data);
 		if ($check) {
 

@@ -40,3 +40,25 @@ function format_date($date)
 {
 	return date('l jS M, Y', strtotime($date));
 }
+
+function show($data)
+{
+	echo "<pre>";
+	print_r($data);
+	echo "</pre>";
+}
+
+function get_image($image_url, $extra = '')
+{
+	if (!file_exists($image_url)) {
+   		if ($extra == 'female') {
+   			$image = ASSETS . "/user_female.jpg";
+   		}else {
+   			$image = ASSETS . "/user_male.jpg";
+   		}				   		
+   }else {
+   		$image = $image_url;
+   }
+
+   return $image;
+}
