@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 06:34 PM
+-- Generation Time: Apr 27, 2024 at 11:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `gender` (`gender`),
   KEY `rank` (`rank`),
   KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -110,7 +110,10 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `date`, `user_id`, 
 (2, 'Mary', 'Phiri', 'mary@yahoo.com', '2024-04-22 22:17:41', 'oao3tht79qs59ts0kCV9Zb4sl8612IhegWCXYHQclzgmRt8ReqQRWo2oxVUE', 'female', '', 'super_admin', '$2y$10$kLaJT17c4hXB3KrpLwgTUeTCAYe9cBVyIaKO/Yhw6/skEgGgmccNi', ''),
 (3, 'John', 'Tembo', 'john@yahoo.com', '2024-04-26 20:35:37', 'xt1MdfCzM4rBJ8uJ5pJjqIQJ3yPh5camqK6V71jr8pi7XNfCtGwbMG02gHIX', 'male', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'admin', '$2y$10$.byCmJoPPQ3VjDKUtRZ8NO9EqvDCK14gUyizMvpSPY4hGnYZMHHqu', ''),
 (4, 'Anna', 'Jones', 'anna@yahoo.com', '2024-04-26 20:55:00', '8u95jViTOJeawwLiKUroeKXjfdlBLbeMW1nXWYbZs6nHvheKJ52XQyJTJnwU', 'female', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'reception', '$2y$10$Uqn6fhvqUROq8q8wqFZUXOH3JqTIVQy92VjdBbd5DJmoFj9gDvS6G', ''),
-(5, 'Vibe', 'Peters', 'vibe@yahoo.com', '2024-04-26 20:56:10', 'IZQ2SyeeRin58UkfdPQFxRlLO7GOUvBav4FwbWVVRa18AFmuF7qEvcj4q8G6', 'male', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'lecturer', '$2y$10$dHNSSFH/5mbqvV7TCqoMR.25tRhsd6wwFQPiCkqMqa7T8EI/dypOW', '');
+(5, 'Vibe', 'Peters', 'vibe@yahoo.com', '2024-04-26 20:56:10', 'IZQ2SyeeRin58UkfdPQFxRlLO7GOUvBav4FwbWVVRa18AFmuF7qEvcj4q8G6', 'male', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'lecturer', '$2y$10$dHNSSFH/5mbqvV7TCqoMR.25tRhsd6wwFQPiCkqMqa7T8EI/dypOW', ''),
+(6, 'Bob', 'Marley', 'bob@yahoo.com', '2024-04-27 22:05:21', '3KsXT2F3KcW2uiE3IS5wq5wCHcW0bdRo6zebOpgE4WTT8gdk6DBovMGCbZQc', 'male', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'student', '$2y$10$SR6Y1RwjqrG17J1nAKgJBuhXzv6oigJku7g8S.I6tHJkeV1w2mxK6', ''),
+(7, 'Jane', 'Mandawa', 'mikipary@gmail.com', '2024-04-27 22:10:25', 'oLp1kpDnu393jNpmQsAXpR8CYipPGykBzOZ2wXc4lpOUdn8HXK8mhytldJjc', 'female', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'student', '$2y$10$9/l3PobyNARmKiBci3gCl.PQJ3bglEzVAq8ww8S/wR9LCu9rWAYzK', ''),
+(8, 'Maria', 'Jonnes', 'maria@yahoo.com', '2024-04-27 22:15:39', 'J4l3kwG8UqSnhC33bKTOZDclYLCjK1duv2UnclNM5vFcPIfMOMz8ozhr5QYT', 'female', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'student', '$2y$10$8gu0HUB31WcyzZ91Vpa55OLXhMoPR5/78qCfp.eq8UiulYyW3yTWK', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
