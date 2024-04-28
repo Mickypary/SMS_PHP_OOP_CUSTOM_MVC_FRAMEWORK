@@ -108,6 +108,14 @@ class User extends Model
 
 	public function generate_user_id($data)
 	{
+		// to use firstname.lastname as user_id in generate_user_id
+		// $data['user_id'] = strtolower($data['firstname'] . "." . $data['firstname']);
+
+		// while($this->where('user_id',$data['user_id']))
+		// {
+		//     $data['user_id'] .= rand(100,9999);
+		// }
+
 		$data['user_id'] = random_string(60);
 		return $data;
 	}

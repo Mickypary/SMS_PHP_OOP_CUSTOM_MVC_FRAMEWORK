@@ -29,13 +29,13 @@
 
 				<ul class="nav nav-tabs">
 				  <li class="nav-item">
-				    <a class="nav-link active" aria-current="page" href="#">Lecturers</a>
+				    <a class="nav-link <?= $page_tab == 'lecturers' ? 'active' : ''; ?>" aria-current="page" href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=lecturers">Lecturers</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="#">Students</a>
+				    <a class="nav-link <?= $page_tab == 'students' ? 'active' : ''; ?>" href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=students">Students</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="#">Tests</a>
+				    <a class="nav-link <?= $page_tab == 'tests' ? 'active' : '' ?>" href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=tests">Tests</a>
 				  </li>
 				</ul>
 
