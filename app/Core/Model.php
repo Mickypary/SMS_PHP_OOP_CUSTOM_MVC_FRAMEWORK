@@ -72,11 +72,11 @@ class Model extends Database
 		return $data;
 	}
 
-	public function findAll()
+	public function findAll($order = "asc")
 	{
 		$this->query_type = "select";
 
-		$this->query = "SELECT * FROM " . $this->table;
+		$this->query = "SELECT * FROM " . $this->table . " order by id " . $order;
 		// echo $query;
 		$data =  $this->query($this->query);
 

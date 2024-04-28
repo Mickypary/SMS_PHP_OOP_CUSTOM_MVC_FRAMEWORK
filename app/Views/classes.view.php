@@ -6,15 +6,15 @@
 		<?php $this->load_view('includes/crumbs',['crumbs' => $crumbs]); ?>
 
 		<div class="card-group justify-content-center">
-			<h5>Schools</h5>
+			<h5>Classes</h5>
 			<table class="table table-striped table-hover">
 				<tr>
 					<th></th>
-					<th>School</th>
+					<th>Class Name</th>
 					<th>Created by</th>
 					<th>Date</th>
 					<th>
-						<a href="<?= ROOT ?>/schools/add">
+						<a href="<?= ROOT ?>/classes/add">
 							<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
 						</a>
 					</th>
@@ -22,22 +22,22 @@
 			<?php if($rows): ?>
 				<?php foreach ($rows as $key => $row): ?>
 					<tr>
-						<td><button class="btn btn-sm btn-primary"><i class="fa fa-chevron-right"></i></button></td>
-						<td><?= $row->school ?></td>
+						<td>
+							<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>">
+								<button class="btn btn-sm btn-primary" autofocus><i class="fa fa-chevron-right"></i></button>
+							</a>	
+						</td>
+						<td><?= $row->class ?></td>
 						<td><?= $row->user->firstname ?> <?= $row->user->lastname ?></td>
 						<td><?= format_date($row->date) ?></td>
 						<td>
-							<a href="<?= ROOT ?>/schools/edit/<?= $row->id ?>">
+							<a href="<?= ROOT ?>/classes/edit/<?= $row->id ?>">
 								<button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 							</a>
-							<a href="<?= ROOT ?>/schools/delete/<?= $row->id ?>" id="delete">
+							<a href="<?= ROOT ?>/classes/delete/<?= $row->id ?>" id="delete">
 								<!-- <i class="fa fa-trash-alt"></i> -->
 								<button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
-							</a>
-							<a href="<?= ROOT ?>/switch_school/<?= $row->id ?>" id="">
-								<!-- <i class="fa fa-trash-alt"></i> -->
-								<button class="btn btn-sm btn-success"><i class="fa fa-chevron-right"></i>Switch To</button>
-							</a>				
+							</a>			
 						</td>
 					</tr>
 				<?php endforeach ?>
