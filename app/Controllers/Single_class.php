@@ -21,9 +21,13 @@ class Single_class extends Controller
 		if ($row) {
 			$crumbs[] = [$row->class,''];
 		}
+
+		$page_tab = isset($_GET['tab']) ? $_GET['tab'] : "";
+		
 		$this->load_view('single_class',[
 			'row' => $row,
 			'crumbs' => $crumbs,
+			'page_tab' => $page_tab,
 		]);
 	}
 

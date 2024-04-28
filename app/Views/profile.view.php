@@ -58,7 +58,7 @@
 				    <a class="nav-link" href="#">Class</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="#">Test</a>
+				    <a class="nav-link" href="#">Tests</a>
 				  </li>
 				</ul>
 

@@ -8,45 +8,34 @@
 
 			<?php if ($row): ?>
 				<div class="row">
-					<div class="col-sm-4 col-md-3"> 
-						<?php
-						   $image = $row->profile_photo;
-						   $gender = $row->gender;
-
-						?>
-							<img src="<?= get_image($image, $gender) ?>" class="border border-primary d-block mx-auto rounded-circle" style="width: 150px;">
-						
-						<h3 class="text-center"><?= esc($row->user->firstname) ?> <?= esc($row->lastname) ?></h3>
-					</div>
-					<div class="col-sm-8 col-md-9 bg-light p-2">
-						<table class="table table-bordered table-hover table-striped">
-							<tr>
-								<th>Class Name</th>
-								<td><?= esc($row->class) ?></td>
-							</tr>
-							<tr>
-								<th>Created By</th>
-								<td><?= esc($row->user->firstname) ?> <?= esc($row->user->lastname) ?></td>
-							</tr>
-							<tr>														
-								<th>Date Created</th>
-								<td><?= format_date(esc($row->date)) ?></td>
-							</tr>
-						</table>
-					</div>
+					<center><h4><?= esc(ucwords($row->class)) ?></h4></center>
+					<table class="table table-bordered table-hover table-striped">
+						<tr>
+							<th>Class Name</th>
+							<td><?= esc(ucwords($row->class)) ?></td>
+						</tr>
+						<tr>
+							<th>Created By</th>
+							<td><?= esc($row->user->firstname) ?> <?= esc($row->user->lastname) ?></td>
+						</tr>
+						<tr>														
+							<th>Date Created</th>
+							<td><?= format_date(esc($row->date)) ?></td>
+						</tr>
+					</table>
 				</div> <!-- End 1st row -->
 			
 			<br>
-			<div class="container-fluid">
+
 				<ul class="nav nav-tabs">
 				  <li class="nav-item">
-				    <a class="nav-link active" aria-current="page" href="#">Basic Info</a>
+				    <a class="nav-link active" aria-current="page" href="#">Lecturers</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="#">Class</a>
+				    <a class="nav-link" href="#">Students</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="#">Test</a>
+				    <a class="nav-link" href="#">Tests</a>
 				  </li>
 				</ul>
 
@@ -59,8 +48,6 @@
 				    </div>
 				  </form>
 				</nav>
-				
-			</div>
 
 			<?php else: ?>
 				<h4 style="text-align: center"><?= 'No record found'; ?></h4>
