@@ -7,6 +7,6 @@
 </head>
 <body>
 
-	<h1>Page not found</h1>
+	<h3>Page not found</h3>
 </body>
 </html>

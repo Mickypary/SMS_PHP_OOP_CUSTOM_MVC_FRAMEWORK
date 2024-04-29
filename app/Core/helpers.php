@@ -62,3 +62,13 @@ function get_image($image_url, $extra = '')
 
    return $image;
 }
+
+ function views_path($view)
+{
+	// code...
+	if (file_exists("../app/Views/".$view.".inc.php")) {		
+		return "../app/Views/".$view.".inc.php";
+	}else {
+		return "../app/Views/404.view.php";
+	}
+}

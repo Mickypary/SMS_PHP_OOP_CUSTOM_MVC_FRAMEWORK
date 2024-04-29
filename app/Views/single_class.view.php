@@ -39,15 +39,48 @@
 				  </li>
 				</ul>
 
-				<!-- Nav search -->
-				<nav class="navbar bg-body-tertiary">
-				  <form class="form-inline">
-				    <div class="input-group">
-				      <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-				      <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
-				    </div>
-				  </form>
-				</nav>
+				
+
+				<?php
+
+					switch ($page_tab) {
+						case 'lecturers':
+							// code...
+						include(views_path('class_tab_lecturers'));
+							break;
+
+						case 'students':
+							// code...
+						include(views_path('class_tab_students'));
+							break;
+
+						case 'tests':
+							// code...
+						include(views_path('class_tab_tests'));
+							break;
+
+						case 'lecturers-add':
+							// code...
+						include(views_path('class_tab_lecturers_add'));
+							break;
+
+						case 'students-add':
+							// code...
+						include(views_path('class_tab_students_add'));
+							break;
+
+						case 'tests-add':
+							// code...
+						include(views_path('class_tab_tests_add'));
+							break;
+						
+						default:
+							// code...
+							break;
+					}
+
+
+				?>
 
 			<?php else: ?>
 				<h4 style="text-align: center"><?= 'No record found'; ?></h4>
