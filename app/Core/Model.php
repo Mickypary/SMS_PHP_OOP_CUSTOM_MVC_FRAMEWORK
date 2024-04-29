@@ -44,7 +44,7 @@ class Model extends Database
 		return $data;
 	}
 
-	public function whereRow($column, $value)
+	public function getWhere($column, $value)
 	{
 		$this->query_type = "select";
 

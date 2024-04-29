@@ -13,7 +13,7 @@ class Single_class extends Controller
 		}
 
 		$classes = new Classes_model();
-		$row = $classes->whereRow('class_id',$id);
+		$row = $classes->getWhere('class_id',$id);
 
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Classes','classes'];
@@ -24,10 +24,17 @@ class Single_class extends Controller
 
 		$page_tab = isset($_GET['tab']) ? $_GET['tab'] : "lecturers";
 
+		if ($page_tab == 'lecturers-add' && count($_POST) > 0 ) {
+			// add lecturer
+			$user = new User();
+			$name = "%" . $_POST['name'] . "%";
+			$results = $user->query('select * from users where firstname like :firstname', ['firstname' => $name]);
+		}
 		$this->load_view('single_class',[
 			'row' => $row,
 			'crumbs' => $crumbs,
 			'page_tab' => $page_tab,
+			'results' => $results,
 		]);
 	}
 

@@ -23,21 +23,12 @@
 
 		<div class="card-group justify-content-center">
 			<?php if($rows): ?>
-			<?php foreach ($rows as $key => $row): ?>
-				<div class="card m-2 shadow" style="min-width: 14rem; max-width: 14rem;">
-				  <?php
-				   $image = $row->profile_photo;
-				   $gender = $row->gender;
+				<?php foreach ($rows as $key => $row): ?>
 
-				   ?>
-				  <img src="<?= get_image($image,$gender) ?>" class="card-img-top" alt="Card image cap">
-				  <div class="card-body">
-				    <h5 class="card-title"><?= esc($row->firstname) ?> <?= esc($row->lastname) ?></h5>
-				    <p class="card-text"><?= ucwords(str_replace("_", " ", esc($row->rank))); ?></p>
-				    <a href="<?= ROOT ?>/profile/<?=$row->user_id?>" class="btn btn-primary">Profile</a>
-				  </div>
-				</div>
-			<?php endforeach ?>
+					<!-- User include file comes here with card template -->
+					<?php include(views_path('user')) ?>
+				
+				<?php endforeach ?>
 			<?php else: ?>
 				<div>
 					<h5><?= 'No record found'; ?></h5>
