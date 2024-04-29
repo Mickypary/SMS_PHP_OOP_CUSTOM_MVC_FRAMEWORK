@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 11:39 PM
+-- Generation Time: Apr 29, 2024 at 05:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,95 @@ SET time_zone = "+00:00";
 --
 -- Database: `school_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classes`
+--
+
+CREATE TABLE IF NOT EXISTS `classes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `class` varchar(30) NOT NULL,
+  `user_id` varchar(60) NOT NULL,
+  `school_id` varchar(60) NOT NULL,
+  `class_id` varchar(60) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `class` (`class`),
+  KEY `user_id` (`user_id`),
+  KEY `school_id` (`school_id`),
+  KEY `class_id` (`class_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `classes`
+--
+
+INSERT INTO `classes` (`id`, `class`, `user_id`, `school_id`, `class_id`, `date`) VALUES
+(1, 'first class', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', '5bMB75TLxnNamvul8k6f95k7Lj1ajzUg0wOpzGQ1nhxsiHwu6NetcAOqb0rH', '2024-04-28 19:28:58'),
+(3, 'second class', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'mN8PHEIGjvD1LkCTrgDgp6uQIzKjcA0CHota96xHSalB2KbaS7yRFSQqjoFZ', '2024-04-28 19:45:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_lecturers`
+--
+
+CREATE TABLE IF NOT EXISTS `class_lecturers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(60) NOT NULL,
+  `class_id` varchar(60) NOT NULL,
+  `disabled` tinyint(1) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `class_id` (`class_id`),
+  KEY `disabled` (`disabled`),
+  KEY `date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_students`
+--
+
+CREATE TABLE IF NOT EXISTS `class_students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(60) NOT NULL,
+  `class_id` varchar(60) NOT NULL,
+  `disabled` tinyint(1) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `date` (`date`),
+  KEY `disabled` (`disabled`),
+  KEY `class_id` (`class_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_tests`
+--
+
+CREATE TABLE IF NOT EXISTS `class_tests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(60) NOT NULL,
+  `class_id` varchar(60) NOT NULL,
+  `disabled` tinyint(1) NOT NULL,
+  `test` varchar(100) NOT NULL,
+  `test_id` varchar(60) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `test_id` (`test_id`),
+  KEY `date` (`date`),
+  KEY `test` (`test`),
+  KEY `disabled` (`disabled`),
+  KEY `class_id` (`class_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -112,7 +201,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `date`, `user_id`, 
 (4, 'Anna', 'Jones', 'anna@yahoo.com', '2024-04-26 20:55:00', '8u95jViTOJeawwLiKUroeKXjfdlBLbeMW1nXWYbZs6nHvheKJ52XQyJTJnwU', 'female', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'reception', '$2y$10$Uqn6fhvqUROq8q8wqFZUXOH3JqTIVQy92VjdBbd5DJmoFj9gDvS6G', ''),
 (5, 'Vibe', 'Peters', 'vibe@yahoo.com', '2024-04-26 20:56:10', 'IZQ2SyeeRin58UkfdPQFxRlLO7GOUvBav4FwbWVVRa18AFmuF7qEvcj4q8G6', 'male', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'lecturer', '$2y$10$dHNSSFH/5mbqvV7TCqoMR.25tRhsd6wwFQPiCkqMqa7T8EI/dypOW', ''),
 (6, 'Bob', 'Marley', 'bob@yahoo.com', '2024-04-27 22:05:21', '3KsXT2F3KcW2uiE3IS5wq5wCHcW0bdRo6zebOpgE4WTT8gdk6DBovMGCbZQc', 'male', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'student', '$2y$10$SR6Y1RwjqrG17J1nAKgJBuhXzv6oigJku7g8S.I6tHJkeV1w2mxK6', ''),
-(7, 'Jane', 'Mandawa', 'mikipary@gmail.com', '2024-04-27 22:10:25', 'oLp1kpDnu393jNpmQsAXpR8CYipPGykBzOZ2wXc4lpOUdn8HXK8mhytldJjc', 'female', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'student', '$2y$10$9/l3PobyNARmKiBci3gCl.PQJ3bglEzVAq8ww8S/wR9LCu9rWAYzK', ''),
+(7, 'Jane', 'Mandawa', 'jane@yahoo.com', '2024-04-27 22:10:25', 'oLp1kpDnu393jNpmQsAXpR8CYipPGykBzOZ2wXc4lpOUdn8HXK8mhytldJjc', 'female', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'student', '$2y$10$9/l3PobyNARmKiBci3gCl.PQJ3bglEzVAq8ww8S/wR9LCu9rWAYzK', ''),
 (8, 'Maria', 'Jonnes', 'maria@yahoo.com', '2024-04-27 22:15:39', 'J4l3kwG8UqSnhC33bKTOZDclYLCjK1duv2UnclNM5vFcPIfMOMz8ozhr5QYT', 'female', 'll7OeAgsjEP6tCaWcdUASuTqesxo7h9m7R3dmehcB6ytWau8WKbohkSpHO1o', 'student', '$2y$10$8gu0HUB31WcyzZ91Vpa55OLXhMoPR5/78qCfp.eq8UiulYyW3yTWK', '');
 COMMIT;
 
