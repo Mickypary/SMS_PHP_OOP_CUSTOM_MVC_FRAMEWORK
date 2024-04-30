@@ -13,7 +13,7 @@
 							<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Assign</button>
 						</a>
 					  	<!-- remove new user -->
-						<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=lecturers-remove&select=true">
+						<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=lecturers-remove&deselect=true">
 							<button class="btn btn-sm btn-danger"><i class="fa fa-minus"></i>De-assign</button>
 						</a>
 						

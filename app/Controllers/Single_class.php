@@ -59,6 +59,12 @@ class Single_class extends Controller
 					$errors[] = "Lecturer already assigned in this class!";
 				}
 				
+			}elseif (isset($_POST['deselected'])) {
+				// code...
+				$lecturer = $lect->where('class_id', $id, 'desc');
+				$query = "delete from class_lecturers where user_id = :user_id && class_id = :class_id limit 1";
+				$check = $lect->query($query, ['user_id' => $_POST['deselected'], 'class_id' => $id]);
+				$this->redirect('single_class/'.$id.'?tab=lecturers');
 			}
 			
 		}elseif($page_tab == 'lecturers') {
