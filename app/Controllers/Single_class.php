@@ -29,7 +29,7 @@ class Single_class extends Controller
 		$lect = new Lecturers_model(); 
 
 		$results = false;
-		if ($page_tab == 'lecturers-add' && count($_POST) > 0 ) {
+		if (($page_tab == 'lecturers-add' || $page_tab == 'lecturers-remove') && count($_POST) > 0 ) {
 			// find lecturer
 			if (isset($_POST['search'])) {
 				if (trim($_POST['name']) != "") {
