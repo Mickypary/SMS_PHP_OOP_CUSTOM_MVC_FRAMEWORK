@@ -8,7 +8,7 @@
 				  </form>
 
 				  <!-- add new user -->
-					<a href="<?= ROOT ?>/signup?mode=users">
+					<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=tests-add&select=true">
 						<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add Test</button>
 					</a>
 				</nav>

@@ -20,12 +20,12 @@ class Model extends Database
 
 	}
 
-	public function where($column, $value)
+	public function where($column, $value, $order = 'asc')
 	{
 		$this->query_type = "select";
 
 		$column = addslashes($column);
-		$this->query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :".$column;
+		$this->query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :".$column . " order by id " . $order;
 		// echo $query;
 		$data =  $this->query($this->query,[
 			$column => $value,
@@ -44,12 +44,12 @@ class Model extends Database
 		return $data;
 	}
 
-	public function getWhere($column, $value)
+	public function getWhere($column, $value, $order = 'asc')
 	{
 		$this->query_type = "select";
 
 		$column = addslashes($column);
-		$this->query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :".$column;
+		$this->query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :".$column . " order by id " . $order;
 		// echo $query;
 		$data =  $this->query($this->query,[
 			$column => $value,

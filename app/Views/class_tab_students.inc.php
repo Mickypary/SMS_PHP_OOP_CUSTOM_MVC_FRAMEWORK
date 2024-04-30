@@ -8,7 +8,7 @@
 				  </form>
 
 				  <!-- add new user -->
-					<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=students-add">
+					<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=students-add&select=true">
 						<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add Student</button>
 					</a>
 				</nav>

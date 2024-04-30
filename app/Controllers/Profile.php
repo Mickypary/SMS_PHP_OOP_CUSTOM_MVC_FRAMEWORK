@@ -13,7 +13,7 @@ class Profile extends Controller
 		}
 
 		$user = new User();
-		$row = $user->whereRow('user_id',$id);
+		$row = $user->getWhere('user_id',$id);
 
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Profile','profile'];

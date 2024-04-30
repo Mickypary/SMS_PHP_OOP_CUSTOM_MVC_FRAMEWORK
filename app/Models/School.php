@@ -27,7 +27,7 @@ class School extends Model
 		// check for school name
 		if (isset($DATA['school']) && empty($DATA['school'])) {
 			$this->errors['school'] = "School Name field is required";
-		}elseif (isset($DATA['school']) && !preg_match("/^[a-zA-Z ]+$/", $DATA['school'])) {
+		}elseif (isset($DATA['school']) && !preg_match("/^[a-zA-Z0-9\- ]+$/", $DATA['school'])) {
 			$this->errors['school'] = "Only letters allowed in School Name";
 		}elseif(!empty($this->where('school',$DATA['school']))) {
 			// print_r($this->where('school',$DATA['school']));
