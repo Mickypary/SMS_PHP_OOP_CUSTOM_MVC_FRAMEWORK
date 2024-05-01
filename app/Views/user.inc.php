@@ -13,7 +13,7 @@
 	   <?php if (isset($_GET['select'])): ?>
 	   	<button name="selected" value="<?=$row->user_id?>" class="btn btn-success float-end">Assign</button>
 	   <?php elseif(isset($_GET['deselect'])): ?>
-	   	<button name="deselected" value="<?=$row->user_id?>" class="btn btn-danger float-end">Unassign</button>
+	   	<button name="selected" value="<?=$row->user_id?>" class="btn btn-danger float-end">Unassign</button>
 	   <?php endif ?>
 	    
 	  </div>

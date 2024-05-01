@@ -61,9 +61,7 @@ class Database
 						$data = $stm->fetchAll(PDO::FETCH_ASSOC);
 					}
 
-					if (is_array($data) && count($data) > 0) {
-						return $data;
-					}
+					
 
 				break;
 
@@ -86,6 +84,22 @@ class Database
 			
 		}
 		
+
+		
+
+		// run functions after select
+		if (is_array($data)) {
+			if(property_exists($this, 'afterSelect')) {
+				foreach($this->afterSelect as $func) {
+					// note: the $func is just a variable holding the real value such as generate_user_id which makes it $this->generate_user_id() for instance as the $func gets replaced by the content value
+					$data = $this->$func($data);
+				}
+			}	
+		}
+
+		if (is_array($data) && count($data) > 0) {
+			return $data;
+		}
 
 		return false;
 

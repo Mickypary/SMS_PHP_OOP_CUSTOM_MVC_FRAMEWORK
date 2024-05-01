@@ -33,9 +33,7 @@
 						
 						<?php endforeach ?>	
 					<?php else: ?>
-						<?php if (count($_POST) > 0): ?>
-							<center><hr><h4><?= 'No record found'; ?></h4></center>
-						<?php endif ?>	
+							<center><hr><h4><?= 'No lecturer found in this class'; ?></h4></center>
 					<?php endif ?>
 				</div>
 				
