@@ -51,17 +51,17 @@
 						include(views_path('class_tab_tests'));
 							break;
 
-						case 'lecturers-add':
+						case 'lecturer-add':
 							// code...
 						include(views_path('class_tab_lecturers_add'));
 							break;
 
-						case 'lecturers-remove':
+						case 'lecturer-remove':
 							// code...
 						include(views_path('class_tab_lecturers_remove'));
 							break;
 
-						case 'students-add':
+						case 'student-add':
 							// code...
 						include(views_path('class_tab_students_add'));
 							break;
