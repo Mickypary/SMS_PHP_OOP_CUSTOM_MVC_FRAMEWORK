@@ -8,12 +8,21 @@ class User extends Model
 {
 	// protected $table = "users";
 	protected $allowedColumns = [
-		'firstname', 'lastname', 'email', 'password', 'rank', 'gender', 'date'
+		'firstname',
+		'lastname', 
+		'email', 
+		'password', 
+		'rank', 
+		'gender', 
+		'date',
 	];
 
 	protected $beforeInsert = [
-		'generate_user_id', 'generate_school_id', 'hash_password'
+		'generate_user_id', 
+		'generate_school_id', 
+		'hash_password'
 	];
+
 
 	public function validate($DATA)
 	{
@@ -115,7 +124,6 @@ class User extends Model
 		// {
 		//     $data['user_id'] .= rand(100,9999);
 		// }
-
 		$data['user_id'] = random_string(60);
 		return $data;
 	}
@@ -134,6 +142,7 @@ class User extends Model
 		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 		return $data;
 	}
+
 
 
 

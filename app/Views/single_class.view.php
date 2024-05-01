@@ -66,6 +66,11 @@
 						include(views_path('class_tab_students_add'));
 							break;
 
+						case 'student-remove':
+							// code...
+						include(views_path('class_tab_students_remove'));
+							break;
+
 						case 'tests-add':
 							// code...
 						include(views_path('class_tab_tests_add'));

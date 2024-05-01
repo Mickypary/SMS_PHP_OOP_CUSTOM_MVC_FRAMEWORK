@@ -276,17 +276,16 @@ class Single_class extends Controller
 
 		$page_tab = "student-remove";
 
-		$stud = new Student_model(); 
+		$stud = new Students_model(); 
 
 		$results = false;
 		if (count($_POST) > 0 ) {
-			// find lecturer
+			// find student
 			if (isset($_POST['search'])) {
 				if (trim($_POST['name']) != "") {
-					// print_r('here'); die();
 					$user = new User();
 					$name = "%" . trim($_POST['name']) . "%";
-					$query = "select * from users where (firstname like :fname || lastname like :lname) && rank = 'lecturer' limit 10";
+					$query = "select * from users where (firstname like :fname || lastname like :lname) && rank = 'student' limit 10";
 					$results = $user->query($query, ['fname' => $name, 'lname' => $name]);
 					// print_r($results); die();
 				}else {
@@ -296,7 +295,7 @@ class Single_class extends Controller
 			}elseif (isset($_POST['selected'])) {
 				// add lecturer
 				// $query = "select id from class_lecturers where user_id = :user_id && class_id = :class_id limit 1";
-				$query = "select * from class_lecturers where user_id = :user_id && class_id = :class_id && disabled = 0 limit 1";
+				$query = "select * from class_students where user_id = :user_id && class_id = :class_id && disabled = 0 limit 1";
 
 					$check = $stud->query($query, ['user_id' => $_POST['selected'], 'class_id' => $id]);
 					if ($check) {
@@ -306,12 +305,11 @@ class Single_class extends Controller
 
 						// $lect->query($query, ['user_id' => $_POST['selected'], 'class_id' => $id]);
 						$stud->update($check[0]->id, $arr);
-						$this->redirect('single_class/'.$id.'?tab=lecturers');
+						$this->redirect('single_class/'.$id.'?tab=students');
 					}else {
-						$errors[] = "Ensure the lecturer is assigned before removing!";
+						$errors[] = "Ensure the student is assigned before removing!";
 					}							
 			}
-			
 		}
 
 

@@ -1,5 +1,5 @@
 <form method="POST" action="" class="form mx-auto" style="width: 100%; max-width: 400px;">
-	<br><h4>Remove Lecturer</h4>
+	<br><h4>Remove Student</h4>
 
 	<!-- Alert Start -->
 			<?php if(count($errors) > 0): ?>
@@ -14,9 +14,9 @@
 			<!-- Alert End -->
 
 			
-	<input autofocus type="text" class="form-control" name="name" value="<?= input_val('name') ?>" placeholder="Lecturer Name">
+	<input autofocus type="text" class="form-control" name="name" value="<?= input_val('name') ?>" placeholder="Student Name">
 	<br>
-	<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=lecturers">
+	<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=students">
 		<button type="button" class="btn btn-danger">Cancel</button>
 	</a>
 	<button name="search" class="btn btn-primary float-end">Search</button>
@@ -40,5 +40,5 @@
 				<center><hr><h4><?= 'No record found'; ?></h4></center>
 			<?php endif ?>	
 		<?php endif ?>
-	</div>
+	</div>	
 </form>

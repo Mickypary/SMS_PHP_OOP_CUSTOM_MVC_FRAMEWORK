@@ -21,6 +21,12 @@ class Login extends Controller
 					$row = $row[0];
 					//verify password
 					if(password_verify($_POST['password'], $row->password)) {
+						// instantiate the school object
+						$school = new School();
+						$school_row = $school->getWhere('school_id', $row->school_id);
+						// add school_name to the row object so that school_name becomes part of the row object to be added to session array
+						$row->school_name = $school_row->school;
+						// $_SESSION['school_name'] = $school_row->school;
 						Auth::authenticate($row);
 						$this->redirect('home');
 					}

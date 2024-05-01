@@ -1,5 +1,5 @@
 <form method="POST" action="" class="form mx-auto" style="width: 100%; max-width: 400px;">
-	<br><h4>Remove Lecturer</h4>
+	<br><h4>Remove Student</h4>
 
 	<!-- Alert Start -->
 			<?php if(count($errors) > 0): ?>
@@ -16,7 +16,7 @@
 			
 	<input autofocus type="text" class="form-control" name="name" value="<?= input_val('name') ?>" placeholder="Lecturer Name">
 	<br>
-	<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=lecturers">
+	<a href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=students">
 		<button type="button" class="btn btn-danger">Cancel</button>
 	</a>
 	<button name="search" class="btn btn-primary float-end">Search</button>
@@ -26,19 +26,18 @@
 
 
 <!-- Search Result panel -->
-<form method="POST">
-	<div class="card-group justify-content-center">
-		<?php if(isset($results) && $results): ?>
-			
-				<?php foreach ($results as $key => $row): ?>
+<div class="card-group justify-content-center">
+	<form method="POST">
+		<?php if(isset($results) && $results): ?>	
+			<?php foreach ($results as $key => $row): ?>
 
-					<?php include(views_path('user')) ?>
-				
-				<?php endforeach ?>	
+				<?php include(views_path('user')) ?>
+			
+			<?php endforeach ?>	
 		<?php else: ?>
 			<?php if (count($_POST) > 0): ?>
 				<center><hr><h4><?= 'No record found'; ?></h4></center>
 			<?php endif ?>	
 		<?php endif ?>
-	</div>
-</form>
+	</form>
+</div>

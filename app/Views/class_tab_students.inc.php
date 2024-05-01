@@ -23,14 +23,12 @@
 
 				<div class="card-group justify-content-center">
 					<?php if(is_array($students)): ?>
-			
 						<?php foreach ($students as $key => $student): ?>
 							<?php 
 							$row = $student->user; 
 							include(views_path('user'))
 
-							?>
-						
+							?>					
 						<?php endforeach ?>	
 					<?php else: ?>
 							<center><hr><h4><?= 'There are no students in this class'; ?></h4></center>
