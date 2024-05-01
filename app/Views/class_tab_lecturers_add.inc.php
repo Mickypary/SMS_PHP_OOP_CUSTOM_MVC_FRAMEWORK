@@ -26,8 +26,8 @@
 
 
 <!-- Search Result panel -->
-<div class="card-group justify-content-center">
-	<form method="POST">
+<form method="POST">
+	<div class="card-group justify-content-center">
 
 		<?php if(isset($results) && $results): ?>
 			
@@ -41,6 +41,6 @@
 				<center><hr><h4><?= 'No record found'; ?></h4></center>
 			<?php endif ?>	
 		<?php endif ?>
-	</form>
-
-</div>
+		
+	</div>	
+</form>
