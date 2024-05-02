@@ -20,7 +20,7 @@
 				<!-- Alert End -->
 
 				<form method="POST" action="">
-					<input type="email" name="email" value="<?= input_val('email'); ?>" class="my-2 form-control" placeholder="Email" autofocus>
+					<input type="email" name="email" value="<?= input_val('email'); ?>" class="my-3 form-control" placeholder="Email" autofocus>
 					<input type="password" name="password" value="<?= input_val('password'); ?>" class="my-2 form-control" placeholder="Password">
 					<button type="submit" class="btn btn-primary" >Login</button>
 				</form>

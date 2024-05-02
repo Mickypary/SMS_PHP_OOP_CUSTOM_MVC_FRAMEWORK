@@ -13,6 +13,7 @@ class Profile extends Controller
 		}
 
 		$user = new User();
+		$id = trim($id == '') ? Auth::getUser_id() : $id;
 		$row = $user->getWhere('user_id',$id);
 
 		$crumbs[] = ['Dashboard','/school/public'];
