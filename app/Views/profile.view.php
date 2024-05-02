@@ -52,15 +52,44 @@
 			<div class="container-fluid">
 				<ul class="nav nav-tabs">
 				  <li class="nav-item">
-				    <a class="nav-link active" aria-current="page" href="#">Basic Info</a>
+				    <a class="nav-link <?= $page_tab == 'info' ? 'active' : '' ?>" aria-current="page" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=info">Basic Info</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="#">Class</a>
+				    <a class="nav-link <?= $page_tab == 'class' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=class">Class</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="#">Tests</a>
+				    <a class="nav-link <?= $page_tab == 'test' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=test">Tests</a>
 				  </li>
 				</ul>
+
+				<?php
+
+					switch ($page_tab) {
+						case 'info':
+							// code...
+						echo "This is info";
+							break;
+
+						case 'class':
+							// code...
+						echo "This is class";
+							break;
+
+						case 'test':
+							// code...
+						echo "This is test";
+							break;
+						
+						default:
+							// code...
+							break;
+					}
+
+
+
+
+
+				?>
 
 				<!-- Nav search -->
 				<nav class="navbar bg-body-tertiary">

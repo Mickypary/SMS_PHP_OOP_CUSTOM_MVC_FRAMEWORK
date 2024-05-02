@@ -15,13 +15,14 @@ class Classes extends Controller
 		
 		$classes = new Classes_model();
 
-		$rows = $classes->findAll('desc');
+		$school_id = Auth::getSchool_id();
+		$results = $classes->query("select * from classes where school_id = :school_id order by id desc" ,['school_id' => $school_id]);
 
 		// $data['rows'] = $data;
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Classes','classes'];
 		$this->load_view('classes',[
-			'rows' => $rows,
+			'rows' => $results,
 			'crumbs' => $crumbs,
 		]);
 	}

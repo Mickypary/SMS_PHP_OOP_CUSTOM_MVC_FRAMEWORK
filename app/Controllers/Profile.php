@@ -21,8 +21,13 @@ class Profile extends Controller
 		if ($row) {
 			$crumbs[] = [$row->firstname,'profile'];
 		}
-		$this->load_view('profile',[
+
+		// get more info
+		$page_tab = isset($_GET['tab']) ? $_GET['tab'] : "info";
+
+		$this->load_view('profile',[	
 			'row' => $row,
+			'page_tab' => $page_tab,
 			'crumbs' => $crumbs,
 		]);
 	}
