@@ -8,24 +8,43 @@ class Classes extends Controller
 	
 	public function index()
 	{
-
+		$results = array();
 		if($check = !Auth::logged_in()) {
 			$this->redirect('login');
 		}
-
 		
 		$classes = new Classes_model();
 
 		$school_id = Auth::getSchool_id();
-		$results = $classes->query("select * from classes where school_id = :school_id order by id desc" ,['school_id' => $school_id]);
 
-		// $data['rows'] = $data;
+		if (Auth::access('admin')) {
+			// code...
+			$results = $classes->query("select * from classes where school_id = :school_id order by id desc" ,['school_id' => $school_id]);
+		}else {
+
+			$class = new Classes_model();
+			$mytable = "class_students";
+			if (Auth::getRank() == 'lecturer') {
+				$mytable = "class_lecturers";
+			}
+
+			$query = "select * from $mytable where user_id = :user_id and disabled = 0";
+			$arr['stud_classes'] = $class->query($query, ['user_id' => Auth::getUser_id()]);
+			
+			// to get the actual class name from the classes table
+			if ($arr['stud_classes']) {
+				foreach ($arr['stud_classes'] as $key => $srow) {
+					$results[] = $class->getWhere('class_id', $srow->class_id);
+				}
+			}	
+		}
+
+		
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Classes','classes'];
-		$this->load_view('classes',[
-			'rows' => $results,
-			'crumbs' => $crumbs,
-		]);
+		$data['rows'] = $results;
+		$data['crumbs'] = $crumbs;
+		$this->load_view('classes', $data);
 	}
 
 	// add new school

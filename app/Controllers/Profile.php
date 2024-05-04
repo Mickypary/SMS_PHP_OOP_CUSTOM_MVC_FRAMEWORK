@@ -42,12 +42,7 @@ class Profile extends Controller
 					$data['student_classes'][] = $class->getWhere('class_id', $srow->class_id);
 				}
 			}
-			// print_r($data['student_classes']);
 		}
-		// $test[] = 'ade';
-		// $data['test'][] = 'ade';
-		// $data['test'][] = 'Gbemi';
-		// print_r($data['test']);
 		
 		$data['row'] = $row;
 		$data['crumbs'] = $crumbs;

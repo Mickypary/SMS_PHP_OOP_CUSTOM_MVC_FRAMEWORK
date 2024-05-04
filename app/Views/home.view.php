@@ -22,6 +22,7 @@
 		<div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px">
 			<div class="row justify-content-center">
 
+				<?php if (Auth::access('super_admin')): ?>
 				<!-- School -->
 				<div class="col-3 shadow rounded m-4 border card p-0">
 					<a href="<?=ROOT?>/schools">
@@ -32,8 +33,9 @@
 						<div class="card-footer">View all schools</div>
 					</a>
 				</div>
+				<?php endif; ?>
 				
-				
+				<?php if (Auth::access('admin')): ?>
 				<!-- Staff -->			
 				<div class="col-3 shadow rounded m-4 border card p-0">
 					<a href="<?=ROOT?>/users">
@@ -44,8 +46,9 @@
 						<div class="card-footer">View all staff members</div>
 					</a>
 				</div>
+				<?php endif; ?>
 				
-				
+				<?php if (Auth::access('reception')): ?>
 				<!-- Students -->
 				<div class="col-3 shadow rounded m-4 border card p-0">
 					<a href="<?=ROOT?>/students">
@@ -56,7 +59,7 @@
 						<div class="card-footer">View all students</div>
 					</a>
 				</div>
-				
+				<?php endif; ?>
 				
 				<!-- Classes -->	
 				<div class="col-3 shadow rounded m-4 border card p-0">
@@ -81,7 +84,7 @@
 					</a>
 				</div>
 				
-				
+				<?php if (Auth::access('admin')): ?>
 				<!-- Statistics -->
 				<div class="col-3 shadow rounded m-4 border card p-0">
 					<a href="<?=ROOT?>/statistics">
@@ -92,8 +95,9 @@
 						<div class="card-footer">View students statistics</div>
 					</a>
 				</div>
+				<?php endif; ?>
 				
-				
+				<?php if (Auth::access('admin')): ?>
 				<!-- Settings -->
 				<div class="col-3 shadow rounded m-4 border card p-0">
 					<a href="<?=ROOT?>/settings">
@@ -104,6 +108,7 @@
 						<div class="card-footer">App Settings</div>
 					</a>
 				</div>
+				<?php endif; ?>
 				
 				
 				<!-- Profile -->

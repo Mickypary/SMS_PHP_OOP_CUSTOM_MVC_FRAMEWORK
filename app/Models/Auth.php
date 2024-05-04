@@ -102,7 +102,7 @@ class Auth
 			return false;
 		}
 
-		if (isset($row)) {
+		if (!isset($row)) {
 			if ($_SESSION['USER']->user_id == $row->user_id) {
 				return true;
 			}
@@ -110,7 +110,7 @@ class Auth
 
 		$allowed[] = 'super_admin';
 		$allowed[] = 'admin';
-		if (in_array($_SESSION['USER']->user_id, $allowed)) {
+		if (in_array($_SESSION['USER']->rank, $allowed)) {
 			return true;
 		}
 		return false;
