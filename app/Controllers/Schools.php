@@ -12,18 +12,21 @@ class Schools extends Controller
 		if($check = !Auth::logged_in()) {
 			$this->redirect('login');
 		}
+
+		if (Auth::access('super_admin')) {
+			$school = new School();
+			$rows = $school->findAll();
+
+			$crumbs[] = ['Dashboard','/school/public'];
+			$crumbs[] = ['Schools','schools'];
+			$data['rows'] = $rows;
+			$data['crumbs'] = $crumbs;
+			$this->load_view('schools', $data);
+		}else {
+			$this->load_view('access-denied');
+		}
 		
-		$school = new School();
-
-		$rows = $school->findAll();
-
-		// $data['rows'] = $data;
-		$crumbs[] = ['Dashboard','/school/public'];
-		$crumbs[] = ['Schools','schools'];
-		$this->load_view('schools',[
-			'rows' => $rows,
-			'crumbs' => $crumbs,
-		]);
+		
 	}
 
 	// add new school
@@ -35,24 +38,30 @@ class Schools extends Controller
 			$this->redirect('login');
 		}
 
-		if (count($_POST) > 0) {
-			$school = new School();
-			if ($school->validate($_POST)) {
-				$_POST['date'] = date('Y-m-d H:i:s');
-				$school->insert($_POST);
-				$this->redirect('schools');
-			}else {
-				$errors = $school->errors;
+		if (Auth::access('super_admin')) {
+			// code...
+			if (count($_POST) > 0) {
+				$school = new School();
+				if ($school->validate($_POST)) {
+					$_POST['date'] = date('Y-m-d H:i:s');
+					$school->insert($_POST);
+					$this->redirect('schools');
+				}else {
+					$errors = $school->errors;
+				}
 			}
+
+			$_SESSION['errors'] = $errors;
+			$crumbs[] = ['Dashboard',''];
+			$crumbs[] = ['Schools','schools'];
+			$crumbs[] = ['Add','schools/add'];
+			$data['crumbs'] = $crumbs;
+			$this->load_view('schools.add', $data);
+		}else {
+			$this->load_view('access-denied');
 		}
 
-		$_SESSION['errors'] = $errors;
-		$crumbs[] = ['Dashboard',''];
-		$crumbs[] = ['Schools','schools'];
-		$crumbs[] = ['Add','schools/add'];
-		$this->load_view('schools.add',[
-			'crumbs' => $crumbs,
-		]);
+		
 	}
 
 	// add new school
@@ -64,17 +73,21 @@ class Schools extends Controller
 			$this->redirect('login');
 		}
 
-		$school = new School();
-		$row = $school->where('id',$id);
+		if (Auth::access('super_admin')) {
+			// code...
+			$school = new School();
+			$row = $school->where('id',$id);
 
-		// $data['rows'] = $row;
-		$crumbs[] = ['Dashboard',''];
-		$crumbs[] = ['Schools','schools'];
-		$crumbs[] = ['Edit','schools/edit'];
-		$this->load_view('schools.edit',[
-			'rows' => $row,
-			'crumbs' => $crumbs,
-		]);
+			// $data['rows'] = $row;
+			$crumbs[] = ['Dashboard',''];
+			$crumbs[] = ['Schools','schools'];
+			$crumbs[] = ['Edit','schools/edit'];
+			$data['rows'] = $row;
+			$data['crumbs'] = $crumbs;
+			$this->load_view('schools.edit', $data);
+		}else {
+			$this->load_view('access-denied');
+		}
 	}
 
 	// update school
@@ -86,7 +99,7 @@ class Schools extends Controller
 			$this->redirect('login');
 		}
 
-		if (count($_POST) > 0) {
+		if (count($_POST) > 0 && Auth::access('super_admin')) {
 			$school = new School();
 			if ($school->validate($_POST)) {
 				$school->update($id,$_POST);
@@ -96,6 +109,8 @@ class Schools extends Controller
 				$_SESSION['errors'] = $errors;
 				$this->redirect('schools/edit/'.$id);
 			}
+		}else {
+			$this->load_view('access-denied');
 		}
 	}
 
@@ -108,11 +123,16 @@ class Schools extends Controller
 			$this->redirect('login');
 		}
 
-		$school = new School();
+		if (Auth::access('super_admin')) {
+			// code...
+			$school = new School();
 			$school->delete($id);
 			sleep(1);
 			$this->redirect('schools');
 			die();
+		}else {
+			$this->load_view('access-denied');
+		}		
 
 		// $row = $school->where('id',$id);	
             

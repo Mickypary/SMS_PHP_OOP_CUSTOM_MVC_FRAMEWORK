@@ -55,29 +55,30 @@
 				    <a class="nav-link <?= $page_tab == 'info' ? 'active' : '' ?>" aria-current="page" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=info">Basic Info</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link <?= $page_tab == 'class' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=class">Class</a>
+				    <a class="nav-link <?= $page_tab == 'classes' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=classes">My Classes</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link <?= $page_tab == 'test' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=test">Tests</a>
+				    <a class="nav-link <?= $page_tab == 'tests' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=tests">Tests</a>
 				  </li>
 				</ul>
 
 				<?php
+				
 
 					switch ($page_tab) {
 						case 'info':
 							// code...
-						echo "This is info";
+						include(views_path('profile_tab_info'));
 							break;
 
-						case 'class':
+						case 'classes':
 							// code...
-						echo "This is class";
+						include(views_path('profile_tab_classes'));
 							break;
 
-						case 'test':
+						case 'tests':
 							// code...
-						echo "This is test";
+						include(views_path('profile_tab_tests'));
 							break;
 						
 						default:
@@ -92,14 +93,7 @@
 				?>
 
 				<!-- Nav search -->
-				<nav class="navbar bg-body-tertiary">
-				  <form class="form-inline">
-				    <div class="input-group">
-				      <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-				      <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
-				    </div>
-				  </form>
-				</nav>
+				
 				
 			</div>
 

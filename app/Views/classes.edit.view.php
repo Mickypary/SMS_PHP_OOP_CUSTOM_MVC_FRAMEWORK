@@ -8,7 +8,7 @@
 		<?php if($rows): ?>	
 		<div class="card-group justify-content-center">
 	
-			<form method="POST" action="<?= ROOT ?>/classes/update/<?= $rows[0]->id ?>">
+			<form method="POST" action="<?= ROOT ?>/classes/update/<?= $rows->id ?>">
 				<h3>Edit Class</h3>
 				<!-- Alert Start -->
 				<?php if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0): ?>
@@ -22,7 +22,7 @@
 					</div>
 				<?php endif; ?>
 				<!-- Alert End -->
-				<input class="form-control" value="<?= input_val('class',$rows[0]->class) ?>" type="text" name="class" placeholder="Class Name" autofocus><br>
+				<input class="form-control" value="<?= input_val('class',$rows->class) ?>" type="text" name="class" placeholder="Class Name" autofocus><br>
 				<input class="btn btn-primary float-end" type="submit" value="Update">
 				<a href="<?= ROOT ?>/classes">
 					<input class="btn btn-danger" type="button" value="Cancel">

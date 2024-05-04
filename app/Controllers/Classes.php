@@ -12,6 +12,7 @@ class Classes extends Controller
 		if($check = !Auth::logged_in()) {
 			$this->redirect('login');
 		}
+
 		
 		$classes = new Classes_model();
 
@@ -36,24 +37,29 @@ class Classes extends Controller
 			$this->redirect('login');
 		}
 
-		if (count($_POST) > 0) {
-			$classes = new Classes_model();
-			if ($classes->validate($_POST)) {
-				$_POST['date'] = date('Y-m-d H:i:s');
-				$classes->insert($_POST);
-				$this->redirect('classes');
-			}else {
-				$errors = $classes->errors;
+		if (Auth::access('admin')) {
+			if (count($_POST) > 0) {
+				$classes = new Classes_model();  
+				if ($classes->validate($_POST)) {
+					$_POST['date'] = date('Y-m-d H:i:s');
+					$classes->insert($_POST);
+					$this->redirect('classes');
+				}else {
+					$errors = $classes->errors;
+				}
 			}
-		}
 
-		$_SESSION['errors'] = $errors;
-		$crumbs[] = ['Dashboard',''];
-		$crumbs[] = ['Classes','classes'];
-		$crumbs[] = ['Add','classes/add'];
-		$this->load_view('classes.add',[
-			'crumbs' => $crumbs,
-		]);
+			$_SESSION['errors'] = $errors;
+			$crumbs[] = ['Dashboard',''];
+			$crumbs[] = ['Classes','classes'];
+			$crumbs[] = ['Add','classes/add'];
+			$this->load_view('classes.add',[
+				'crumbs' => $crumbs,
+			]);
+
+		}else {
+			$this->load_view('access-denied');
+		}
 	}
 
 	// add new school
@@ -66,16 +72,18 @@ class Classes extends Controller
 		}
 
 		$classes = new Classes_model();
-		$row = $classes->where('id',$id);
-
-		// $data['rows'] = $row;
-		$crumbs[] = ['Dashboard',''];
-		$crumbs[] = ['Classes','classes'];
-		$crumbs[] = ['Edit','classes/edit'];
-		$this->load_view('classes.edit',[
-			'rows' => $row,
-			'crumbs' => $crumbs,
-		]);
+		$row = $classes->getWhere('id',$id);
+		if (Auth::access('admin') && Auth::i_own_content($row)) {
+			// $data['rows'] = $row;
+			$crumbs[] = ['Dashboard',''];
+			$crumbs[] = ['Classes','classes'];
+			$crumbs[] = ['Edit','classes/edit'];
+			$data['rows'] = $row;
+			$data['crumbs'] = $crumbs;
+			$this->load_view('classes.edit', $data);
+		}else {
+			$this->load_view('access-denied');
+		}	
 	}
 
 	// update school
@@ -87,17 +95,25 @@ class Classes extends Controller
 			$this->redirect('login');
 		}
 
-		if (count($_POST) > 0) {
-			$classes = new Classes_model();
-			if ($classes->validate($_POST)) {
-				$classes->update($id,$_POST);
-				$this->redirect('classes');
-			}else {
-				$errors = $classes->errors;
-				$_SESSION['errors'] = $errors;
-				$this->redirect('classes/edit/'.$id);
+		$classes = new Classes_model();
+		$row = $classes->getWhere('id',$id);
+		if (Auth::access('admin') && Auth::i_own_content($row)) {
+			if (count($_POST) > 0) {
+				$classes = new Classes_model();
+				if ($classes->validate($_POST)) {
+					$classes->update($id,$_POST);
+					$this->redirect('classes');
+				}else {
+					$errors = $classes->errors;
+					$_SESSION['errors'] = $errors;
+					$this->redirect('classes/edit/'.$id);
+				}
 			}
+		}else {
+			$this->load_view('access-denied');
 		}
+
+		
 	}
 
 	// delete new school
@@ -110,10 +126,17 @@ class Classes extends Controller
 		}
 
 		$classes = new Classes_model();
+		$row = $classes->getWhere('id', $id);
+		if (Auth::access('admin') && Auth::i_own_content($row)) {	
 			$classes->delete($id);
 			sleep(1);
 			$this->redirect('classes');
 			die();
+		}else {
+			$this->load_view('access-denied');
+		}
+
+		
 
 		// $row = $school->where('id',$id);	
             

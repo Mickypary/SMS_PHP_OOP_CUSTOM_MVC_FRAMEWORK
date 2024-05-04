@@ -22,14 +22,36 @@ class Profile extends Controller
 			$crumbs[] = [$row->firstname,'profile'];
 		}
 
-		// get more info
-		$page_tab = isset($_GET['tab']) ? $_GET['tab'] : "info";
+		// get more info using $page_tab
+		$data['page_tab'] = isset($_GET['tab']) ? $_GET['tab'] : "info";
 
-		$this->load_view('profile',[	
-			'row' => $row,
-			'page_tab' => $page_tab,
-			'crumbs' => $crumbs,
-		]);
+		if ($data['page_tab'] == 'classes' && $row) {
+			// note the query function in database class can work using any model instances irrespective of the table you are loading from since its inherited by the class extension of the instantiated model
+			$class = new Classes_model();
+			$mytable = "class_students";
+			if ($row->rank == 'lecturer') {
+				$mytable = "class_lecturers";
+			}
+			$query = "select * from $mytable where user_id = :user_id and disabled = 0";
+			$data['stud_classes'] = $class->query($query, ['user_id' => $id]);
+			// print_r($data['stud_classes']); die();
+			
+			$data['student_classes'] = array();
+			if ($data['stud_classes']) {
+				foreach ($data['stud_classes'] as $key => $srow) {
+					$data['student_classes'][] = $class->getWhere('class_id', $srow->class_id);
+				}
+			}
+			// print_r($data['student_classes']);
+		}
+		// $test[] = 'ade';
+		// $data['test'][] = 'ade';
+		// $data['test'][] = 'Gbemi';
+		// print_r($data['test']);
+		
+		$data['row'] = $row;
+		$data['crumbs'] = $crumbs;
+		$this->load_view('profile', $data);
 	}
 
 
