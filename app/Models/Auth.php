@@ -102,7 +102,7 @@ class Auth
 			return false;
 		}
 
-		if (!isset($row)) {
+		if (isset($row)) {
 			if ($_SESSION['USER']->user_id == $row->user_id) {
 				return true;
 			}

@@ -54,17 +54,19 @@
 				  <li class="nav-item">
 				    <a class="nav-link <?= $page_tab == 'info' ? 'active' : '' ?>" aria-current="page" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=info">Basic Info</a>
 				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link <?= $page_tab == 'classes' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=classes">My Classes</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link <?= $page_tab == 'tests' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=tests">Tests</a>
-				  </li>
+				  <?php if (Auth::access('lecturer') || Auth::i_own_content($row)): ?>
+				  	  <li class="nav-item">
+				    	<a class="nav-link <?= $page_tab == 'classes' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=classes">My Classes</a>
+				  	  </li>	  
+					  <li class="nav-item">
+					    <a class="nav-link <?= $page_tab == 'tests' ? 'active' : '' ?>" href="<?=ROOT?>/profile/<?= $row->user_id ?>?tab=tests">Tests</a>
+					  </li>
+				  <?php endif ?>
 				</ul>
+
 
 				<?php
 				
-
 					switch ($page_tab) {
 						case 'info':
 							// code...
@@ -73,7 +75,11 @@
 
 						case 'classes':
 							// code...
-						include(views_path('profile_tab_classes'));
+						if (Auth::access('lecturer') || Auth::i_own_content($row)) {
+							include(views_path('profile_tab_classes'));
+						}else {
+							include(views_path('access-denied'));
+						}
 							break;
 
 						case 'tests':

@@ -14,6 +14,7 @@ class Profile extends Controller
 
 		$user = new User();
 		$id = trim($id == '') ? Auth::getUser_id() : $id;
+		// print_r($id);
 		$row = $user->getWhere('user_id',$id);
 
 		$crumbs[] = ['Dashboard','/school/public'];
@@ -46,7 +47,12 @@ class Profile extends Controller
 		
 		$data['row'] = $row;
 		$data['crumbs'] = $crumbs;
-		$this->load_view('profile', $data);
+		if (Auth::access('reception') || Auth::i_own_content($row)) {
+			$this->load_view('profile', $data);
+		}else {
+			$this->load_view('access-denied');
+		}
+		
 	}
 
 
