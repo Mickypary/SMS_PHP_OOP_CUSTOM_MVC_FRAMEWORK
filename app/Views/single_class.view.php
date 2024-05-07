@@ -20,9 +20,11 @@
 				</div> <!-- End 1st row -->
 
 				<ul class="nav nav-tabs">
+					<?php if (Auth::access('admin') && Auth::i_own_content($row)): ?>
 				  <li class="nav-item">
 				    <a class="nav-link <?= $page_tab == 'lecturers' ? 'active' : ''; ?>" aria-current="page" href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=lecturers">Lecturers</a>
 				  </li>
+				   <?php endif ?>
 				  <li class="nav-item">
 				    <a class="nav-link <?= $page_tab == 'students' ? 'active' : ''; ?>" href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=students">Students</a>
 				  </li>
@@ -38,7 +40,9 @@
 					switch ($page_tab) {
 						case 'lecturers':
 							// code...
-						include(views_path('class_tab_lecturers'));
+						if (Auth::access('admin') && Auth::i_own_content($row)):
+							include(views_path('class_tab_lecturers'));
+				 		endif;
 							break;
 
 						case 'students':

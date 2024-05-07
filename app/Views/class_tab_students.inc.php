@@ -9,6 +9,7 @@
 
 				  <div>
 				  		<!-- add new user -->
+				  		<?php if (Auth::access('lecturer')): ?>
 						<a href="<?= ROOT ?>/single_class/studentadd/<?= $row->class_id ?>?select=true">
 							<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Assign</button>
 						</a>
@@ -16,6 +17,7 @@
 						<a href="<?= ROOT ?>/single_class/studentremove/<?= $row->class_id ?>?deselect=true">
 							<button class="btn btn-sm btn-danger"><i class="fa fa-minus"></i>De-assign</button>
 						</a>
+						<?php endif ?>
 						
 				  </div>
 				  

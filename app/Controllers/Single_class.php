@@ -24,9 +24,11 @@ class Single_class extends Controller
 			$crumbs[] = [$row->class,''];
 		}
 
-		$page_tab = isset($_GET['tab']) ? $_GET['tab'] : "lecturers";
+		$page_tab = isset($_GET['tab']) ? $_GET['tab'] : "students";
 
 		$lect = new Lecturers_model(); 
+
+		$user_id = Auth::getUser_id();
 
 		$results = false;
 		if($page_tab == 'lecturers') {
@@ -36,8 +38,13 @@ class Single_class extends Controller
 			$data['lecturers'] 		= $lecturer;
 		}elseif ($page_tab == 'students') {
 			// display students
+			$arr['class_id'] = $id;
 			$query = "select * from class_students where class_id = :class_id && disabled = 0 order by id desc";
-			$students = $lect->query($query,['class_id' => $id,]);
+			// if (Auth::getRank() == 'student') {
+			// 	$arr['user_id'] = $user_id;
+			// 	$query = "select * from class_students where class_id = :class_id && disabled = 0 && user_id = :user_id order by id desc";
+			// }
+			$students = $lect->query($query,$arr);
 			$data['students'] 		= $students;
 		}
 
@@ -72,7 +79,7 @@ class Single_class extends Controller
 		$lect = new Lecturers_model(); 
 
 		$results = false;
-		if (count($_POST) > 0 ) {
+		if (count($_POST) > 0 && Auth::access('lecturer')) {
 			// find lecturer
 			if (isset($_POST['search'])) {
 				if (trim($_POST['name']) != "") {
@@ -114,7 +121,11 @@ class Single_class extends Controller
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
-		$this->load_view('single_class',$data);
+		if (Auth::access('lecturer')) {
+			$this->load_view('single_class',$data);
+		}else {
+			$this->load_view('access-denied');
+		}
 	}
 
 	public function lecturerremove($id = '')
@@ -140,7 +151,7 @@ class Single_class extends Controller
 		$lect = new Lecturers_model(); 
 
 		$results = false;
-		if (count($_POST) > 0 ) {
+		if (count($_POST) > 0 && Auth::access('lecturer')) {
 			// find lecturer
 			if (isset($_POST['search'])) {
 				if (trim($_POST['name']) != "") {
@@ -181,7 +192,11 @@ class Single_class extends Controller
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
-		$this->load_view('single_class',$data);
+		if (Auth::access('lecturer')) {
+			$this->load_view('single_class',$data);
+		}else {
+			$this->load_view('access-denied');
+		}
 	}
 
 
@@ -209,7 +224,7 @@ class Single_class extends Controller
 		$stud = new Students_model(); 
 
 		$results = false;
-		if (count($_POST) > 0 ) {
+		if (count($_POST) > 0 && Auth::access('lecturer') ) {
 			// find student
 			if (isset($_POST['search'])) {
 				if (trim($_POST['name']) != "") {
@@ -245,13 +260,17 @@ class Single_class extends Controller
 			}	
 		}
 
-
 		$data['row'] 		= $row;
 		$data['crumbs'] 	= $crumbs;
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
-		$this->load_view('single_class',$data);
+		if (Auth::access('lecturer')) {
+			$this->load_view('single_class',$data);
+		}else {
+			$this->load_view('access-denied');
+		}
+		
 	}
 
 
@@ -318,7 +337,11 @@ class Single_class extends Controller
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
-		$this->load_view('single_class',$data);
+		if (Auth::access('lecturer')) {
+			$this->load_view('single_class',$data);
+		}else {
+			$this->load_view('access-denied');
+		}
 	}
 
 

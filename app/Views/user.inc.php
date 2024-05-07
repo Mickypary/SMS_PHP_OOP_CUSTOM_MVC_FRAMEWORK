@@ -9,7 +9,7 @@
 	    <center><h5 class="card-title"><?= esc($row->firstname) ?> <?= esc($row->lastname) ?></h5></center>
 	    <center><p class="card-text"><?= ucwords(str_replace("_", " ", esc($row->rank))); ?></p></center>
 	    <br>
-	    <?php if (!isset($_GET['select']) && !isset($_GET['deselect'])): ?>
+	    <?php if (!isset($_GET['select']) && !isset($_GET['deselect']) && Auth::access('lecturer') || Auth::i_own_content($row)): ?>
 	    	<center><a href="<?= ROOT ?>/profile/<?=$row->user_id?>" class="btn btn-primary">Profile</a></center>
 	    <?php endif ?>
 	    
