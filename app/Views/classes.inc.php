@@ -8,11 +8,7 @@
 			<th>Created by</th>
 			<th>Date</th>
 			<th>
-				<?php if (Auth::access('admin')): ?>
-					<a href="<?= ROOT ?>/classes/add">
-						<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
-					</a>
-				<?php endif ?>
+				
 				
 			</th>
 		</tr>

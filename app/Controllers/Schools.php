@@ -17,6 +17,14 @@ class Schools extends Controller
 			$school = new School();
 			$rows = $school->findAll();
 
+			if (isset($_GET['find'])) {
+				$find = "%" . $_GET['find'] . "%";
+				$query = "select * from schools where school like :find order by id desc";
+				$arr['find'] = $find;
+
+				$rows = $school->query($query ,$arr);
+			}
+
 			$crumbs[] = ['Dashboard','/school/public'];
 			$crumbs[] = ['Schools','schools'];
 			$data['rows'] = $rows;
