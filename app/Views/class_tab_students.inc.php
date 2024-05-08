@@ -2,8 +2,8 @@
 				<nav class="navbar bg-body-tertiary">
 				  <form class="form-inline">
 				    <div class="input-group">
-				      <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-				      <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+				      <button class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></button>
+				      <input name="find" value="<?= isset($_GET['find']) ? $_GET['find'] : '' ?>" type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
 				    </div>
 				  </form>
 
@@ -32,8 +32,13 @@
 
 							?>					
 						<?php endforeach ?>	
+
+
 					<?php else: ?>
 							<center><hr><h4><?= 'There are no students in this class'; ?></h4></center>
 					<?php endif ?>
 				</div>
+
+				<!-- For Pagination display -->
+						<?= $pager->display(); ?>
 				

@@ -12,6 +12,11 @@ class Classes extends Controller
 		if($check = !Auth::logged_in()) {
 			$this->redirect('login');
 		}
+
+		// For Pagination
+			$limit = 10;	
+			$pager = new Pager($limit);
+			$offset = $pager->offset;
 		
 		$classes = new Classes_model();
 
@@ -19,11 +24,11 @@ class Classes extends Controller
 
 		if (Auth::access('admin')) {
 			// code...
-			$query = "select * from classes where school_id = :school_id order by id desc";
+			$query = "select * from classes where school_id = :school_id order by id desc limit $limit offset $offset";
 			$arr['school_id'] = $school_id;
 			if (isset($_GET['find'])) {
 				$find = "%" . $_GET['find'] . "%";
-				$query = "select * from classes where school_id = :school_id && class like :find order by id desc";
+				$query = "select * from classes where school_id = :school_id && class like :find order by id desc limit $limit offset $offset";
 				$arr['find'] = $find;
 			}
 
@@ -62,6 +67,7 @@ class Classes extends Controller
 		$crumbs[] = ['Classes','classes'];
 		$data['rows'] = $results;
 		$data['crumbs'] = $crumbs;
+		$data['pager'] = $pager;
 		$this->load_view('classes', $data);
 	}
 

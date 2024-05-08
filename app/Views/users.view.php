@@ -33,10 +33,11 @@
 					<h5><?= 'No record found'; ?></h5>
 				</div>
 				
-			<?php endif ?>
-			
-
+			<?php endif ?>		
 		</div>
+
+		<!-- For Pager display -->
+		<?= $pager->display(); ?>
 		
 
 	</div>

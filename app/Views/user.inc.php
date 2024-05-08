@@ -10,14 +10,14 @@
 	    <center><p class="card-text"><?= ucwords(str_replace("_", " ", esc($row->rank))); ?></p></center>
 	    <br>
 	    <?php if (!isset($_GET['select']) && !isset($_GET['deselect']) && Auth::access('lecturer') || Auth::i_own_content($row)): ?>
-	    	<center><a href="<?= ROOT ?>/profile/<?=$row->user_id?>" class="btn btn-primary">Profile</a></center>
+	    	<a href="<?= ROOT ?>/profile/<?=$row->user_id?>" class="btn btn-primary">Profile</a>
 	    <?php endif ?>
 	    
 
 	   <?php if (isset($_GET['select'])): ?>
-	   	<center><button name="selected" value="<?=$row->user_id?>" class="btn btn-success ">Assign</button></center>
+	   	<button name="selected" value="<?=$row->user_id?>" class="btn btn-success ">Assign</button>
 	   <?php elseif(isset($_GET['deselect'])): ?>
-	   	<center><button name="selected" value="<?=$row->user_id?>" class="btn btn-danger ">Unassign</button></center>
+	   	<button name="selected" value="<?=$row->user_id?>" class="btn btn-danger ">Remove</button>
 	   <?php endif ?>
 	    
 	  </div>

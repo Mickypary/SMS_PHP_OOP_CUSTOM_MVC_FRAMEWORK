@@ -27,6 +27,9 @@
 			
 			<?php include(views_path('classes')) ?>	
 
+			<!-- For Pagination display -->
+			<?= $pager->display(); ?>
+
 	</div>
 
 <?php $this->load_view('includes/footer'); ?>

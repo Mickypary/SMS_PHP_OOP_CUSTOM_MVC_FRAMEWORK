@@ -14,6 +14,11 @@ class Single_class extends Controller
 			$this->redirect('login');
 		}
 
+		// For Pagination
+			$limit = 10;	
+			$pager = new Pager($limit);
+			$offset = $pager->offset;
+
 		$classes = new Classes_model();
 		$row = $classes->getWhere('class_id',$id);
 
@@ -39,11 +44,15 @@ class Single_class extends Controller
 		}elseif ($page_tab == 'students') {
 			// display students
 			$arr['class_id'] = $id;
-			$query = "select * from class_students where class_id = :class_id && disabled = 0 order by id desc";
-			// if (Auth::getRank() == 'student') {
-			// 	$arr['user_id'] = $user_id;
-			// 	$query = "select * from class_students where class_id = :class_id && disabled = 0 && user_id = :user_id order by id desc";
-			// }
+			$query = "select * from class_students where class_id = :class_id && disabled = 0 order by id desc limit $limit offset $offset ";
+
+			// find
+			if (isset($_GET['find'])) {
+				$find = "%" . $_GET['find'] . "%";
+				$query = "select class_students.*, users.firstname, users.lastname from class_students join users on class_students.user_id = users.user_id where class_students.class_id = :class_id && class_students.disabled = 0 && (firstname like :find || lastname like :find) order by id desc limit $limit offset $offset";
+				$arr['find'] = $find;
+			}
+
 			$students = $lect->query($query,$arr);
 			$data['students'] 		= $students;
 		}
@@ -53,6 +62,7 @@ class Single_class extends Controller
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
+		$data['pager'] 	= $pager;
 		$this->load_view('single_class',$data);
 	}
 
@@ -96,10 +106,10 @@ class Single_class extends Controller
 			}elseif (isset($_POST['selected'])) {
 				// add lecturer
 				// $query = "select id from class_lecturers where user_id = :user_id && class_id = :class_id limit 1";
-				$query = "select * from class_lecturers where user_id = :user_id && class_id = :class_id && disabled = 0 limit 1";
+				$query = "select id, disabled from class_lecturers where user_id = :user_id && class_id = :class_id limit 1";
 
 					$check = $lect->query($query, ['user_id' => $_POST['selected'], 'class_id' => $id]);
-					// print_r($check); die();
+					// print_r($check);
 					if (!$check) {
 						$arr = array();
 						$arr['user_id'] = $_POST['selected'];
@@ -109,11 +119,19 @@ class Single_class extends Controller
 
 						$lect->insert($arr);
 						$this->redirect('single_class/'.$id.'?tab=lecturers');
-					}else {
+					}elseif(isset($check[0]->disabled) && $check[0]->disabled == '1') {
+						$arr = array();
+						$arr['disabled'] = 0; 
+						$arr['updated_at'] = date("Y-m-d H:i:s");
+
+						$lect->update($check[0]->id, $arr);
+						$this->redirect('single_class/'.$id.'?tab=lecturers');
+						// $errors[] = "Lecturer already assigned in this class!";
+					}elseif($check[0]->disabled == '0') {
 						$errors[] = "Lecturer already assigned in this class!";
-					}					
-			}	
-		}
+					}			
+				}	
+			}
 
 
 		$data['row'] 		= $row;
