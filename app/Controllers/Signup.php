@@ -34,7 +34,7 @@ class Signup extends Controller
 						$this->redirect($mode);
 					}
 					
-					$this->redirect('user');
+					$this->redirect('users');
 					
 				}else {
 					// errors

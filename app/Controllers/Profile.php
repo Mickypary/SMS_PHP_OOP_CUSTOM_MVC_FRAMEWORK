@@ -54,5 +54,32 @@ class Profile extends Controller
 		
 	}
 
+	public function edit($user_id)
+	{
+		$errors = array();
+		if($check = !Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		$user = new User();
+		$id = trim($user_id == '') ? Auth::getUser_id() : $user_id;
+		$row = $user->getWhere('user_id',$id);
+
+		$crumbs[] = ['Dashboard','/school/public'];
+		$crumbs[] = ['Profile','profile'];
+		if ($row) {
+			$crumbs[] = [$row->firstname,'profile'];
+		}
+
+		$data['row'] = $row;
+		$data['crumbs'] = $crumbs;
+		$data['errors'] = $errors;
+		if (Auth::access('admin') || Auth::i_own_content($row)) {
+			$this->load_view('profile_edit', $data);
+		}else {
+			$this->load_view('access-denied');
+		}
+	}
+
 
 } // End Class

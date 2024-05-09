@@ -8,6 +8,7 @@
 
 			<?php if ($row): ?>
 				<div class="row">
+					<!-- left col -->
 					<div class="col-sm-4 col-md-3"> 
 						<?php
 						   $image = $row->profile_photo;
@@ -17,7 +18,18 @@
 							<img src="<?= get_image($image, $gender) ?>" class="border border-primary d-block mx-auto rounded-circle" style="width: 150px;">
 						
 						<h3 class="text-center"><?= esc($row->firstname) ?> <?= esc($row->lastname) ?></h3>
+						<?php if (Auth::access('admin') || Auth::i_own_content($row)): ?>
+						<center>
+							<a href="<?=ROOT?>/profile/edit/<?= $row->user_id ?>">
+								<button class="btn btn-sm btn-primary">Edit Profile</button>
+							</a>
+							<a href="<?=ROOT?>/profile/delete/<?= $row->user_id ?>">
+								<button class="btn btn-sm btn-danger">Delete Profile</button>
+							</a>	
+						</center>
+						<?php endif ?>
 					</div>
+					<!-- Right Col -->
 					<div class="col-sm-8 col-md-9 bg-light p-2">
 						<table class="table table-bordered table-hover table-striped">
 							<tr>

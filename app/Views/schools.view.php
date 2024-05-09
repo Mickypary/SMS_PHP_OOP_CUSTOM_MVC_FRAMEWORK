@@ -24,37 +24,6 @@
 
 		<?php include(views_path('school')) ?>	
 
-		<script type="text/javascript">
-			  // $(document).on('keyup','#search-input',function(){
-			  //   var search-input = $('#search-input').val();
-			  //    $.ajax({
-			  //     url: "",
-			  //     type: "GET",
-			  //     data: {
-			  //     	'find':find,
-			  //     },
-			  //     success: function (data) {
-			  //       $('#school-entry').removeClass('d-none');
-			  //       var html = '';
-			  //       $.each( data, function(key, v){
-			  //       	var increment = key+1
-			  //         html +=
-			  //         '<tr>'+
-			  //         '<td>'+increment+'</td>'+
-			  //         // '<td><?= url('upload/student_images') ?>/'+v.student.image+'</td>'+
-			  //         <?= $row->school ?>
-			  //         '<td>'+v.student.id_no+'<input type="hidden" name="student_id[]" value="'+v.student_id+'"> <input type="hidden" name="id_no[]" value="'+v.student.id_no+'"> </td>'+
-			  //         '<td>'+v.student.name+'</td>'+
-			  //         '<td>'+v.student.fname+'</td>'+
-			  //        '<td style="text-transform:capitalize">'+v.student.gender+'</td>'+ 
-			  //         '<td><input type="text" class="form-control form-control-sm" name="marks[]" value="'+'"></td>'+
-			  //         '</tr>';
-			  //       });
-			  //       html = $('#marks-entry-tr').html(html);
-			  //     }
-			  //   });
-			  // });
-		</script>
 
 	</div>
 
