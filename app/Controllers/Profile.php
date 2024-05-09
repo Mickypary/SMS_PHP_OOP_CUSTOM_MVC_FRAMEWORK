@@ -81,5 +81,33 @@ class Profile extends Controller
 		}
 	}
 
+	public function update($user_id)
+	{
+		$errors = array();
+		if($check = !Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		$user = new User();
+		$id = trim($user_id == '') ? Auth::getUser_id() : $user_id;
+		$row = $user->getWhere('user_id',$id);
+
+		if (count($_POST) > 0 && (Auth::access('admin') || Auth::i_own_content($row))) {
+			// echo 'here'; die();
+			$arr['firstname'] = $_POST['firstname'];
+			$arr['lastname'] = $_POST['lastname'];
+			$arr['email'] = $_POST['email'];
+			$arr['gender'] = $_POST['gender'];
+			$arr['rank'] = $_POST['rank'];
+
+			$user->update($row->id, $arr);
+			$this->redirect('profile/'.$user_id);
+		}else {
+			$this->load_view('access-denied');
+		}
+
+		$data['row'] = $row;
+	}
+
 
 } // End Class

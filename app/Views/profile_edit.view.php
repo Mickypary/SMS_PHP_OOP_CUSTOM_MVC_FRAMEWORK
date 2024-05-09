@@ -27,7 +27,7 @@
 				</div>
 				<!-- Right Col -->
 				<div class="col-sm-8 col-md-9 bg-light p-2">
-					<form method="POST" action="">
+					<form method="POST" action="<?=ROOT?>/profile/update/<?= $row->user_id ?>">
 						<div class="p-4 mx-auto shadow rounded">
 							<div class="row"> <!-- Right Col Inner Row -->
 						
