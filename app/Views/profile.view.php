@@ -40,6 +40,13 @@
 								<th>Last Name</th>
 								<td><?= esc($row->lastname) ?></td>
 							</tr>
+							<?php if ($row->rank == 'student'): ?>
+							<tr>
+								<th>Class</th>
+								<td><?= esc($row->class) ?></td>
+							</tr>
+							<?php endif ?>
+							
 							<tr>
 								<th>Email</th>
 								<td><?= esc($row->email) ?></td>

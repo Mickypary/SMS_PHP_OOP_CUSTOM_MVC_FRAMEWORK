@@ -15,6 +15,7 @@ class User extends Model
 		'rank', 
 		'gender', 
 		'date',
+		'school_id',
 	];
 
 	protected $beforeInsert = [
@@ -23,9 +24,14 @@ class User extends Model
 		'hash_password'
 	];
 
+	protected $beforeUpdate = [
+		'hash_password'
+	];
 
-	public function validate($DATA)
+
+	public function validate($DATA, $id = '')
 	{
+
 		// to be sure the errors property in Model class is refreshed with empty value
 		$this->errors = array();
 
@@ -49,8 +55,17 @@ class User extends Model
 			$this->errors['email'] = "Email field is required";
 		}elseif (isset($DATA['email']) && !filter_var($DATA['email'], FILTER_VALIDATE_EMAIL)) {
 			$this->errors['email'] = "Email is not valid";
-		}elseif(isset($DATA['signup']) && $this->where('email',$DATA['email'])) {
-			$this->errors['email'] = "Email already taken";
+		}else {
+			if (trim($id) == '') {
+				if ($this->getWhere('email',$DATA['email'])) {
+					$this->errors['email'] = "Email already taken";
+				}
+			}else {
+				if ($this->query("select email from $this->table where email = :email && id != :id", ['email' => $DATA['email'], 'id' => $id])) {
+					$this->errors['email'] = "Email already taken";
+				}
+			}
+			
 		}
 
 		// check for gender
@@ -139,7 +154,10 @@ class User extends Model
 
 	public function hash_password($data)
 	{
-		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+		if (isset($data['password'])) {
+			$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+		}
+		
 		return $data;
 	}
 

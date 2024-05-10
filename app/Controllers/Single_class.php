@@ -98,7 +98,7 @@ class Single_class extends Controller
 		$lect = new Lecturers_model(); 
 
 		$results = false;
-		if (count($_POST) > 0 && Auth::access('lecturer')) {
+		if (count($_POST) > 0 && Auth::access('admin')) {
 			// find lecturer
 			if (isset($_POST['search'])) {
 				if (trim($_POST['name']) != "") {
@@ -143,7 +143,7 @@ class Single_class extends Controller
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
-		if (Auth::access('lecturer')) {
+		if (Auth::access('admin')) {
 			$this->load_view('single_class',$data);
 		}else {
 			$this->load_view('access-denied');
@@ -209,7 +209,7 @@ class Single_class extends Controller
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
-		if (Auth::access('lecturer')) {
+		if (Auth::access('admin')) {
 			$this->load_view('single_class',$data);
 		}else {
 			$this->load_view('access-denied');
@@ -241,7 +241,7 @@ class Single_class extends Controller
 		$stud = new Students_model(); 
 
 		$results = false;
-		if (count($_POST) > 0 && Auth::access('lecturer') ) {
+		if (count($_POST) > 0 && Auth::access('admin') ) {
 			// find student
 			if (isset($_POST['search'])) {
 				if (trim($_POST['name']) != "") {
@@ -289,7 +289,7 @@ class Single_class extends Controller
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
-		if (Auth::access('lecturer')) {
+		if (Auth::access('admin')) {
 			$this->load_view('single_class',$data);
 		}else {
 			$this->load_view('access-denied');
@@ -322,7 +322,7 @@ class Single_class extends Controller
 		$stud = new Students_model(); 
 
 		$results = false;
-		if (count($_POST) > 0 ) {
+		if (count($_POST) > 0 && Auth::access('admin')) {
 			// find student
 			if (isset($_POST['search'])) {
 				if (trim($_POST['name']) != "") {
@@ -361,7 +361,7 @@ class Single_class extends Controller
 		$data['page_tab'] 	= $page_tab;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
-		if (Auth::access('lecturer')) {
+		if (Auth::access('admin')) {
 			$this->load_view('single_class',$data);
 		}else {
 			$this->load_view('access-denied');

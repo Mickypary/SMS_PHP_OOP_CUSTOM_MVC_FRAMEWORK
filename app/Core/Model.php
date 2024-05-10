@@ -133,6 +133,26 @@ class Model extends Database
 
 	public function update($id, $data)
 	{	
+		// remove unwanted columns
+		if(property_exists($this, 'allowedColumns')) {
+			foreach($data as $key => $value) {
+				if (!in_array($key, $this->allowedColumns)) {
+					unset($data[$key]);
+				}
+			}
+		}
+
+
+		// run functions before insert
+		if(property_exists($this, 'beforeUpdate')) {
+			foreach($this->beforeUpdate as $func) {
+				// note: the $func is just a variable holding the real value such as generate_user_id which makes it $this->generate_user_id() for instance as the $func gets replaced by the content value
+				$data = $this->$func($data);
+			}
+		}
+
+
+
 		$this->query_type = "update";	
 		$this->query = "UPDATE " . $this->table . " SET ";
 		foreach ($data as $key => $value) {		

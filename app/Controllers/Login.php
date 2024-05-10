@@ -14,11 +14,12 @@ class Login extends Controller
 			
 			// instantiate the User Class since the class file has been included globally in the autoload file using spl_autoload_register
 			$user = new User();
+			$row = $user->getWhere('email',$_POST['email']);
 
-			if ($user->validate($_POST)) {
+			if ($user->validate($_POST,$row->id)) {
 				// check email address
-				if($row = $user->where('email',$_POST['email'])) {
-					$row = $row[0];
+				if($row) {
+					// $row = $row[0];
 					//verify password
 					if(password_verify($_POST['password'], $row->password)) {
 						// instantiate the school object
@@ -37,7 +38,6 @@ class Login extends Controller
 			}else {
 				// errors
 				$errors = $user->errors;
-				// print_r($errors);	
 			}
 		}
 
