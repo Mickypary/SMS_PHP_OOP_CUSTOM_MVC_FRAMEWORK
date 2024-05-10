@@ -122,17 +122,15 @@ class Profile extends Controller
 
 				// code...
 				if ($user->update($row->id, $_POST)) {
-					$_SESSION['alert-type'] = 'info';
+					$_SESSION['alert-type'] = 'success';
 					$_SESSION['message'] = "Updated Successfully";
 				}
 				
 				$this->redirect('profile/'.$user_id);
-				
-
 
 			}else {
 				$errors = $user->errors;
-				$_SESSION['errors'] = $errors;
+				// $_SESSION['errors'] = $errors;
 				// $this->redirect('profile/edit/'.$user_id);
 			}
 			

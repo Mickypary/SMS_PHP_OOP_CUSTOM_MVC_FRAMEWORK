@@ -17,9 +17,14 @@
 						<br>
 					
 					<?php if (Auth::access('admin') || Auth::i_own_content($row)): ?>
-					<center>
-							<button class="btn btn-sm btn-primary">Browse Image</button>
-					</center>
+					<div class="text-center">
+						<label for="image_browse" class="btn btn-sm btn-primary">
+							<input onchange="display_image_name(this.files[0].name)" id="image_browse" type="file" name="image" style="display: none;">
+							Browse Image
+						</label>
+						<br>
+						<small class="file_info text_muted"></small>
+					</div>
 					<?php endif ?>
 				</div>
 				<!-- Right Col -->
@@ -109,18 +114,27 @@
 		
 		<br>
 
-		<!-- Back button -->
-		<!-- <a href="<?=ROOT?>/profile/<?= $row->user_id ?>">
-			<button class="btn btn-sm btn-info text-white">Back to profile</button>
-		</a>	
-
-		<button class="btn btn-sm btn-success text-white float-end">Update Bio</button> -->
-
 		<?php else: ?>
 			<h4 style="text-align: center"><?= 'No record found'; ?></h4>
 		<?php endif ?>
 
 	</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+	function display_image_name(file_name) {
+		document.querySelector('.file_info').innerHTML = "Selected file: " + file_name;
+	}
+
+</script>
+
+
+
 
 <?php $this->load_view('includes/footer'); ?>
 	
