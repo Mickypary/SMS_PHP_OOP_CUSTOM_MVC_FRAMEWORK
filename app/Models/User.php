@@ -16,6 +16,7 @@ class User extends Model
 		'gender', 
 		'date',
 		'school_id',
+		'profile_image',
 	];
 
 	protected $beforeInsert = [

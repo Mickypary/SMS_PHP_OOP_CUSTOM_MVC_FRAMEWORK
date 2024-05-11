@@ -18,6 +18,7 @@
 						<td><?= $row->user->firstname ?> <?= $row->user->lastname ?></td>
 						<td><?= format_date($row->date) ?></td>
 						<td>
+							<?php if (Auth::access('super_admin')): ?>
 							<a href="<?= ROOT ?>/schools/edit/<?= $row->id ?>">
 								<button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 							</a>
@@ -25,10 +26,15 @@
 								<!-- <i class="fa fa-trash-alt"></i> -->
 								<button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
 							</a>
+							<?php endif ?>
+
+							<?php if (Auth::access('reception')): ?>
 							<a href="<?= ROOT ?>/switch_school/<?= $row->id ?>" id="">
 								<!-- <i class="fa fa-trash-alt"></i> -->
 								<button class="btn btn-sm btn-success"><i class="fa fa-chevron-right"></i>Switch To</button>
-							</a>				
+							</a>
+							<?php endif ?>
+
 						</td>
 					</tr>
 				<?php endforeach ?>

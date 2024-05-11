@@ -11,7 +11,7 @@
 					<!-- left col -->
 					<div class="col-sm-4 col-md-3"> 
 						<?php
-						   $image = $row->profile_photo;
+						   $image = $row->profile_image;
 						   $gender = $row->gender;
 
 						?>

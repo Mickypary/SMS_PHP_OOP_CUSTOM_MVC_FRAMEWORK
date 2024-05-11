@@ -5,7 +5,8 @@
 		<!-- Breadcrumbs -->
 		<?php $this->load_view('includes/crumbs',['crumbs' => $crumbs]); ?>
 
-		<!-- Nav search -->
+		<div>
+			<!-- Nav search -->
 			<nav class="navbar bg-body-tertiary">
 			  <form class="form-inline">
 			    <div class="input-group">
@@ -14,11 +15,15 @@
 			    </div>
 			  </form>
 
+			  <?php if (Auth::access('admin')): ?>
 			  <!-- add new user -->
 				<a href="<?= ROOT ?>/signup?mode=users">
 					<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
 				</a>
 			</nav>
+			<?php endif ?>	
+		</div>
+		
 
 
 		<div class="card-group justify-content-center">

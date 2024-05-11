@@ -3,13 +3,14 @@
 
 	<div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px">
 		<center><h4>Edit Profile</h4></center>
-
+		<form method="POST" action="<?=ROOT?>/profile/update/<?= $row->user_id ?>" enctype="multipart/form-data">
 		<?php if ($row): ?>
+			<form method="POST" action="<?=ROOT?>/profile/update/<?= $row->user_id ?>">
 			<div class="row">
-				<!-- left col -->
-				<div class="col-sm-4 col-md-3"> 
+				
+				<div class="col-sm-4 col-md-3">  <!-- left col -->
 					<?php
-					   $image = $row->profile_photo;
+					   $image = $row->profile_image;
 					   $gender = $row->gender;
 
 					?>
@@ -29,23 +30,22 @@
 				</div>
 				<!-- Right Col -->
 				<div class="col-sm-8 col-md-9 bg-light p-2">
-					<form method="POST" action="<?=ROOT?>/profile/update/<?= $row->user_id ?>">
 						<div class="p-4 mx-auto shadow rounded">
 							<div class="row"> <!-- Right Col Inner Row -->
 
 
 								<!-- Alert Start using Session Global Variable -->
-				<?php if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0): ?>
-					<div class="alert alert-warning alert-dismissible fade show" role="alert">
-						<strong>Errors!:</strong> <br>
-						<?php foreach ($_SESSION['errors'] as $key => $error): ?>
-							<?= $error ."<br>" ?>
-							<?php unset($_SESSION['errors']) ?>
-						<?php endforeach ?>
-						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-				<?php endif; ?>
-				<!-- Alert End -->
+									<?php if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0): ?>
+										<div class="alert alert-warning alert-dismissible fade show" role="alert">
+											<strong>Errors!:</strong> <br>
+											<?php foreach ($_SESSION['errors'] as $key => $error): ?>
+												<?= $error ."<br>" ?>
+												<?php unset($_SESSION['errors']) ?>
+											<?php endforeach ?>
+											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+										</div>
+									<?php endif; ?>
+									<!-- Alert End -->
 
 				<!-- Alert Start using array data -->
 			<?php //if(count($errors) > 0): ?>
@@ -60,8 +60,8 @@
 			<!-- Alert End -->
 						
 							
-								<div class="col-sm-5 col-md-6 bg-light p-2" >
-									<span class="required1"></span><input type="text" name="firstname" value="<?= input_val('firstname',$row->firstname); ?>" class="my-2 form-control" placeholder="First Name" autofocus>
+								<div class="col-sm-5 col-md-6 bg-light p-2">
+									<input type="text" name="firstname" value="<?= input_val('firstname',$row->firstname); ?>" class="my-2 form-control" placeholder="First Name" autofocus>
 									<span class="required2"></span><input type="text" name="lastname" value="<?= input_val('lastname', $row->lastname); ?>" class="my-2 form-control" placeholder="Last Name" autofocus>
 									<span class="required"></span><input type="email" name="email" value="<?= input_val('email',$row->email); ?>" class="my-2 form-control" placeholder="Email" autofocus>
 									<select name="gender" class="my-2 form-control">
@@ -103,15 +103,13 @@
 									</div>
 
 										
-
 								</div>
 						
 							</div>
-
-						</form>
+						
 					</div> <!-- End Right Col -->
 				</div> <!-- End 1st row -->
-		
+			</form>
 		<br>
 
 		<?php else: ?>
@@ -128,7 +126,7 @@
 <script type="text/javascript">
 
 	function display_image_name(file_name) {
-		document.querySelector('.file_info').innerHTML = "Selected file: " + file_name;
+		document.querySelector('.file_info').innerHTML = "<b>Selected file: </b><br>" + file_name;
 	}
 
 </script>

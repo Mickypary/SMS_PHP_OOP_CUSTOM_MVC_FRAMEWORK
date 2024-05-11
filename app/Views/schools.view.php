@@ -5,7 +5,8 @@
 		<!-- Breadcrumbs -->
 		<?php $this->load_view('includes/crumbs',['crumbs' => $crumbs]); ?>
 
-		<!-- Nav search -->
+		<div>
+			<!-- Nav search -->
 			<nav class="navbar bg-body-tertiary">
 			  <form class="form-inline">
 			    <div class="input-group">
@@ -15,11 +16,16 @@
 			    </div>
 			  </form>
 
+			  <?php if (Auth::access('super_admin')): ?>
 			  <!-- add new user -->
 				<a href="<?= ROOT ?>/schools/add">
 					<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
 				</a>
+				<?php endif ?>
+
 			</nav>
+		</div>
+		
 		
 
 		<?php include(views_path('school')) ?>	

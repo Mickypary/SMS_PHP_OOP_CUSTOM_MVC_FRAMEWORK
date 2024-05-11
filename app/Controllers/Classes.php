@@ -22,7 +22,7 @@ class Classes extends Controller
 
 		$school_id = Auth::getSchool_id();
 
-		if (Auth::access('admin')) {
+		if (Auth::access('reception')) {
 			// code...
 			$query = "select * from classes where school_id = :school_id order by id desc limit $limit offset $offset";
 			$arr['school_id'] = $school_id;
@@ -143,7 +143,7 @@ class Classes extends Controller
 		if (Auth::access('admin') && Auth::i_own_content($row)) {
 			if (count($_POST) > 0) {
 				$classes = new Classes_model();
-				if ($classes->validate($_POST)) {
+				if ($classes->validate($_POST, $row->id)) {
 					$classes->update($id,$_POST);
 					$this->redirect('classes');
 				}else {

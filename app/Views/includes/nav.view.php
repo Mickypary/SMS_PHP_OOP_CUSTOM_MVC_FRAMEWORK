@@ -28,7 +28,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?=ROOT?>">DASHBOARD</a>
         </li>
-        <?php if (Auth::access('super_admin')): ?>
+        <?php if (Auth::access('reception')): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?=ROOT?>/schools">SCHOOL</a>
           </li>

@@ -20,7 +20,7 @@ class Classes_model extends Model
 		'get_user'
 	];
 
-	public function validate($DATA)
+	public function validate($DATA, $id ='')
 	{
 		// to be sure the errors property in Model class is refreshed with empty value
 		$this->errors = array();
@@ -30,12 +30,17 @@ class Classes_model extends Model
 			$this->errors['class'] = "Class Name field is required";
 		}elseif (isset($DATA['class']) && !preg_match("/^[a-zA-Z0-9 ]+$/", $DATA['class'])) {
 			$this->errors['class'] = "Only letters and numbers allowed in Class Name";
-		}elseif(!empty($this->where('class',$DATA['class']))) {
-			// print_r($this->where('class',$DATA['class']));
-			echo 'now here';
-			// die();
-			$this->errors['class'] = "Class already exist";
-		}
+		}else {
+			if (trim($id) == '') {
+				if ($this->getWhere('class',$DATA['class'])) {
+					$this->errors['class'] = "Class already exist";
+				}
+			}else {
+				if ($this->query("select class from $this->table where class = :class && id != :id", ['class' => $DATA['class'], 'id' => $id])) {
+					$this->errors['class'] = "Class already exist";
+				}
+			}
+		}	
 
 		
 		// check if no error

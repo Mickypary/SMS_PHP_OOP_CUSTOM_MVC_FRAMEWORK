@@ -18,7 +18,7 @@ class Students extends Controller
 			$school_id = Auth::getSchool_id();
 
 			// for pagination
-			$limit = 10;	
+			$limit = 4;	
 			$pager = new Pager($limit);
 			$offset = $pager->offset;
 

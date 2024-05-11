@@ -13,7 +13,7 @@ class Schools extends Controller
 			$this->redirect('login');
 		}
 
-		if (Auth::access('super_admin')) {
+		if (Auth::access('reception')) {
 			$school = new School();
 			$rows = $school->findAll();
 
@@ -107,9 +107,11 @@ class Schools extends Controller
 			$this->redirect('login');
 		}
 
+		$school = new School();
+		$row = $school->getWhere('id',$id);
+
 		if (count($_POST) > 0 && Auth::access('super_admin')) {
-			$school = new School();
-			if ($school->validate($_POST)) {
+			if ($school->validate($_POST, $row->id)) {
 				$school->update($id,$_POST);
 				$this->redirect('schools');
 			}else {

@@ -50,6 +50,7 @@ function show($data)
 
 function get_image($image_url, $extra = '')
 {
+
 	if (!file_exists($image_url)) {
    		if ($extra == 'female') {
    			$image = ASSETS . "/user_female.jpg";
@@ -57,7 +58,9 @@ function get_image($image_url, $extra = '')
    			$image = ASSETS . "/user_male.jpg";
    		}				   		
    }else {
-   		$image = $image_url;
+   		$class = new Image();
+   		// $image = ROOT . '/'. $image_url;
+   		$image = ROOT . '/'. $class->profile_thumb($image_url);
    }
 
    return $image;

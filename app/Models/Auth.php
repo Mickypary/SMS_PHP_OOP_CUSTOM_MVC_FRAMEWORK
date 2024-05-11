@@ -51,7 +51,7 @@ class Auth
 	public static function switch_school($id)
 	{
 		// code...
-		if (isset($_SESSION['USER']) && $_SESSION['USER']->rank == 'super_admin') {
+		if (isset($_SESSION['USER']) && $_SESSION['USER']->rank == 'super_admin' || $_SESSION['USER']->rank == 'admin' || $_SESSION['USER']->rank == 'lecturer' || $_SESSION['USER']->rank == 'reception') {
 			$school =  new School();
 			
 			if ($row = $school->where('id',$id)) {

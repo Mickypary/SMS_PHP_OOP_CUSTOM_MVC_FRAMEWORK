@@ -1,5 +1,5 @@
 <?php
-   $image = $row->profile_photo;
+   $image = $row->profile_image;
    $gender = $row->gender;
 ?>
 
@@ -9,7 +9,7 @@
 	    <center><h5 class="card-title"><?= esc($row->firstname) ?> <?= esc($row->lastname) ?></h5></center>
 	    <center><p class="card-text"><?= ucwords(str_replace("_", " ", esc($row->rank))); ?></p></center>
 	    <br>
-	    <?php if (((!isset($_GET['select']) || !isset($_GET['select'])) && (Auth::access('lecturer') || Auth::i_own_content($row)))): ?>
+	    <?php if (((!isset($_GET['select']) || !isset($_GET['select'])) && (Auth::access('reception') || Auth::i_own_content($row)))): ?>
 	    	<center><a  href="<?= ROOT ?>/profile/<?=$row->user_id?>" class="btn btn-primary mb-2">Profile</a></center>
 	    <?php endif ?>
 	    

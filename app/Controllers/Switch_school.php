@@ -8,7 +8,7 @@ class Switch_school extends Controller
 	
 	public function index($id = '')
 	{
-		if (Auth::access('super_admin')) {
+		if (Auth::access('reception')) {
 			// code...
 			Auth::switch_school($id);
 		}else {

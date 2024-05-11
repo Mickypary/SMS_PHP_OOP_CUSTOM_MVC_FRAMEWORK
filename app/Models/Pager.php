@@ -28,7 +28,7 @@ class Pager
 		$current_link = ROOT .'/'. str_replace('url=', "", $_SERVER['QUERY_STRING']);	
 		$current_link = !strstr($current_link, "page=") ? $current_link .'&page=1' : $current_link;
 		$first_link = preg_replace("/page=[0-9]+/", 'page=1', $current_link);
-		$next_link = preg_replace("/page=[0-9]+/", 'page='.($page_number+$extras+1), $current_link);
+		$next_link = preg_replace("/page=[0-9]+/", 'page='.($page_number+1), $current_link);
 		
 		$this->links['first_link'] = $first_link; 
 		$this->links['current_link'] = $current_link; 
