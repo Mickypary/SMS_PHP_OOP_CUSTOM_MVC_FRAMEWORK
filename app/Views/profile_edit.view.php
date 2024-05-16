@@ -16,8 +16,7 @@
 					?>
 						<img src="<?= get_image($image, $gender) ?>" class="border d-block mx-auto" style="width: 150px;">
 						<br>
-					
-					<?php if (Auth::access('admin') || Auth::i_own_content($row)): ?>
+
 					<div class="text-center">
 						<label for="image_browse" class="btn btn-sm btn-primary">
 							<input onchange="display_image_name(this.files[0].name)" id="image_browse" type="file" name="image" style="display: none;">
@@ -26,7 +25,6 @@
 						<br>
 						<small class="file_info text_muted"></small>
 					</div>
-					<?php endif ?>
 				</div>
 				<!-- Right Col -->
 				<div class="col-sm-8 col-md-9 bg-light p-2">
@@ -35,28 +33,28 @@
 
 
 								<!-- Alert Start using Session Global Variable -->
-									<?php if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0): ?>
-										<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<?php //if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0): ?>
+										<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
 											<strong>Errors!:</strong> <br>
-											<?php foreach ($_SESSION['errors'] as $key => $error): ?>
+											<?php //foreach ($_SESSION['errors'] as $key => $error): ?>
 												<?= $error ."<br>" ?>
-												<?php unset($_SESSION['errors']) ?>
-											<?php endforeach ?>
+												<?php //unset($_SESSION['errors']) ?>
+											<?php //endforeach ?>
 											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-										</div>
-									<?php endif; ?>
+										</div> -->
+									<?php //endif; ?>
 									<!-- Alert End -->
 
 				<!-- Alert Start using array data -->
-			<?php //if(count($errors) > 0): ?>
-				<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<?php if(count($errors) > 0): ?>
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
 					<strong>Errors!:</strong> <br>
-					<?php //foreach ($errors as $key => $error): ?>
+					<?php foreach ($errors as $key => $error): ?>
 						<?= $error ."<br>" ?>
-					<?php //endforeach ?>
+					<?php endforeach ?>
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-				</div> -->
-			<?php //endif; ?>
+				</div>
+			<?php endif; ?>
 			<!-- Alert End -->
 						
 							

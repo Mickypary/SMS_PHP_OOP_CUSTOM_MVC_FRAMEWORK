@@ -34,7 +34,7 @@
           </li>
         <?php endif ?>
         
-        <?php if (Auth::access('admin')): ?>
+        <?php if (Auth::access('reception')): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?=ROOT?>/users">STAFF</a>
           </li>

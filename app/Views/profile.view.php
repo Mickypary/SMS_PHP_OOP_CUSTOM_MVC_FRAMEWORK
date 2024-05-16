@@ -18,7 +18,7 @@
 							<img src="<?= get_image($image, $gender) ?>" class="border border-primary d-block mx-auto rounded-circle" style="width: 150px;">
 						
 						<h3 class="text-center"><?= esc($row->firstname) ?> <?= esc($row->lastname) ?></h3>
-						<?php if (Auth::access('admin') || Auth::i_own_content($row)): ?>
+						<?php if (Auth::access('admin') || (Auth::access('reception') && $row->rank == 'student')): ?>
 						<center>
 							<a href="<?=ROOT?>/profile/edit/<?= $row->user_id ?>">
 								<button class="btn btn-sm btn-primary">Edit Profile</button>

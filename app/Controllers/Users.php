@@ -13,7 +13,7 @@ class Users extends Controller
 			$this->redirect('login');
 		}
 
-		if (Auth::access('admin')) {
+		if (Auth::access('reception')) {
 
 			// For Pagination
 			$limit = 10;	

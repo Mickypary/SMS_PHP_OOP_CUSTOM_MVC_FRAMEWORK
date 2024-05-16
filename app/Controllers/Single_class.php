@@ -64,6 +64,15 @@ class Single_class extends Controller
 
 			$students = $lect->query($query,$arr);
 			$data['students'] 		= $students;
+		}elseif ($page_tab == 'tests') {
+			// display test
+			$arr['class_id'] = $id;
+			$arr['user_id'] = $user_id;
+			$query = "select * from tests where class_id = :class_id && user_id = :user_id order by id desc limit $limit offset $offset ";
+
+			$tests = $lect->query($query,$arr);
+			$data['tests'] 		= $tests;
+			// print_r($data['tests']);
 		}
 
 		$data['row'] 		= $row;
@@ -366,6 +375,151 @@ class Single_class extends Controller
 		}else {
 			$this->load_view('access-denied');
 		}
+	}
+
+
+
+	// add student
+	public function testadd($id = '')
+	{
+		$errors = array();
+
+		if(!Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		$classes = new Classes_model();
+		$row = $classes->getWhere('class_id',$id);
+
+		$crumbs[] = ['Dashboard','/school/public'];
+		$crumbs[] = ['Classes','classes'];
+
+		if ($row) {
+			$crumbs[] = [$row->class,''];
+		}
+
+		$page_tab = "test-add";
+
+		$test_class = new Tests_model(); 
+
+		$results = false;
+		if (count($_POST) > 0 && Auth::access('lecturer') ) {
+
+			if (isset($_POST['test'])) {
+
+				$arr = array();
+				$arr['test'] = $_POST['test'];
+				$arr['description'] = $_POST['description'];
+				$arr['class_id'] = $id;
+				$arr['disabled'] = 0; 
+				$arr['date'] = date("Y-m-d H:i:s");
+
+				$test_class->insert($arr);
+				$this->redirect('single_class/'.$id.'?tab=tests');
+	
+			}	
+		}
+
+		$data['row'] 		= $row;
+		$data['crumbs'] 	= $crumbs;
+		$data['page_tab'] 	= $page_tab;
+		$data['results'] 	= $results;
+		$data['errors'] 	= $errors;
+		if (Auth::access('admin')) {
+			$this->load_view('single_class',$data);
+		}else {
+			$this->load_view('access-denied');
+		}
+		
+	}
+
+	public function edit_test($class_id = '', $test_id = '')
+	{
+		$errors = array();
+
+		if(!Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		$test_class = new Tests_model(); 
+		$test = $test_class->getWhere('test_id',$test_id);
+
+		$classes = new Classes_model();
+		$row = $classes->getWhere('class_id',$class_id);
+
+		$crumbs[] = ['Dashboard','/school/public'];
+		$crumbs[] = ['Classes','classes'];
+
+		if ($row) {
+			$crumbs[] = [$row->class,''];
+		}
+
+		$page_tab = "test-edit";	
+
+		$results = false;
+		if (count($_POST) > 0 && Auth::access('lecturer') ) {
+
+			if (isset($_POST['test'])) {
+
+				$arr = array();
+				$arr['test'] = $_POST['test'];
+				$arr['description'] = $_POST['description'];
+				$arr['disabled'] = $_POST['disabled'];
+
+				// code...
+				if ($test_class->update($test->id, $arr)) {
+					$_SESSION['alert-type'] = 'success';
+					$_SESSION['message'] = "Updated Successfully";
+				}
+				$this->redirect('single_class/'.$class_id.'/?tab=tests');
+	
+			}	
+		}
+
+		$data['row'] 		= $row;
+		$data['crumbs'] 	= $crumbs;
+		$data['page_tab'] 	= $page_tab;
+		$data['test'] 	= $test;
+		$data['errors'] 	= $errors;
+		if (Auth::access('lecturer')) {
+			$this->load_view('single_class',$data);
+		}else {
+			$this->load_view('access-denied');
+		}
+		
+	}
+
+	public function delete_test($class_id = '', $test_id = '')
+	{
+		$errors = array();
+
+		if(!Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		$test_class = new Tests_model(); 
+		$test = $test_class->getWhere('test_id',$test_id);
+
+		// $crumbs[] = ['Dashboard','/school/public'];
+		// $crumbs[] = ['Classes','classes'];
+
+		// if ($row) {
+		// 	$crumbs[] = [$row->class,''];
+		// }
+
+		$page_tab = "tests";
+
+		if (Auth::access('lecturer') && Auth::i_own_content($test) ) {
+			if ($test_class->delete($test->id, $arr)) {
+				$_SESSION['alert-type'] = 'success';
+				$_SESSION['message'] = "Deleted Successfully";
+			}
+			$this->redirect('single_class/'.$class_id.'/?tab=tests');	
+		}else {
+			$this->load_view('access-denied');
+			die();
+		}
+		
 	}
 
 

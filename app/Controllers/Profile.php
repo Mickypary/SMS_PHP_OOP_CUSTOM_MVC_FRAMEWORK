@@ -24,7 +24,6 @@ class Profile extends Controller
 				$row = $row[0];
 			}else {
 				$row->class = 'Not Assigned to class yet';
-				// print_r($row);
 			}
 		}
 		
@@ -77,12 +76,6 @@ class Profile extends Controller
 		$user = new User();
 		$id = trim($user_id == '') ? Auth::getUser_id() : $user_id;
 		$row = $user->getWhere('user_id',$id);
-
-		// $crumbs[] = ['Dashboard','/school/public'];
-		// $crumbs[] = ['Profile','profile'];
-		// if ($row) {
-		// 	$crumbs[] = [$row->firstname,'profile'];
-		// }
 
 		$data['row'] = $row;
 		// $data['crumbs'] = $crumbs;

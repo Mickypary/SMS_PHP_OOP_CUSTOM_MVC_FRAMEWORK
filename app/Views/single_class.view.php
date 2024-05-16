@@ -50,11 +50,6 @@
 						include(views_path('class_tab_students'));
 							break;
 
-						case 'tests':
-							// code...
-						include(views_path('class_tab_tests'));
-							break;
-
 						case 'lecturer-add':
 							// code...
 						include(views_path('class_tab_lecturers_add'));
@@ -75,9 +70,21 @@
 						include(views_path('class_tab_students_remove'));
 							break;
 
-						case 'tests-add':
+						case 'tests':
 							// code...
-						include(views_path('class_tab_tests_add'));
+							include(views_path('class_tab_tests'));
+							break;
+
+
+
+						case 'test-add':
+							// code...
+						include(views_path('class_tab_test_add'));
+							break;
+
+						case 'test-edit':
+							// code...
+						include(views_path('class_tab_test_edit'));
 							break;
 						
 						default:

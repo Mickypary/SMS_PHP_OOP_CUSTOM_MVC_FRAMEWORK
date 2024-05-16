@@ -84,7 +84,7 @@ class Schools extends Controller
 		if (Auth::access('super_admin')) {
 			// code...
 			$school = new School();
-			$row = $school->where('id',$id);
+			$row = $school->getWhere('id',$id);
 
 			// $data['rows'] = $row;
 			$crumbs[] = ['Dashboard',''];

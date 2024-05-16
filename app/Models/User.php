@@ -39,7 +39,7 @@ class User extends Model
 		// check for firstname
 		if (isset($DATA['firstname']) && empty($DATA['firstname'])) {
 			$this->errors['firstname'] = "Firstname field is required";
-		}elseif (isset($DATA['firstname']) && !preg_match("/^[a-zA-Z]+$/", $DATA['firstname'])) {
+		}elseif (isset($DATA['firstname']) && !preg_match("/^[a-zA-Z -]+$/", $DATA['firstname'])) {
 			$this->errors['firstname'] = "Only letters allowed in firstname";
 		}
 
