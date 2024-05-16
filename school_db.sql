@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2024 at 12:19 AM
+-- Generation Time: May 16, 2024 at 04:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -69,14 +69,15 @@ CREATE TABLE IF NOT EXISTS `class_lecturers` (
   KEY `disabled` (`disabled`),
   KEY `date` (`date`),
   KEY `school_id` (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `class_lecturers`
 --
 
 INSERT INTO `class_lecturers` (`id`, `user_id`, `class_id`, `disabled`, `date`, `school_id`, `updated_at`) VALUES
-(1, 'IZQ2SyeeRin58UkfdPQFxRlLO7GOUvBav4FwbWVVRa18AFmuF7qEvcj4q8G6', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 0, '2024-05-10 16:07:22', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', NULL);
+(1, 'IZQ2SyeeRin58UkfdPQFxRlLO7GOUvBav4FwbWVVRa18AFmuF7qEvcj4q8G6', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 0, '2024-05-10 16:07:22', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', NULL),
+(2, 'rktJFRmv9WncpRIH4uwuRoz2ZhvBQ5anQEv5yLQULgmU2XnzxUM58wJ44g2h', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 0, '2024-05-13 14:37:48', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', NULL);
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `class_students` (
   KEY `class_id` (`class_id`),
   KEY `user_id` (`user_id`),
   KEY `school_id` (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `class_students`
@@ -106,7 +107,8 @@ CREATE TABLE IF NOT EXISTS `class_students` (
 
 INSERT INTO `class_students` (`id`, `user_id`, `class_id`, `disabled`, `date`, `school_id`, `updated_at`) VALUES
 (1, 'J4l3kwG8UqSnhC33bKTOZDclYLCjK1duv2UnclNM5vFcPIfMOMz8ozhr5QYT', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 0, '2024-05-10 16:08:24', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', NULL),
-(2, '3KsXT2F3KcW2uiE3IS5wq5wCHcW0bdRo6zebOpgE4WTT8gdk6DBovMGCbZQc', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 0, '2024-05-10 16:08:31', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', NULL);
+(2, '3KsXT2F3KcW2uiE3IS5wq5wCHcW0bdRo6zebOpgE4WTT8gdk6DBovMGCbZQc', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 0, '2024-05-10 16:08:31', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', NULL),
+(3, 'oLp1kpDnu393jNpmQsAXpR8CYipPGykBzOZ2wXc4lpOUdn8HXK8mhytldJjc', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 0, '2024-05-13 12:45:23', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', NULL);
 
 -- --------------------------------------------------------
 
@@ -186,6 +188,61 @@ INSERT INTO `schools` (`id`, `school`, `school_id`, `date`, `user_id`, `status`)
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tests`
+--
+
+CREATE TABLE IF NOT EXISTS `tests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `test_id` varchar(60) NOT NULL,
+  `class_id` varchar(60) NOT NULL,
+  `school_id` varchar(60) NOT NULL,
+  `user_id` varchar(60) NOT NULL,
+  `test` varchar(100) NOT NULL,
+  `description` varchar(2048) NOT NULL,
+  `date` datetime NOT NULL,
+  `disabled` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `test_id` (`test_id`),
+  KEY `class_id` (`class_id`),
+  KEY `school_id` (`school_id`),
+  KEY `user_id` (`user_id`),
+  KEY `test` (`test`),
+  KEY `date` (`date`),
+  KEY `disabled` (`disabled`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tests`
+--
+
+INSERT INTO `tests` (`id`, `test_id`, `class_id`, `school_id`, `user_id`, `test`, `description`, `date`, `disabled`) VALUES
+(3, 'OMTKd6kt4mtHQt1y3B5DevqyuXlBcXWTWtG1Zfg2SrS7NAqI0YyqGaqI0QDM', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'Year 7B End of Term', 'This test is very important for your grade point.', '2024-05-15 15:02:48', 0),
+(4, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'My Second Test', 'I love to test', '2024-05-16 12:03:40', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_questions`
+--
+
+CREATE TABLE IF NOT EXISTS `test_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `test_id` varchar(60) NOT NULL,
+  `question` text NOT NULL,
+  `image` varchar(500) NOT NULL,
+  `test_type` varchar(10) NOT NULL,
+  `correct_answer` text NOT NULL,
+  `choices` text NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `test_id` (`test_id`),
+  KEY `test_type` (`test_type`),
+  KEY `date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -217,16 +274,16 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `date`, `user_id`, `gender`, `school_id`, `rank`, `password`, `profile_image`) VALUES
-(1, 'Eathorne', 'Banda', 'eathorne@yahoo.com', '2024-04-22 22:00:33', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'male', 'yUkbpMqUDRkJLsK9R04xbJgO036XLI4zg71Eu0uSzoGHGdn53rJQXPUm4Qy2', 'super_admin', '$2y$10$pYVX5iPIuxTTgRFKrTXCFeBIEYe7HjMUZ2ECHNcGpxdzAcKgcYvy.', ''),
+(1, 'Eathorne', 'Banda', 'eathorne@yahoo.com', '2024-04-22 22:00:33', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'super_admin', '$2y$10$pYVX5iPIuxTTgRFKrTXCFeBIEYe7HjMUZ2ECHNcGpxdzAcKgcYvy.', ''),
 (2, 'Mary', 'Phiri', 'mary@yahoo.com', '2024-04-22 22:17:41', 'oao3tht79qs59ts0kCV9Zb4sl8612IhegWCXYHQclzgmRt8ReqQRWo2oxVUE', 'female', '', 'super_admin', '$2y$10$kLaJT17c4hXB3KrpLwgTUeTCAYe9cBVyIaKO/Yhw6/skEgGgmccNi', ''),
 (3, 'John', 'Tembo', 'john@yahoo.com', '2024-04-26 20:35:37', 'xt1MdfCzM4rBJ8uJ5pJjqIQJ3yPh5camqK6V71jr8pi7XNfCtGwbMG02gHIX', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'admin', '$2y$10$.byCmJoPPQ3VjDKUtRZ8NO9EqvDCK14gUyizMvpSPY4hGnYZMHHqu', 'uploads/1727807829051559.jpg'),
-(4, 'Anna', 'Jones', 'anna@yahoo.com', '2024-04-26 20:55:00', '8u95jViTOJeawwLiKUroeKXjfdlBLbeMW1nXWYbZs6nHvheKJ52XQyJTJnwU', 'female', '79bAeHYN3Ma3g6MwHdg5b06JRyoQbMsDHT4bdcXoe3oPfsClrFxryJ6DNEET', 'reception', '$2y$10$Uqn6fhvqUROq8q8wqFZUXOH3JqTIVQy92VjdBbd5DJmoFj9gDvS6G', 'uploads/Elina Alfara.jpg'),
+(4, 'Anna', 'Jones', 'anna@yahoo.com', '2024-04-26 20:55:00', '8u95jViTOJeawwLiKUroeKXjfdlBLbeMW1nXWYbZs6nHvheKJ52XQyJTJnwU', 'female', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'reception', '$2y$10$Uqn6fhvqUROq8q8wqFZUXOH3JqTIVQy92VjdBbd5DJmoFj9gDvS6G', 'uploads/Elina Alfara.jpg'),
 (5, 'Vibe', 'Peters', 'vibe@yahoo.com', '2024-04-26 20:56:10', 'IZQ2SyeeRin58UkfdPQFxRlLO7GOUvBav4FwbWVVRa18AFmuF7qEvcj4q8G6', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'lecturer', '$2y$10$dHNSSFH/5mbqvV7TCqoMR.25tRhsd6wwFQPiCkqMqa7T8EI/dypOW', 'uploads/1727811477760433.jpg'),
 (6, 'Bob', 'Marley', 'bob@yahoo.com', '2024-04-27 22:05:21', '3KsXT2F3KcW2uiE3IS5wq5wCHcW0bdRo6zebOpgE4WTT8gdk6DBovMGCbZQc', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$SR6Y1RwjqrG17J1nAKgJBuhXzv6oigJku7g8S.I6tHJkeV1w2mxK6', 'uploads/mark zukerberg.jpg'),
 (7, 'Jane', 'Mandawa', 'jane@yahoo.com', '2024-04-27 22:10:25', 'oLp1kpDnu393jNpmQsAXpR8CYipPGykBzOZ2wXc4lpOUdn8HXK8mhytldJjc', 'female', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$9/l3PobyNARmKiBci3gCl.PQJ3bglEzVAq8ww8S/wR9LCu9rWAYzK', 'uploads/OWAKAH SUCCESS CHISOM.jpg'),
-(8, 'Maria', 'Jonnes', 'maria@yahoo.com', '2024-04-27 22:15:39', 'J4l3kwG8UqSnhC33bKTOZDclYLCjK1duv2UnclNM5vFcPIfMOMz8ozhr5QYT', 'female', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$8gu0HUB31WcyzZ91Vpa55OLXhMoPR5/78qCfp.eq8UiulYyW3yTWK', 'uploads/WhatsApp Image 2024-02-21 at 17.05.31.jpeg'),
-(9, 'Lanre', 'Odeseye', 'lanre@yahoo.com', '2024-05-07 21:52:22', 'K1ruJmb4bcwPbaocMWFNY8QjF0IY4BAxp83ZpvvB08ylSlu1G4AYP8F3ZoMr', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$w62V.LLTIK80aplKsGQ/junotH9rsKqvqH99Gt4WVj73EEDK.qKe6', 'uploads/AGANA SAMUEL CHINEDU.jpg'),
-(10, 'Adelana', 'Akinsanya', 'adelana@yahoo.com', '2024-05-07 21:53:00', '2OmMdNydqofm8S8jvF3pxZ2SQocFmBzuOAp7OZVCWPlhATYVEkPoF6MoGpSz', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$jpNQ3y05yLhXHsqOqdn6lu207Xc0pWP7AzkpnY1zuhFJaTnWJ31Hq', 'uploads/Mr. Kobru Michael (IT Support Officer)  edited.png'),
+(8, 'Amar', 'Aavani', 'amar@yahoo.com', '2024-04-27 22:15:39', 'J4l3kwG8UqSnhC33bKTOZDclYLCjK1duv2UnclNM5vFcPIfMOMz8ozhr5QYT', 'female', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$8gu0HUB31WcyzZ91Vpa55OLXhMoPR5/78qCfp.eq8UiulYyW3yTWK', 'uploads/Amar Aavani.jpg'),
+(9, 'Al-Moghro', 'Bilal', 'bilal@yahoo.com', '2024-05-07 21:52:22', 'K1ruJmb4bcwPbaocMWFNY8QjF0IY4BAxp83ZpvvB08ylSlu1G4AYP8F3ZoMr', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$w62V.LLTIK80aplKsGQ/junotH9rsKqvqH99Gt4WVj73EEDK.qKe6', 'uploads/Al-Moghrobi Bilal.jpg'),
+(10, 'Jeremiah', 'Haile', 'jeremiah@yahoo.com', '2024-05-07 21:53:00', '2OmMdNydqofm8S8jvF3pxZ2SQocFmBzuOAp7OZVCWPlhATYVEkPoF6MoGpSz', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$jpNQ3y05yLhXHsqOqdn6lu207Xc0pWP7AzkpnY1zuhFJaTnWJ31Hq', 'uploads/JEREMIAH HAILE.jpg'),
 (11, 'Ayooluwa', 'Alabi', 'ayooluwa@yahoo.com', '2024-05-07 21:56:01', 'gdEjqD7Qx153BMUEu2tWVsde90MBVsUjI2bZ9cTabDwqzfWmJrlGWN3RO1PD', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'student', '$2y$10$6zeBz1YpJPWi0algO5.QjO2gdRnvTHeBOP8PcKnVcHQeggkGrAypm', 'uploads/KINGSLEY JASON CHIBUIKEM.jpg'),
 (12, 'Adenubi', 'Adefunto', 'adenubi@yahoo.com', '2024-05-09 10:41:18', 'rktJFRmv9WncpRIH4uwuRoz2ZhvBQ5anQEv5yLQULgmU2XnzxUM58wJ44g2h', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'lecturer', '$2y$10$c91vg/lZbTPJlT.y6HU/1OFvSNVyvebErkl8CQ1.7Phrb6ztLA2pe', '');
 COMMIT;
