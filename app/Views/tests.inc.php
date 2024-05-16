@@ -17,13 +17,13 @@
 		<?php foreach ($rows as $key => $row): ?>
 			<tr>
 				<td>
-					<a href="<?= ROOT ?>/tests/<?= $row->class_id ?>">
+					<a href="<?= ROOT ?>/single_test/<?= $row->test_id ?>">
 						<button class="btn btn-sm btn-primary" autofocus><i class="fa fa-chevron-right"></i></button>
 					</a>	
 				</td>
 				<td><?= $row->test ?></td>
 				<td><?= $row->user->firstname ?> <?= $row->user->lastname ?></td>
-				
+
 				<?php $active = $row->disabled ? 'No' : 'Yes'; ?>
 				<td><?= $active ?></td>
 				<td><?= format_date($row->date) ?></td>

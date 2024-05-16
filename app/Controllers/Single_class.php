@@ -500,19 +500,12 @@ class Single_class extends Controller
 		$test_class = new Tests_model(); 
 		$test = $test_class->getWhere('test_id',$test_id);
 
-		// $crumbs[] = ['Dashboard','/school/public'];
-		// $crumbs[] = ['Classes','classes'];
-
-		// if ($row) {
-		// 	$crumbs[] = [$row->class,''];
-		// }
-
 		$page_tab = "tests";
 
 		if (Auth::access('lecturer') && Auth::i_own_content($test) ) {
 			if ($test_class->delete($test->id, $arr)) {
 				$_SESSION['alert-type'] = 'success';
-				$_SESSION['message'] = "Deleted Successfully";
+				$_SESSION['message'] = "Updated Successfully";
 			}
 			$this->redirect('single_class/'.$class_id.'/?tab=tests');	
 		}else {
