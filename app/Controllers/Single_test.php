@@ -32,10 +32,14 @@ class Single_test extends Controller
 		$page_tab = "view";
 
 		$results = false;
+		
+		$qst = new Questions_model();
+		$questions = $qst->where('test_id', $row->test_id);
 
 		$data['row'] 		= $row;
 		$data['crumbs'] 	= $crumbs;
 		$data['page_tab'] 	= $page_tab;
+		$data['questions'] 	= $questions;
 		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
 		$data['pager'] 	= $pager;
@@ -68,12 +72,27 @@ class Single_test extends Controller
 
 		$page_tab = "add_subjective";
 
-		$results = false;
+		$qst = new Questions_model();
 
+		if (count($_POST) > 0 ) {		
+
+			if ($qst->validate($_POST)) {
+				
+				$_POST['date'] = date("Y-m-d H:i:s");
+				$_POST['test_id'] = $row->test_id;
+				$_POST['question_type'] = 'subjective';
+				$qst->insert($_POST);
+				$this->redirect('single_test/'.$row->test_id);
+			}else {
+				$errors = $qst->errors;
+			}
+		}
+
+		$results = false;
+		
 		$data['row'] 		= $row;
 		$data['crumbs'] 	= $crumbs;
 		$data['page_tab'] 	= $page_tab;
-		$data['results'] 	= $results;
 		$data['errors'] 	= $errors;
 		$data['pager'] 	= $pager;
 		$this->load_view('single_test',$data);
