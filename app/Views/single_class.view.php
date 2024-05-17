@@ -41,50 +41,48 @@
 						case 'lecturers':
 							// code...
 						if (Auth::access('admin') && Auth::i_own_content($row)):
-							include(views_path('class_tab_lecturers'));
+							include(views_path('inc/class_tab_lecturers'));
 				 		endif;
 							break;
 
 						case 'students':
 							// code...
-						include(views_path('class_tab_students'));
+						include(views_path('inc/class_tab_students'));
 							break;
 
 						case 'lecturer-add':
 							// code...
-						include(views_path('class_tab_lecturers_add'));
+						include(views_path('inc/class_tab_lecturers_add'));
 							break;
 
 						case 'lecturer-remove':
 							// code...
-						include(views_path('class_tab_lecturers_remove'));
+						include(views_path('inc/class_tab_lecturers_remove'));
 							break;
 
 						case 'student-add':
 							// code...
-						include(views_path('class_tab_students_add'));
+						include(views_path('inc/class_tab_students_add'));
 							break;
 
 						case 'student-remove':
 							// code...
-						include(views_path('class_tab_students_remove'));
+						include(views_path('inc/class_tab_students_remove'));
 							break;
 
 						case 'tests':
 							// code...
-							include(views_path('class_tab_tests'));
+							include(views_path('inc/class_tab_tests'));
 							break;
-
-
 
 						case 'test-add':
 							// code...
-						include(views_path('class_tab_test_add'));
+						include(views_path('inc/class_tab_test_add'));
 							break;
 
 						case 'test-edit':
 							// code...
-						include(views_path('class_tab_test_edit'));
+						include(views_path('inc/class_tab_test_edit'));
 							break;
 						
 						default:

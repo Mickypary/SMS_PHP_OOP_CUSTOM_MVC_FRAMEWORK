@@ -28,7 +28,7 @@
 		
 		
 
-		<?php include(views_path('school')) ?>	
+		<?php include(views_path('inc/school')) ?>	
 
 
 	</div>

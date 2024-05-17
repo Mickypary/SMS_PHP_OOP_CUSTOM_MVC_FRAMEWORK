@@ -25,7 +25,7 @@
 
 			
 			
-			<?php include(views_path('tests')) ?>	
+			<?php include(views_path('inc/tests')) ?>	
 
 			<!-- For Pagination display -->
 			<?= $pager->display(); ?>

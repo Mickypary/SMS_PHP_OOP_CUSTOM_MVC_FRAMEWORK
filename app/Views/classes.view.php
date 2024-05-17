@@ -25,7 +25,7 @@
 
 			
 			
-			<?php include(views_path('classes')) ?>	
+			<?php include(views_path('inc/classes')) ?>	
 
 			<!-- For Pagination display -->
 			<?= $pager->display(); ?>

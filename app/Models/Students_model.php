@@ -9,7 +9,11 @@ class Students_model extends Model
 {
 	protected $table = "class_students";
 	protected $allowedColumns = [
-		'user_id', 'school_id', 'class_id', 'date', 'disabled',
+		'user_id', 
+		'school_id', 
+		'class_id', 
+		'date', 
+		'disabled',
 	];
 
 	protected $beforeInsert = [

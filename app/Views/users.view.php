@@ -30,7 +30,7 @@
 			<?php if($rows): ?>
 				<?php foreach ($rows as $key => $row): ?>
 					<!-- User include file comes here with card template -->
-					<?php include(views_path('user')) ?>
+					<?php include(views_path('inc/user')) ?>
 				
 				<?php endforeach ?>
 			<?php else: ?>
