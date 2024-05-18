@@ -35,14 +35,22 @@ class Single_test extends Controller
 		
 		$qst = new Questions_model();
 		$questions = $qst->where('test_id', $row->test_id, 'desc');
+		if ($questions) {
+			$total_questions = count($questions);
+		}else {
+			$total_questions = 0;
+		}
+		
 
-		$data['row'] 		= $row;
-		$data['crumbs'] 	= $crumbs;
-		$data['page_tab'] 	= $page_tab;
-		$data['questions'] 	= $questions;
-		$data['results'] 	= $results;
-		$data['errors'] 	= $errors;
-		$data['pager'] 	= $pager;
+
+		$data['row'] 			= $row;
+		$data['crumbs'] 		= $crumbs;
+		$data['page_tab'] 		= $page_tab;
+		$data['questions'] 		= $questions;
+		$data['total_questions'] 	= $total_questions;
+		$data['results'] 		= $results;
+		$data['errors'] 		= $errors;
+		$data['pager'] 			= $pager;
 		$this->load_view('single_test',$data);
 	}
 
@@ -77,6 +85,10 @@ class Single_test extends Controller
 		if (count($_POST) > 0 ) {		
 
 			if ($qst->validate($_POST)) {
+
+				if ($myimage = upload_image($_FILES)) {
+					$_POST['image'] = $myimage;
+				}
 				
 				$_POST['date'] = date("Y-m-d H:i:s");
 				$_POST['test_id'] = $row->test_id;

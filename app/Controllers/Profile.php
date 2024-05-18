@@ -111,22 +111,27 @@ class Profile extends Controller
 
 				// check for files upload
 				// print_r($_FILES); die();
-				if (count($_FILES['image']) > 0) {
-					$allowed[] = "image/jpeg";
-					$allowed[] = "image/jpg";
-					$allowed[] = "image/png";
-
-					if ($_FILES['image']['error'] == 0 && in_array($_FILES['image']['type'], $allowed)) {
-						// code...
-						$folder = 'uploads/';
-						if (!file_exists($folder)) {
-							mkdir($folder, 0777, true);
-						}
-						$destination = $folder.$_FILES['image']['name'];
-						move_uploaded_file($_FILES['image']['tmp_name'], $destination);
-						$_POST['profile_image'] = $destination;
-					}
+				if ($myimage = upload_image($_FILES)) {
+					$_POST['profile_image'] = $myimage;
 				}
+				
+				// Note i have to create a funtion upload_image in helper to put the below function for reususabilty
+				// if (count($_FILES['image']) > 0) {
+				// 	$allowed[] = "image/jpeg";
+				// 	$allowed[] = "image/jpg";
+				// 	$allowed[] = "image/png";
+
+				// 	if ($_FILES['image']['error'] == 0 && in_array($_FILES['image']['type'], $allowed)) {
+				// 		// code...
+				// 		$folder = 'uploads/';
+				// 		if (!file_exists($folder)) {
+				// 			mkdir($folder, 0777, true);
+				// 		}
+				// 		$destination = $folder.$_FILES['image']['name'];
+				// 		move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+				// 		$_POST['profile_image'] = $destination;
+				// 	}
+				// }
 
 				if ($_POST['rank'] == 'super_admin' && $_SESSION['USER']->rank != 'super_admin') {
 					$_POST['rank'] = 'admin';

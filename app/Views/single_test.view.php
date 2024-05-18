@@ -24,7 +24,8 @@
 						<?php $active = $row->disabled ? 'No' : 'Yes'; ?>
 						<tr>
 							<td><b>Active: </b><?= $active; ?></td>
-							<td colspan="4"><b>Test Description: </b><br><?= esc($row->description) ?></td>	
+							<td><b>Total Questions: </b><?= isset($total_questions) ? $total_questions : ''; ?></td>
+							<td colspan="3"><b>Test Description: </b><br><?= esc($row->description) ?></td>	
 						</tr>
 					</table>
 				</div> <!-- End 1st row -->
