@@ -24,14 +24,11 @@
 <?php foreach ($questions as $question): $num++ ?>
 	<div class="card mb-4 shadow">
 	  <div class="card-header">
-	    <span class="bg-primary text-white p-1 rounded">Question #<?= $num; ?></span>
+	    <span class="bg-primary text-white p-1 rounded">Question #<?= $num; ?></span> <span class="badge bg-success"><?= date('F jS, Y H:i:s a') ?></span>
 	  </div>
 	  <div class="card-body">
-	    <h5 class="card-title">Special title treatment</h5>
-	    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	  </div>
-	  <div class="card-footer text-body-secondary">
-	    <?= date('F jS, Y H:i:s a') ?>
+	    <h5 class="card-title"><?= esc($question->question); ?></h5>
+	    <p class="card-text">1 Point</p>
 	  </div>
 	</div>
 <?php endforeach; ?>

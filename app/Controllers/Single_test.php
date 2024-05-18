@@ -34,7 +34,7 @@ class Single_test extends Controller
 		$results = false;
 		
 		$qst = new Questions_model();
-		$questions = $qst->where('test_id', $row->test_id);
+		$questions = $qst->where('test_id', $row->test_id, 'desc');
 
 		$data['row'] 		= $row;
 		$data['crumbs'] 	= $crumbs;
