@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 04:26 PM
+-- Generation Time: May 18, 2024 at 02:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -229,16 +229,31 @@ CREATE TABLE IF NOT EXISTS `test_questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `test_id` varchar(60) NOT NULL,
   `question` text NOT NULL,
-  `image` varchar(500) NOT NULL,
-  `test_type` varchar(10) NOT NULL,
-  `correct_answer` text NOT NULL,
-  `choices` text NOT NULL,
+  `comment` varchar(1024) NOT NULL,
+  `image` varchar(500) DEFAULT NULL,
+  `question_type` varchar(10) NOT NULL,
+  `correct_answer` text DEFAULT NULL,
+  `choices` text DEFAULT NULL,
   `date` datetime NOT NULL,
+  `user_id` varchar(60) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `test_id` (`test_id`),
-  KEY `test_type` (`test_type`),
-  KEY `date` (`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `test_type` (`question_type`),
+  KEY `date` (`date`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `test_questions`
+--
+
+INSERT INTO `test_questions` (`id`, `test_id`, `question`, `comment`, `image`, `question_type`, `correct_answer`, `choices`, `date`, `user_id`) VALUES
+(1, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'What is the process by which plants make energy from sunlight', '', NULL, 'subjective', NULL, NULL, '2024-05-17 11:41:22', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(2, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'Which year did Zambia get independence?', '', NULL, 'subjective', NULL, NULL, '2024-05-17 11:49:54', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(3, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'What age is puberty for men?', '', NULL, 'subjective', NULL, NULL, '2024-05-18 11:23:38', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(4, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'Here is another question with a comment', 'This question is worth 1 point', NULL, 'subjective', NULL, NULL, '2024-05-18 13:00:22', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(5, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'A new question with an image', '2 Points', 'uploads/depositphotos_88208814-stock-photo-business-strategy-banner-sign-concept.jpg', 'subjective', NULL, NULL, '2024-05-18 13:32:37', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(6, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'Another test question with an image', '1 Point', 'uploads/1716036412_pngtree-creative-startup-banner-design-rocket-investment-piggy-bank-and-company-strategy-image_13926654.png', 'subjective', NULL, NULL, '2024-05-18 13:46:52', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo');
 
 -- --------------------------------------------------------
 
