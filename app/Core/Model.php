@@ -133,6 +133,8 @@ class Model extends Database
 
 	public function update($id, $data)
 	{	
+		$this->query_type = "update";
+
 		// remove unwanted columns
 		if(property_exists($this, 'allowedColumns')) {
 			foreach($data as $key => $value) {
@@ -168,6 +170,8 @@ class Model extends Database
 
 	public function delete($id)
 	{
+		$this->query_type = "delete";
+
 		$this->query = "DELETE FROM " . $this->table . " WHERE id =:id";
 		// echo $query;
 		return $this->query($this->query,[

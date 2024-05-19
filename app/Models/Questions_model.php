@@ -38,6 +38,10 @@ class Questions_model extends Model
 			$this->errors['question'] = "Question cannot be empty";
 		}
 
+		if (isset($DATA['correct_answer']) && empty($DATA['correct_answer'])) {
+			$this->errors['correct_answer'] = "Correct answer cannot be empty";
+		}
+
 		
 		// check if no error
 		if (count($this->errors) == 0) {

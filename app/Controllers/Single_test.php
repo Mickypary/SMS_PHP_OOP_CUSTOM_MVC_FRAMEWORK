@@ -6,7 +6,7 @@
 class Single_test extends Controller
 {
 	
-	public function index($id = '')
+	public function index($test_id = '')
 	{
 		$errors = array();
 
@@ -20,7 +20,7 @@ class Single_test extends Controller
 			$offset = $pager->offset;
 
 		$tests = new Tests_model();
-		$row = $tests->getWhere('test_id',$id);
+		$row = $tests->getWhere('test_id',$test_id);
 
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Tests','tests'];
@@ -55,7 +55,7 @@ class Single_test extends Controller
 	}
 
 
-	public function addsubjective($id = '')
+	public function add_question($id = '')
 	{
 		$errors = array();
 
@@ -78,13 +78,13 @@ class Single_test extends Controller
 			$crumbs[] = [$row->test,''];
 		}
 
-		$page_tab = "add_subjective";
+		$page_tab = "add_question";
 
-		$qst = new Questions_model();
+		$question = new Questions_model();
 
 		if (count($_POST) > 0 ) {		
 
-			if ($qst->validate($_POST)) {
+			if ($question->validate($_POST)) {
 
 				if ($myimage = upload_image($_FILES)) {
 					$_POST['image'] = $myimage;
@@ -92,11 +92,21 @@ class Single_test extends Controller
 				
 				$_POST['date'] = date("Y-m-d H:i:s");
 				$_POST['test_id'] = $row->test_id;
-				$_POST['question_type'] = 'subjective';
-				$qst->insert($_POST);
+				if (isset($_GET['type']) && $_GET['type'] == 'objective') {
+					$_POST['question_type'] = 'objective';
+					$_POST[''] = 'objective';
+				}else {
+					$_POST['question_type'] = 'subjective';
+				}
+
+				if ($question->insert($_POST)) {
+					$_SESSION['alert-type'] = 'success';
+					$_SESSION['message'] = "Inserted Successfully";
+				}
+				
 				$this->redirect('single_test/'.$row->test_id);
 			}else {
-				$errors = $qst->errors;
+				$errors = $question->errors;
 			}
 		}
 
@@ -106,9 +116,119 @@ class Single_test extends Controller
 		$data['crumbs'] 	= $crumbs;
 		$data['page_tab'] 	= $page_tab;
 		$data['errors'] 	= $errors;
-		$data['pager'] 	= $pager;
+		$data['pager'] 		= $pager;
 		$this->load_view('single_test',$data);
 	}
+
+
+	public function edit_question($test_id, $qst_id)
+	{
+		$errors = array();
+
+		if(!Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		// For Pagination
+			$limit = 10;	
+			$pager = new Pager($limit);
+			$offset = $pager->offset;
+
+		$tests = new Tests_model();
+		$row = $tests->getWhere('test_id',$test_id);
+
+		$crumbs[] = ['Dashboard','/school/public'];
+		$crumbs[] = ['Tests','tests'];
+
+		if ($row) {
+			$crumbs[] = [$row->test,''];
+		}
+
+		$page_tab = "edit_question";
+
+		$question = new Questions_model();
+		$edit_qst = $question->getWhere('id', $qst_id);
+
+		if (count($_POST) > 0 ) {		
+
+			if ($question->validate($_POST)) {
+
+				if ($myimage = upload_image($_FILES)) {
+					$_POST['image'] = $myimage;
+					// remove old image
+					$old_image = $edit_qst->image;
+				}
+
+				$type = '';
+				if ($edit_qst->question_type == 'objective') {
+					$type = '?type=objective';
+				}
+
+				if ($question->update($edit_qst->id, $_POST)) {
+
+					// remove old image
+					if (isset($old_image) && file_exists($old_image)) {
+						unlink($old_image);
+					}
+
+					$_SESSION['alert-type'] = 'success';
+					$_SESSION['message'] = "Updated Successfully";
+				}
+				
+				$this->redirect('single_test/edit_question/'.$row->test_id.'/'.$edit_qst->id.$type);
+			}else {
+				$errors = $question->errors;
+			}
+		}
+
+		$results = false;
+		
+		$data['row'] 			= $row;
+		$data['edit_qst'] 		= $edit_qst;
+		$data['crumbs'] 		= $crumbs;
+		$data['page_tab'] 		= $page_tab;
+		$data['errors'] 		= $errors;
+		$data['pager'] 			= $pager;
+		$this->load_view('single_test',$data);
+	}
+
+
+	public function delete_question($test_id, $qst_id)
+	{
+		$errors = array();
+
+		if(!Auth::logged_in()) {
+			$this->redirect('login');
+		}
+
+		$tests = new Tests_model();
+		$row = $tests->getWhere('test_id',$test_id);
+
+		$crumbs[] = ['Dashboard','/school/public'];
+		$crumbs[] = ['Tests','tests'];
+
+		if ($row) {
+			$crumbs[] = [$row->test,''];
+		}
+
+		$page_tab = "delete_question";
+
+		$question = new Questions_model();
+		$quest = $question->getWhere('id', $qst_id);
+
+		if (Auth::access('lecturer')) {
+
+			if ($question->delete($qst_id)) {			
+				// remove old image
+				if (isset($quest->image) && file_exists($quest->image)) {
+					unlink($quest->image);
+				}
+			}
+		}		
+
+		$this->redirect('single_test/'.$row->test_id);
+	}
+
 
 	
 

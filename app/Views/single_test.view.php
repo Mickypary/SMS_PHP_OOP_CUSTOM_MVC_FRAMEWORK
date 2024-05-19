@@ -42,24 +42,19 @@
 				 		endif;
 							break;
 
-						case 'add_subjective':
+						case 'add_question':
 							// code...
-						include(views_path('inc/test_tab_add_subjective'));
+						include(views_path('inc/test_tab_add_question'));
 							break;
 
-						case 'add_multiple':
+						case 'edit_question':
 							// code...
-						include(views_path('inc/test_tab_add_multiple'));
-							break;
-
-						case 'add_objective':
-							// code...
-						include(views_path('inc/test_tab_add_objective'));
+						include(views_path('inc/test_tab_edit_question'));
 							break;
 
 						case 'edit':
 							// code...
-						include(views_path('inc/test_tab_lecturers_edit'));
+						include(views_path('inc/test_tab_edit'));
 							break;
 
 						case 'delete':

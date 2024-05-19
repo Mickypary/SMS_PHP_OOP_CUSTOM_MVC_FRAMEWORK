@@ -339,7 +339,6 @@ class Single_class extends Controller
 					$name = "%" . trim($_POST['name']) . "%";
 					$query = "select * from users where (firstname like :fname || lastname like :lname) && rank = 'student' limit 10";
 					$results = $user->query($query, ['fname' => $name, 'lname' => $name]);
-					// print_r($results); die();
 				}else {
 					$errors[] = "You haven't typed anything!";
 				}

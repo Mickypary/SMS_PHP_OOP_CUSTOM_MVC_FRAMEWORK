@@ -8,10 +8,10 @@
 	    <i class="fa fa-bars"></i>Add
 	  </button>
 	  <ul class="dropdown-menu dropdown-menu-end">
-	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/multiple<?= $row->test_id ?>">Multiple Choice Question</a></li>
-	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/addobjective/<?= $row->test_id ?>">Objective Question</a></li>
+	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/add_question/<?= $row->test_id ?>">Multiple Choice Question</a></li>
+	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/add_question/<?= $row->test_id ?>?type=objective">Objective Question</a></li>
 	    <li><hr class="dropdown-divider"></li>
-	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/addsubjective/<?= $row->test_id ?>">Subjective Question</a></li>
+	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/add_question/<?= $row->test_id ?>">Subjective Question</a></li>
 	  </ul>
 	</div>
 </nav>
@@ -33,9 +33,20 @@
 	    <?php endif ?>
 	    
 	    <p class="card-text"><?= esc($question->comment); ?></p>
+	    <?php $type = ''; ?>
+
+	    <?php if ($question->question_type  == 'objective'):
+	    	$type = '?type=objective';
+	     ?>
+	    	<p class="card-text"><b>Answer: </b><?= esc($question->correct_answer); ?></p>
+	    <?php endif ?>
 	    <p class="card-text float-end">
-	    	<button class="btn btn-info pe-1 text-white"><i class="fa fa-edit"></i></button>
-	    	<button class="btn btn-danger pe-1 text-white"><i class="fa fa-trash-alt"></i></button>
+	    	<a href="<?= ROOT ?>/single_test/edit_question/<?= $question->test_id ?>/<?= $question->id ?><?= $type ?>">
+	    		<button class="btn btn-info pe-1 text-white"><i class="fa fa-edit"></i></button>
+	    	</a>
+	    	<a href="<?= ROOT ?>/single_test/delete_question/<?= $question->test_id ?>/<?= $question->id ?>" id="delete">
+	    		<button class="btn btn-danger pe-1 text-white"><i class="fa fa-trash-alt"></i></button>
+	    	</a>    	
 	    </p>
 	  </div>
 	</div>

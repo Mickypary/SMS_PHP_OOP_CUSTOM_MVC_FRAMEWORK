@@ -59,9 +59,7 @@ class Database
 						$data = $stm->fetchAll(PDO::FETCH_OBJ);
 					}else {
 						$data = $stm->fetchAll(PDO::FETCH_ASSOC);
-					}
-
-					
+					}			
 
 				break;
 
