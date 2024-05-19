@@ -38,6 +38,22 @@ class Questions_model extends Model
 			$this->errors['question'] = "Question cannot be empty";
 		}
 
+		// check for multiple choice answer
+		$num = 0;
+		$letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+		foreach ($DATA as $key => $value) {
+			if (strstr($key, 'choice')) {
+				// print_r($key); die();
+				if (empty($value)) {	
+					$this->errors[$key] = "Please add a valid answer in choice $letters[$num]";
+					// $this->errors['choice'.$num] = "Please add a valid answer in choice $letters[$num]";
+				}
+				$num++;
+			}
+		}
+
+
+		// check for correct answer
 		if (isset($DATA['correct_answer']) && empty($DATA['correct_answer'])) {
 			$this->errors['correct_answer'] = "Correct answer cannot be empty";
 		}

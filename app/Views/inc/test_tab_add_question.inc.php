@@ -40,6 +40,57 @@
 		  	<input type="text" name="correct_answer" value="<?= input_val('correct_answer') ?>" class="form-control" id="inputGroupFile03" placeholder="Enter the correct answer here">
 		</div>
 	<?php endif ?>
+
+	<?php if (isset($_GET['type']) && $_GET['type'] == 'multiple'): ?>
+		<div class="card" style="">
+		  <div class="card-header bg-secondary text-white">
+		    Multiple Choice Answers <button onclick="add_choice()" type="button" class="btn btn-warning btn-sm float-end"><i class="fa fa-plus"></i>Add Choice</button>
+		  </div>
+
+		  <ul class="list-group list-group-flush choice-list">
+
+		  	<?php if (isset($_POST['choice0'])): ?>
+
+		  		<?php
+
+
+		  			$num = 0;
+					$letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+					foreach ($_POST as $key => $value) {
+						if (strstr($key, 'choice')) {
+											?>
+								<li class="list-group-item">
+						    		<?= $letters[$num]; ?> : <input type="text" class="form-control" name="<?= $key ?>" value="<?= $value ?>" placeholder="Type your answer here">
+						    		<input type="radio" name="correct_answer"> Correct Answer
+							    </li>
+
+							<?php 
+								$num++;	
+						} 					
+
+					}
+
+				?>
+							  		
+
+		  	<?php else: ?>
+		  		<li class="list-group-item">
+		    		A : <input type="text" class="form-control" name="choice0" placeholder="Type your answer here">
+		    		<input type="radio" name="correct_answer"> Correct Answer
+			    </li>
+
+			    <li class="list-group-item">
+			    	B : <input type="text" class="form-control" name="choice1" placeholder="Type your answer here">
+			    	<input type="radio" name="correct_answer"> Correct Answer
+			    </li>
+		  	
+		  	<?php endif ?>
+		    
+
+		  </ul>
+		</div>
+		<br>
+	<?php endif ?>
 	
 	
 	<a href="<?= ROOT ?>/single_test/<?= $row->test_id ?>/">
@@ -49,3 +100,26 @@
 	<div class="clearfix"></div>
 	
 </form>
+
+<script>
+
+	var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+	
+	function add_choice() {
+
+		// ${choices.children.length} or ${choices.childElementCount}
+
+		var choices = document.querySelector('.choice-list');
+		if (choices.children.length < letters.length) {
+
+			choices.innerHTML += `
+			<li class="list-group-item">
+		    	${letters[choices.children.length]} : <input type="text" class="form-control" name="choice${choices.childElementCount}" placeholder="Type your answer here">
+		    	<input type="radio" name="correct_answer"> Correct Answer
+		    </li>`;
+
+		}
+		
+	}
+
+</script>

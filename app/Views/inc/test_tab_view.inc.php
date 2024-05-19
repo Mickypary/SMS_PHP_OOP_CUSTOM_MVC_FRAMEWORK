@@ -8,7 +8,7 @@
 	    <i class="fa fa-bars"></i>Add
 	  </button>
 	  <ul class="dropdown-menu dropdown-menu-end">
-	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/add_question/<?= $row->test_id ?>">Multiple Choice Question</a></li>
+	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/add_question/<?= $row->test_id ?>?type=multiple">Multiple Choice Question</a></li>
 	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/add_question/<?= $row->test_id ?>?type=objective">Objective Question</a></li>
 	    <li><hr class="dropdown-divider"></li>
 	    <li><a class="dropdown-item" href="<?= ROOT ?>/single_test/add_question/<?= $row->test_id ?>">Subjective Question</a></li>
