@@ -21,7 +21,7 @@ class Single_test extends Controller
 
 		$tests = new Tests_model();
 		$row = $tests->getWhere('test_id',$test_id);
-
+		
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Tests','tests'];
 
@@ -92,9 +92,25 @@ class Single_test extends Controller
 				
 				$_POST['date'] = date("Y-m-d H:i:s");
 				$_POST['test_id'] = $row->test_id;
+
 				if (isset($_GET['type']) && $_GET['type'] == 'objective') {
 					$_POST['question_type'] = 'objective';
 					$_POST[''] = 'objective';
+				}elseif(isset($_GET['type']) && $_GET['type'] == 'multiple') {
+					$_POST['question_type'] = 'multiple';
+					// for multiple choice
+					$num = 0;
+					$arr = [];
+						$letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+						foreach ($_POST as $key => $value) {
+							if (strstr($key, 'choice')) {
+								$arr[$letters[$num]] = $value;
+								// unset($_POST[$key]);
+								$num++;
+							}
+						}
+
+						$_POST['choices'] = json_encode($arr);
 				}else {
 					$_POST['question_type'] = 'subjective';
 				}
@@ -162,7 +178,23 @@ class Single_test extends Controller
 				$type = '';
 				if ($edit_qst->question_type == 'objective') {
 					$type = '?type=objective';
+				}elseif ($edit_qst->question_type == 'multiple') {
+					$type = '?type=multiple';
+					// for multiple choice
+					$num = 0;
+					$arr = [];
+						$letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+						foreach ($_POST as $key => $value) {
+							if (strstr($key, 'choice')) {
+								$arr[$letters[$num]] = $value;
+								// unset($_POST[$key]);
+								$num++;
+							}
+						}
+
+						$_POST['choices'] = json_encode($arr);
 				}
+				// show($_POST); die();
 
 				if ($question->update($edit_qst->id, $_POST)) {
 

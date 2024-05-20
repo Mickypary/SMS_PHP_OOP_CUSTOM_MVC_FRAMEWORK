@@ -57,7 +57,7 @@ class Tests extends Controller
 			// to get the actual class name and creator of the class from the classes table
 			if ($arr['stud_classes']) {
 				foreach ($arr['stud_classes'] as $key => $srow) {
-					$results[] = $test->getWhere('class_id', $srow->class_id);
+					$results = $test->where('class_id', $srow->class_id);
 				}
 				// print_r($results);
 			}	
@@ -66,7 +66,7 @@ class Tests extends Controller
 		
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Tests','tests'];
-		$data['rows'] = $results;
+		$data['test_rows'] = $results;
 		$data['crumbs'] = $crumbs;
 		$data['pager'] = $pager;
 		$this->load_view('tests', $data);

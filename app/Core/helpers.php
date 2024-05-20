@@ -97,3 +97,52 @@ function upload_image($FILES)
 
 	return false;
 }
+
+function has_taken_test($test_id)
+{
+
+	return 'No';
+}
+
+function can_take_test($my_test_id)
+{
+	$class = new Classes_model();
+	$mytable = "class_students";
+	if (Auth::getRank() != 'student') {
+		return false;
+
+	}
+	$query = "select * from $mytable where user_id = :user_id and disabled = 0";
+	$data['stud_classes'] = $class->query($query, ['user_id' => Auth::getUser_id()]);
+	// show($data['stud_classes']);
+	
+
+	// use class_id in class_student table to fetch record from classes table
+	$data['student_classes'] = array();
+	if ($data['stud_classes']) {
+		foreach ($data['stud_classes'] as $key => $srow) {
+			$data['student_classes'][] = $class->getWhere('class_id', $srow->class_id);
+		}
+	}
+
+
+	// Collect all the class ids
+	$class_ids = [];
+	foreach ($data['student_classes'] as $key => $classrow) {
+		$class_ids[] = $classrow->class_id;
+	}
+
+	$class_ids = "'" . implode("','", $class_ids) . "'";
+	$test = new Tests_model();
+	$query = "select * from tests where class_id IN ($class_ids)";
+	$tests = $test->query($query);
+	$my_test = array_column($tests, 'test_id');
+
+	if (in_array($my_test_id, $my_test)) {
+		return true;
+	}
+
+	// show($my_test);
+
+	return false;
+}

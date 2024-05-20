@@ -89,21 +89,21 @@
 					switch ($page_tab) {
 						case 'info':
 							// code...
-						include(views_path('profile_tab_info'));
+						include(views_path('inc/profile_tab_info'));
 							break;
 
 						case 'classes':
 							// code...
 						if (Auth::access('lecturer') || Auth::i_own_content($row)) {
-							include(views_path('profile_tab_classes'));
+							include(views_path('inc/profile_tab_classes'));
 						}else {
-							include(views_path('access-denied'));
+							include(views_path('inc/access-denied'));
 						}
 							break;
 
 						case 'tests':
 							// code...
-						include(views_path('profile_tab_tests'));
+						include(views_path('inc/profile_tab_tests'));
 							break;
 						
 						default:

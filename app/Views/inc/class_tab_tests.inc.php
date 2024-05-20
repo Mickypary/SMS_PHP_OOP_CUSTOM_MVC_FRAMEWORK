@@ -20,6 +20,7 @@
 			<th>Test Name</th>
 			<th>Created by</th>
 			<th>Active</th>
+			<th>Taken</th>
 			<th>Date Created</th>
 			<th>
 						
@@ -38,6 +39,7 @@
 				<td><?= $test->user->firstname ?> <?= $row->user->lastname ?></td>
 				<?php $active = $test->disabled ? 'No' : 'Yes'; ?>
 				<td><?= $active ?></td>
+				<td><?= has_taken_test($test->test_id) ?></td>
 				<td><?= format_date($test->date) ?></td>
 				<td>
 					<?php if (Auth::access('lecturer')): ?>

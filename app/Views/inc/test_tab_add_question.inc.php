@@ -61,7 +61,10 @@
 											?>
 								<li class="list-group-item">
 						    		<?= $letters[$num]; ?> : <input type="text" class="form-control" name="<?= $key ?>" value="<?= $value ?>" placeholder="Type your answer here">
-						    		<input type="radio" name="correct_answer"> Correct Answer
+						    		<label style="cursor: pointer;">
+						    			<input type="radio" name="correct_answer" <?= $letters[$num] == $_POST['correct_answer'] ? 'checked' : ''  ?>  value="<?= $letters[$num]; ?>"> Correct Answer
+						    		</label>
+						    		
 							    </li>
 
 							<?php 
@@ -76,12 +79,18 @@
 		  	<?php else: ?>
 		  		<li class="list-group-item">
 		    		A : <input type="text" class="form-control" name="choice0" placeholder="Type your answer here">
-		    		<input type="radio" name="correct_answer"> Correct Answer
+		    		<label style="cursor: pointer;">
+		    			<input type="radio" name="correct_answer"  value="A"> Correct Answer
+		    		</label>
+		    		
 			    </li>
 
 			    <li class="list-group-item">
 			    	B : <input type="text" class="form-control" name="choice1" placeholder="Type your answer here">
-			    	<input type="radio" name="correct_answer"> Correct Answer
+			    	<label style="cursor: pointer;">
+			    		<input type="radio" name="correct_answer" value="B"> Correct Answer
+			    	</label>
+			    	
 			    </li>
 		  	
 		  	<?php endif ?>
@@ -115,7 +124,9 @@
 			choices.innerHTML += `
 			<li class="list-group-item">
 		    	${letters[choices.children.length]} : <input type="text" class="form-control" name="choice${choices.childElementCount}" placeholder="Type your answer here">
-		    	<input type="radio" name="correct_answer"> Correct Answer
+		    	<label style="cursor: pointer;">
+		    	<input type="radio" name="correct_answer" value="${letters[choices.children.length]}"> Correct Answer
+		    	</label>
 		    </li>`;
 
 		}

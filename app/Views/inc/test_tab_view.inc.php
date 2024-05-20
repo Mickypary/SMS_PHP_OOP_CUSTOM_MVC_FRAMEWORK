@@ -40,6 +40,31 @@
 	     ?>
 	    	<p class="card-text"><b>Answer: </b><?= esc($question->correct_answer); ?></p>
 	    <?php endif ?>
+
+	    <?php if ($question->question_type  == 'multiple'):
+	    	$type = '?type=multiple';
+	     ?>
+	    	<div class="card" style="width: 18rem;">
+			  <div class="card-header">
+			    Multiple Choice
+			  </div>
+			  <ul class="list-group list-group-flush">
+			  	<?php $choices = json_decode($question->choices); ?>
+			  	<?php foreach ($choices as $key => $value): ?>
+			  		<li class="list-group-item"><b><?= $key . ': '; ?></b><?= $value; ?> 
+			  		<?php if (trim($key) == trim($question->correct_answer)): ?>
+			  			<i class="fa fa-check float-end"></i>
+			  		<?php endif ?>
+			  		
+			  	</li>
+			  	<?php endforeach ?>
+			    
+			  </ul>
+			</div>
+			<br>
+			<p class="card-text"><b>Answer: </b><?= esc($question->correct_answer); ?></p>
+	    <?php endif ?>
+
 	    <p class="card-text float-end">
 	    	<a href="<?= ROOT ?>/single_test/edit_question/<?= $question->test_id ?>/<?= $question->id ?><?= $type ?>">
 	    		<button class="btn btn-info pe-1 text-white"><i class="fa fa-edit"></i></button>

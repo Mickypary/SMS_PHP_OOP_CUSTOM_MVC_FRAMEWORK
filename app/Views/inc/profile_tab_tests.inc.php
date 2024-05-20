@@ -8,3 +8,7 @@
 				    </div>
 				  </form>
 				</nav>
+
+
+		
+		<?php include(views_path('inc/tests'));  ?>
