@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2024 at 02:52 PM
+-- Generation Time: May 21, 2024 at 10:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -200,7 +200,8 @@ CREATE TABLE IF NOT EXISTS `tests` (
   `test` varchar(100) NOT NULL,
   `description` varchar(2048) NOT NULL,
   `date` datetime NOT NULL,
-  `disabled` tinyint(1) NOT NULL DEFAULT 0,
+  `disabled` tinyint(1) NOT NULL DEFAULT 1,
+  `is_editable` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `test_id` (`test_id`),
   KEY `class_id` (`class_id`),
@@ -208,16 +209,17 @@ CREATE TABLE IF NOT EXISTS `tests` (
   KEY `user_id` (`user_id`),
   KEY `test` (`test`),
   KEY `date` (`date`),
-  KEY `disabled` (`disabled`)
+  KEY `disabled` (`disabled`),
+  KEY `is_editable` (`is_editable`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tests`
 --
 
-INSERT INTO `tests` (`id`, `test_id`, `class_id`, `school_id`, `user_id`, `test`, `description`, `date`, `disabled`) VALUES
-(3, 'OMTKd6kt4mtHQt1y3B5DevqyuXlBcXWTWtG1Zfg2SrS7NAqI0YyqGaqI0QDM', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'Year 7B End of Term', 'This test is very important for your grade point.', '2024-05-15 15:02:48', 0),
-(4, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'My Second Test', 'I love to test', '2024-05-16 12:03:40', 0);
+INSERT INTO `tests` (`id`, `test_id`, `class_id`, `school_id`, `user_id`, `test`, `description`, `date`, `disabled`, `is_editable`) VALUES
+(3, 'OMTKd6kt4mtHQt1y3B5DevqyuXlBcXWTWtG1Zfg2SrS7NAqI0YyqGaqI0QDM', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'Biology Test', 'This test is very important for your grade point.', '2024-05-15 15:02:48', 0, 1),
+(4, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'f6SJFj7wfJWGKjsz6w4DKq72dkJCR5WqlHQ3d3QH5HwDXnH5EzWzyH7nN8gn', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'General Test', 'I love to test', '2024-05-16 12:03:40', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -241,19 +243,19 @@ CREATE TABLE IF NOT EXISTS `test_questions` (
   KEY `test_type` (`question_type`),
   KEY `date` (`date`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `test_questions`
 --
 
 INSERT INTO `test_questions` (`id`, `test_id`, `question`, `comment`, `image`, `question_type`, `correct_answer`, `choices`, `date`, `user_id`) VALUES
-(1, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'What is the process by which plants make energy from sunlight', '', NULL, 'subjective', NULL, NULL, '2024-05-17 11:41:22', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
-(2, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'Which year did Zambia get independence?', '', NULL, 'subjective', NULL, NULL, '2024-05-17 11:49:54', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
-(3, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'What age is puberty for men?', '', NULL, 'subjective', NULL, NULL, '2024-05-18 11:23:38', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
-(4, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'Here is another question with a comment', 'This question is worth 1 point', NULL, 'subjective', NULL, NULL, '2024-05-18 13:00:22', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
-(5, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'A new question with an image', '2 Points', 'uploads/depositphotos_88208814-stock-photo-business-strategy-banner-sign-concept.jpg', 'subjective', NULL, NULL, '2024-05-18 13:32:37', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
-(6, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'Another test question with an image', '1 Point', 'uploads/1716036412_pngtree-creative-startup-banner-design-rocket-investment-piggy-bank-and-company-strategy-image_13926654.png', 'subjective', NULL, NULL, '2024-05-18 13:46:52', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo');
+(27, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'Identify the person in the image below', '2 Points', 'uploads/1716141247_mark zukerberg.jpg', 'subjective', NULL, NULL, '2024-05-19 18:54:07', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(28, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'An objective question', '2 Points', NULL, 'objective', 'Yes o', NULL, '2024-05-19 20:19:53', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(29, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'xawwess', '1 Point', NULL, 'objective', 'Home', NULL, '2024-05-19 20:25:11', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(30, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'What are young goats called?', '1 Point', NULL, 'multiple', 'A', '{\"A\":\"Kids\",\"B\":\"Lion\",\"C\":\"Monster\",\"D\":\"Cat\"}', '2024-05-20 09:20:56', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(31, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'What is your name is a subjective qst', '2 Points', NULL, 'subjective', NULL, NULL, '2024-05-21 09:03:42', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo'),
+(32, 'coZGpYlfyyHHkbxjQTGjGAzxBC72RASURUzpobcnsNNNhag6jlzITIpIyZ0M', 'This is an objective qst', '', NULL, 'objective', 'Answer', NULL, '2024-05-21 09:04:00', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo');
 
 -- --------------------------------------------------------
 
@@ -289,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `date`, `user_id`, `gender`, `school_id`, `rank`, `password`, `profile_image`) VALUES
-(1, 'Eathorne', 'Banda', 'eathorne@yahoo.com', '2024-04-22 22:00:33', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'super_admin', '$2y$10$pYVX5iPIuxTTgRFKrTXCFeBIEYe7HjMUZ2ECHNcGpxdzAcKgcYvy.', ''),
+(1, 'Eathorne', 'Banda', 'eathorne@yahoo.com', '2024-04-22 22:00:33', 'bdud3ULxTu4a8QFKYmAucbwH4KWZ0m4f6CxdEH7hcDclWgMXR52hSVOD0soo', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'super_admin', '$2y$10$pYVX5iPIuxTTgRFKrTXCFeBIEYe7HjMUZ2ECHNcGpxdzAcKgcYvy.', 'uploads/1716057105_RAJI TARIA MUHAMMED.jpg'),
 (2, 'Mary', 'Phiri', 'mary@yahoo.com', '2024-04-22 22:17:41', 'oao3tht79qs59ts0kCV9Zb4sl8612IhegWCXYHQclzgmRt8ReqQRWo2oxVUE', 'female', '', 'super_admin', '$2y$10$kLaJT17c4hXB3KrpLwgTUeTCAYe9cBVyIaKO/Yhw6/skEgGgmccNi', ''),
 (3, 'John', 'Tembo', 'john@yahoo.com', '2024-04-26 20:35:37', 'xt1MdfCzM4rBJ8uJ5pJjqIQJ3yPh5camqK6V71jr8pi7XNfCtGwbMG02gHIX', 'male', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'admin', '$2y$10$.byCmJoPPQ3VjDKUtRZ8NO9EqvDCK14gUyizMvpSPY4hGnYZMHHqu', 'uploads/1727807829051559.jpg'),
 (4, 'Anna', 'Jones', 'anna@yahoo.com', '2024-04-26 20:55:00', '8u95jViTOJeawwLiKUroeKXjfdlBLbeMW1nXWYbZs6nHvheKJ52XQyJTJnwU', 'female', 'lL0I5kALk046bESGuuvxuxi6fP2yjO3JJ9J53E2dSHLCocyzzuSkl02m9bcy', 'reception', '$2y$10$Uqn6fhvqUROq8q8wqFZUXOH3JqTIVQy92VjdBbd5DJmoFj9gDvS6G', 'uploads/Elina Alfara.jpg'),
