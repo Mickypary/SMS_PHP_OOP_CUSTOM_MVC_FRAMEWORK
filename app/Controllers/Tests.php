@@ -33,6 +33,9 @@ class Tests extends Controller
 			}
 
 				$results = $test->query($query , $arr);
+				// $a = $test->query($query , $arr);
+				// $merge = array_merge($results, $a);
+				// print_r($merge); die();
 
 		}else {
 
@@ -47,16 +50,17 @@ class Tests extends Controller
 			$arr['user_id'] = Auth::getUser_id();
 			if (isset($_GET['find'])) {
 				$find = "%" . $_GET['find'] . "%";
-				$query = "select classes.class, $mytable.* from $mytable join classes on $mytable.class_id = classes.class_id where $mytable.user_id = :user_id && $mytable.disabled = 0 && $mytable.school_id = :school_id && classes.class like :find order by id desc";
+				$query = "select tests.test, tests.test_id, $mytable.* from $mytable join tests on $mytable.class_id = tests.class_id where $mytable.user_id = :user_id && $mytable.disabled = 0 && $mytable.school_id = :school_id && tests.test like :find order by id desc";
 				$arr['find'] = $find;
 			}
 
-			$arr['stud_classes'] = $test->query($query, $arr);
+			// $arr['stud_classes'] = $test->query($query, $arr);
+			$results = $test->query($query, $arr);
 			// $results = $class->query($query, ['user_id' => Auth::getUser_id()]);
 			
 			// to get the actual class name and creator of the class from the classes table
-			if ($arr['stud_classes']) {
-				foreach ($arr['stud_classes'] as $key => $srow) {
+			if ($results && !isset($_GET['find'])) {
+				foreach ($results as $key => $srow) {
 					$results = $test->where('class_id', $srow->class_id);
 				}
 				// print_r($results);

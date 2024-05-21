@@ -5,7 +5,7 @@
 		<!-- Breadcrumbs -->
 		<?php $this->load_view('includes/crumbs',['crumbs' => $crumbs]); ?>
 
-		<center><h5>Tests</h5></center>
+		<center><h5>Testssss</h5></center>
 
 		<!-- Nav search -->
 			<nav class="navbar bg-body-tertiary">
