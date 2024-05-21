@@ -65,14 +65,18 @@
 			<p class="card-text"><b>Answer: </b><?= esc($question->correct_answer); ?></p>
 	    <?php endif ?>
 
+	    <!-- For action button -->
 	    <p class="card-text float-end">
-	    	<a href="<?= ROOT ?>/single_test/edit_question/<?= $question->test_id ?>/<?= $question->id ?><?= $type ?>">
+	    	<?php if ($row->is_editable): ?>
+	    		<a href="<?= ROOT ?>/single_test/edit_question/<?= $question->test_id ?>/<?= $question->id ?><?= $type ?>">
 	    		<button class="btn btn-info pe-1 text-white"><i class="fa fa-edit"></i></button>
-	    	</a>
-	    	<a href="<?= ROOT ?>/single_test/delete_question/<?= $question->test_id ?>/<?= $question->id ?>" id="delete">
-	    		<button class="btn btn-danger pe-1 text-white"><i class="fa fa-trash-alt"></i></button>
-	    	</a>    	
+		    	</a>
+		    	<a href="<?= ROOT ?>/single_test/delete_question/<?= $question->test_id ?>/<?= $question->id ?>" id="delete">
+		    		<button class="btn btn-danger pe-1 text-white"><i class="fa fa-trash-alt"></i></button>
+		    	</a>   
+	    	<?php endif; ?>	 	
 	    </p>
+
 	  </div>
 	</div>
 <?php endforeach; ?>

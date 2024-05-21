@@ -29,12 +29,26 @@ class Single_test extends Controller
 			$crumbs[] = [$row->test,''];
 		}
 
+		// for disabling test
+		if (isset($_GET['disable'])) {
+			if ($row->disabled) {
+				$disable = 0;
+			}else {
+				$disable = 1;
+			}
+
+			$query = "update tests SET disabled = $disable where test_id = :test_id";
+			$tests->query($query, ['test_id' => $row->test_id]);
+		}
+
+
 		$page_tab = "view";
 
 		$results = false;
 		
 		$qst = new Questions_model();
 		$questions = $qst->where('test_id', $row->test_id, 'desc');
+
 		if ($questions) {
 			$total_questions = count($questions);
 		}else {
@@ -152,6 +166,7 @@ class Single_test extends Controller
 
 		$tests = new Tests_model();
 		$row = $tests->getWhere('test_id',$test_id);
+		// show($row);
 
 		$crumbs[] = ['Dashboard','/school/public'];
 		$crumbs[] = ['Tests','tests'];
@@ -165,9 +180,14 @@ class Single_test extends Controller
 		$question = new Questions_model();
 		$edit_qst = $question->getWhere('id', $qst_id);
 
-		if (count($_POST) > 0 ) {		
+		if (count($_POST) > 0 ) {	
 
-			if ($question->validate($_POST)) {
+			if (!$row->is_editable) {
+				$errors[] = 'Editing for this test is disabled';
+			}
+
+
+			if ($question->validate($_POST) && count($errors) == 0) {
 
 				if ($myimage = upload_image($_FILES)) {
 					$_POST['image'] = $myimage;
@@ -194,7 +214,6 @@ class Single_test extends Controller
 
 						$_POST['choices'] = json_encode($arr);
 				}
-				// show($_POST); die();
 
 				if ($question->update($edit_qst->id, $_POST)) {
 
@@ -209,8 +228,9 @@ class Single_test extends Controller
 				
 				$this->redirect('single_test/edit_question/'.$row->test_id.'/'.$edit_qst->id.$type);
 			}else {
-				$errors = $question->errors;
+				$errors = array_merge($errors,$question->errors);
 			}
+			// show($errors);
 		}
 
 		$results = false;
@@ -243,12 +263,20 @@ class Single_test extends Controller
 			$crumbs[] = [$row->test,''];
 		}
 
+		if (!$row->is_editable) {
+			$errors[] = 'This test question cannot be deleted!';
+			$_SESSION['alert-type'] = 'error';
+			$_SESSION['message'] = "This test question cannot be deleted!";
+		}
+
+
+
 		$page_tab = "delete_question";
 
 		$question = new Questions_model();
 		$quest = $question->getWhere('id', $qst_id);
 
-		if (Auth::access('lecturer')) {
+		if (Auth::access('lecturer') && count($errors) == 0) {
 
 			if ($question->delete($qst_id)) {			
 				// remove old image

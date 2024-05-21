@@ -8,9 +8,12 @@
 	  </form>
 
 	  <!-- add new user -->
-		<a href="<?= ROOT ?>/single_class/testadd/<?= $row->class_id ?>?tab=test-add">
-			<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add Test</button>
-		</a>
+	  <?php if (Auth::access('lecturer')): ?>
+	  		<a href="<?= ROOT ?>/single_class/testadd/<?= $row->class_id ?>?tab=test-add">
+				<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add Test</button>
+			</a>
+	  <?php endif ?>
+		
 	</nav>
 
 
@@ -22,6 +25,7 @@
 			<th>Active</th>
 			<th>Taken</th>
 			<th>Date Created</th>
+			<th></th>
 			<th>
 						
 			</th>
@@ -31,9 +35,11 @@
 		<?php foreach ($tests as $key => $test): ?>
 			<tr>
 				<td>
+					<?php if (Auth::access('lecturer')): ?>
 					<a href="<?= ROOT ?>/single_test/<?= $test->test_id ?>">
 						<button class="btn btn-sm btn-primary" autofocus><i class="fa fa-chevron-right"></i></button>
-					</a>	
+					</a>
+					<?php endif ?>		
 				</td>
 				<td><?= $test->test ?></td>
 				<td><?= $test->user->firstname ?> <?= $row->user->lastname ?></td>
@@ -41,6 +47,13 @@
 				<td><?= $active ?></td>
 				<td><?= has_taken_test($test->test_id) ?></td>
 				<td><?= format_date($test->date) ?></td>
+				<td>
+					<?php if (can_take_test($test->test_id)): ?>
+						<a href="<?= ROOT ?>/take_test/<?= $test->test_id ?>">
+							<button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Attempt Test</button>
+						</a>	
+					<?php endif ?>					
+				</td>
 				<td>
 					<?php if (Auth::access('lecturer')): ?>
 					<a href="<?= ROOT ?>/single_class/edit_test/<?= $row->class_id ?>/<?= $test->test_id ?>?tab=tests">

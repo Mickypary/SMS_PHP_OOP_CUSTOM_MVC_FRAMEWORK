@@ -1,5 +1,5 @@
 <!-- Nav search -->
-		<h3>Tests</h3>
+		<!-- <h3>Tests</h3> -->
 				<nav class="navbar bg-body-tertiary">
 				  <form class="form-inline">
 				    <div class="input-group">

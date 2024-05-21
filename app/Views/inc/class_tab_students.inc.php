@@ -9,7 +9,7 @@
 
 				  <div>
 				  		<!-- add new user -->
-				  		<?php if (Auth::access('admin')): ?>
+				  		<?php if (Auth::access('lecturer')): ?>
 						<a href="<?= ROOT ?>/single_class/studentadd/<?= $row->class_id ?>?select=true">
 							<button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Assign</button>
 						</a>

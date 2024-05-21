@@ -23,7 +23,8 @@ class Tests_model extends Model
 	];
 
 	protected $afterSelect = [
-		'get_user'
+		'get_user',
+		'get_class',
 	];
 
 	public function validate($DATA, $id ='')
@@ -94,6 +95,19 @@ class Tests_model extends Model
 			$result = $user->where('user_id',$row->user_id);
 			//  just like array push. its adding to the array $data
 			$data[$key]->user = is_array($result) ? $result[0] : false;
+		}
+
+		return $data;
+	}
+
+	public function get_class($data)
+	{
+		// print_r($data); die();
+		$class = new Classes_model();
+		foreach ($data as $key => $row) {
+			$result = $class->where('class_id',$row->class_id);
+			//  just like array push. its adding to the array $data
+			$data[$key]->class = is_array($result) ? $result[0] : false;
 		}
 
 		return $data;

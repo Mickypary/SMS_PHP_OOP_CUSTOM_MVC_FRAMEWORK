@@ -22,8 +22,23 @@
 							</td>
 						</tr>
 						<?php $active = $row->disabled ? 'No' : 'Yes'; ?>
+						<?php
+
+							$btn_text = 'Unpublish';
+							$btn_color = 'btn-success text-white';
+							if ($row->disabled) {
+								$btn_text = 'Publish';
+								$btn_color = 'btn-danger';
+							}
+
+						 ?>
 						<tr>
-							<td><b>Active: </b><?= $active; ?></td>
+							<td>
+								<b>Published: </b><?= $active; ?><br>
+								<a href="<?= ROOT ?>/single_test/<?= $row->test_id ?>?disable=true">
+									<button class="btn btn-sm <?= $btn_color ?>"><?= $btn_text ?></button>
+								</a>			
+							</td>
 							<td><b>Total Questions: </b><?= isset($total_questions) ? $total_questions : ''; ?></td>
 							<td colspan="3"><b>Test Description: </b><br><?= esc($row->description) ?></td>	
 						</tr>
@@ -36,8 +51,9 @@
 
 					switch ($page_tab) {
 						case 'view':
+						// echo 'here';
 							// code...
-						if (Auth::access('admin') && Auth::i_own_content($row)):
+						if (Auth::access('admin') || Auth::i_own_content($row)):
 							include(views_path('inc/test_tab_view'));
 				 		endif;
 							break;

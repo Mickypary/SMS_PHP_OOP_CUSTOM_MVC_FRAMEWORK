@@ -10,8 +10,8 @@ class Single_class extends Controller
 	{
 		$errors = array();
 
-		if(!Auth::logged_in()) {
-			$this->redirect('login');
+		if(!Auth::access('student')) {
+			$this->redirect('access_denied');
 		}
 
 		// For Pagination
@@ -29,7 +29,7 @@ class Single_class extends Controller
 			$crumbs[] = [$row->class,''];
 		}
 
-		$page_tab = isset($_GET['tab']) ? $_GET['tab'] : "students";
+		$page_tab = isset($_GET['tab']) ? $_GET['tab'] : "lecturers";
 
 		$lect = new Lecturers_model(); 
 
@@ -67,12 +67,11 @@ class Single_class extends Controller
 		}elseif ($page_tab == 'tests') {
 			// display test
 			$arr['class_id'] = $id;
-			$arr['user_id'] = $user_id;
-			$query = "select * from tests where class_id = :class_id && user_id = :user_id order by id desc limit $limit offset $offset ";
+			// $arr['user_id'] = $user_id;
+			$query = "select * from tests where class_id = :class_id order by id desc limit $limit offset $offset ";
 
 			$tests = $lect->query($query,$arr);
 			$data['tests'] 		= $tests;
-			// print_r($data['tests']);
 		}
 
 		$data['row'] 		= $row;

@@ -27,6 +27,10 @@ class Take_test extends Controller
 
 		if ($row) {
 			$crumbs[] = [$row->test,''];
+
+			// make test not editable once it comes to this controller
+			$query = "update tests SET is_editable = 0 where test_id = :test_id limit 1";
+			$tests->query($query, ['test_id' => $row->test_id]);
 		}
 
 		$page_tab = "view";
@@ -34,8 +38,8 @@ class Take_test extends Controller
 		$results = false;
 		
 		$qst = new Questions_model();
-		$questions = $qst->where('test_id', $row->test_id, 'desc');
-		
+		$questions = $qst->where('test_id', $row->test_id, 'asc');
+
 		if (is_array($questions) && $questions) {
 			$total_questions = count($questions);
 		}else {

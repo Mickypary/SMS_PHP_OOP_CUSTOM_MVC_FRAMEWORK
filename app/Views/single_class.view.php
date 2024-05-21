@@ -25,12 +25,16 @@
 				    <a class="nav-link <?= $page_tab == 'lecturers' ? 'active' : ''; ?>" aria-current="page" href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=lecturers">Lecturers</a>
 				  </li>
 				   <?php endif ?>
+
 				  <li class="nav-item">
 				    <a class="nav-link <?= $page_tab == 'students' ? 'active' : ''; ?>" href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=students">Students</a>
 				  </li>
+
+				  <?php if (Auth::access('lecturer')): ?>
 				  <li class="nav-item">
 				    <a class="nav-link <?= $page_tab == 'tests' ? 'active' : '' ?>" href="<?= ROOT ?>/single_class/<?= $row->class_id ?>?tab=tests">Tests</a>
 				  </li>
+				  <?php endif ?>
 				</ul>
 
 				
@@ -38,16 +42,19 @@
 				<?php
 
 					switch ($page_tab) {
+
+						// lecturers
 						case 'lecturers':
-							// code...
-						if (Auth::access('admin') && Auth::i_own_content($row)):
-							include(views_path('inc/class_tab_lecturers'));
-				 		endif;
+							if (Auth::access('admin') && Auth::i_own_content($row)):
+								include(views_path('inc/class_tab_lecturers'));
+				 			else:
+				 				include(views_path('inc/access-denied'));
+				 			endif;
 							break;
 
+						// students
 						case 'students':
-							// code...
-						include(views_path('inc/class_tab_students'));
+							include(views_path('inc/class_tab_students'));
 							break;
 
 						case 'lecturer-add':
@@ -70,19 +77,27 @@
 						include(views_path('inc/class_tab_students_remove'));
 							break;
 
+						// tests
 						case 'tests':
-							// code...
-							include(views_path('inc/class_tab_tests'));
+							if (Auth::access('lecturer')):
+								include(views_path('inc/class_tab_tests'));
+							else:
+								include(views_path('inc/access-denied'));
+							endif;
 							break;
-
+						
+						// test-add...
 						case 'test-add':
-							// code...
-						include(views_path('inc/class_tab_test_add'));
+							if (Auth::access('lecturer')):
+								include(views_path('inc/class_tab_test_add'));
+							endif;
 							break;
 
+						// test-edit...
 						case 'test-edit':
-							// code...
-						include(views_path('inc/class_tab_test_edit'));
+							if (Auth::access('lecturer')):
+								include(views_path('inc/class_tab_test_edit'));
+							endif;
 							break;
 						
 						default:

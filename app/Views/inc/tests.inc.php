@@ -7,6 +7,7 @@
 			<th>Test Name</th>
 			<th>Created by</th>
 			<th>Active</th>
+			<th>Taken</th>
 			<th>Date</th>
 			<th>
 						
@@ -17,15 +18,18 @@
 		<?php foreach ($test_rows as $key => $row): ?>
 			<tr>
 				<td>
-					<a href="<?= ROOT ?>/single_test/<?= $row->test_id ?>">
-						<button class="btn btn-sm btn-primary" autofocus><i class="fa fa-chevron-right"></i></button>
-					</a>	
+					<?php if (Auth::access('lecturer')): ?>
+						<a href="<?= ROOT ?>/single_test/<?= $row->test_id ?>">
+							<button class="btn btn-sm btn-primary" autofocus><i class="fa fa-chevron-right"></i></button>
+						</a>	
+					<?php endif ?>	
 				</td>
 				<td><?= $row->test ?></td>
 				<td><?= $row->user->firstname ?> <?= $row->user->lastname ?></td>
 
 				<?php $active = $row->disabled ? 'No' : 'Yes'; ?>
 				<td><?= $active ?></td>
+				<td><?= has_taken_test($row->test_id) ?></td>
 				<td><?= format_date($row->date) ?></td>
 				<td>
 					<?php if (can_take_test($row->test_id)): ?>

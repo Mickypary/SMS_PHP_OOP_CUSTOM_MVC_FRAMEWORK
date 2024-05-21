@@ -9,6 +9,7 @@
 <center><h4><?= 'Edit ' . $quest_type . ' Question' ?></h4></center>
 
 <?php if (is_object($edit_qst)): ?>
+	<?php //show($errors); die(); ?>
 	
 	<form method="POST" action="" enctype="multipart/form-data">
 
